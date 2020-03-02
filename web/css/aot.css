@@ -1,0 +1,56 @@
+/**
+ * Global
+ */
+html {
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+body {
+    background: #334771;
+    height: 100vh;
+}
+
+#stage-container {
+  display: flex;
+  height: 35vh;
+  justify-content: center;
+  align-items: center;
+  background-color: #1e2a3f;
+}
+
+#stage {
+  background-color: #000;
+  height: 100%;
+  width: calc(35vh * 4 / 3);
+  margin: auto;
+}
+
+#blocks-container {
+  height: 65vh;
+}
+
+.blocklyMainBackground {
+  stroke: none;
+}
+
+.scratchCategoryMenu {
+    width: 64px;
+    background-color: #1e2a3f;
+    color: white;
+}
+
+.scratchCategoryMenuItem.categorySelected {
+    background-color: #2a3b5c;
+}
+
+.blocklyToolboxDiv {
+    background-color: #1e2a3f;
+}
+
+.blocklyScrollbarHorizontal {
+    display: none !important;
+}
+
+.blocklyScrollbarVertical {
+    display: none !important;
+}
