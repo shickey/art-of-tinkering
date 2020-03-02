@@ -1,15 +1,15 @@
 [submodule "blocks"]
-	path = blocks
+	path = lib/blocks
 	url = https://github.com/shickey/scratch-blocks.git
 [submodule "vm"]
-	path = vm
+	path = lib/vm
 	url = https://github.com/shickey/scratch-vm.git
 [submodule "render"]
-	path = render
+	path = lib/render
 	url = https://github.com/shickey/scratch-render
 [submodule "storage"]
-	path = storage
+	path = lib/storage
 	url = https://github.com/shickey/scratch-storage
 [submodule "svg-renderer"]
-	path = svg-renderer
+	path = lib/svg-renderer
 	url = https://github.com/LLK/scratch-svg-renderer
