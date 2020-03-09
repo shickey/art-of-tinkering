@@ -64,5 +64,7 @@
 	</array>
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<false/>
+	<key>NSCameraUsageDescription</key>
+	<string>Use your camera to capture sprites!</string>
 </dict>
 </plist>

@@ -21,7 +21,7 @@ body {
 #stage {
   background-color: #000;
   height: 100%;
-  width: calc(35vh * 4 / 3);
+  width: calc(35vh * 16 / 9);
   margin: auto;
 }
 
