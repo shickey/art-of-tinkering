@@ -161,17 +161,41 @@ class ImageEditViewController: UIViewController {
             colorView.setNeedsDisplay()
             filter.chromaColor = SIMD3<Float>(Float(pixelColor.r) / 255.0, Float(pixelColor.g) / 255.0, Float(pixelColor.b) / 255.0)
             filter.threshold = 0.0
-            imageView.image = UIImage(ciImage: filter.outputImage!, scale: image.scale, orientation: .up)
+            imageView.image = UIImage(ciImage: filter.outputImage!)
             
         case .changed:
             let dist = sender.distance
             let width = imageView.bounds.width
             filter.threshold = clamp(Float(dist / (width / 2.0)), 0, 1.0)
-            print("color: \(filter.chromaColor!), threshold: \(filter.threshold)")
-            imageView.image = UIImage(ciImage: filter.outputImage!, scale: image.scale, orientation: .up)
+            imageView.image = UIImage(ciImage: filter.outputImage!)
         case .ended: break
         default: break
         }
+    }
+    
+    @IBAction func confirmTapped(_ sender: Any) {
+        let bigImg = UIImage(ciImage: filter.outputImage!)
+        
+        let size = CGSize(width: bigImg.size.width / 10.0, height: bigImg.size.height / 10.0)
+        UIGraphicsBeginImageContext(size)
+        bigImg.draw(in: CGRect(x: 0, y: 0, width: size.width, height: size.height))
+        let img = UIGraphicsGetImageFromCurrentImageContext()!
+        UIGraphicsEndImageContext()
+        
+        let png = img.pngData()!
+        let hash = md5(png)
+        
+        let documents = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).last!
+        let assetsFolder = documents.appendingPathComponent("sprite-images", isDirectory: true)
+        
+        let fileUrl = assetsFolder.appendingPathComponent("\(hash).png")
+        try! png.write(to: fileUrl)
+        
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let scratchVC = storyboard.instantiateViewController(withIdentifier: "Scratch") as! ScratchViewController
+        scratchVC.imageHash = hash
+        self.present(scratchVC, animated: true, completion: nil)
+        
     }
     
 }

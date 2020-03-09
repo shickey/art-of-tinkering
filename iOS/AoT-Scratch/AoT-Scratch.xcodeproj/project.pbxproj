@@ -11,6 +11,7 @@
 		A30DC6032412F46F008DD0E0 /* ChromaKeyFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = A30DC6022412F46F008DD0E0 /* ChromaKeyFilter.swift */; };
 		A30DC6052412F663008DD0E0 /* Shaders.metal in Sources */ = {isa = PBXBuildFile; fileRef = A30DC6042412F663008DD0E0 /* Shaders.metal */; };
 		A31497B824140041005399C8 /* Util.swift in Sources */ = {isa = PBXBuildFile; fileRef = A31497B724140041005399C8 /* Util.swift */; };
+		A31497BC2416F2A0005399C8 /* NetworkExtension.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A31497BB2416F2A0005399C8 /* NetworkExtension.framework */; };
 		A3E135D32409A61700D4B680 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3E135D22409A61700D4B680 /* AppDelegate.swift */; };
 		A3E135DA2409A61700D4B680 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A3E135D82409A61700D4B680 /* Main.storyboard */; };
 		A3E135DC2409A61900D4B680 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A3E135DB2409A61900D4B680 /* Assets.xcassets */; };
@@ -27,6 +28,7 @@
 		A30DC6022412F46F008DD0E0 /* ChromaKeyFilter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChromaKeyFilter.swift; sourceTree = "<group>"; };
 		A30DC6042412F663008DD0E0 /* Shaders.metal */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.metal; path = Shaders.metal; sourceTree = "<group>"; };
 		A31497B724140041005399C8 /* Util.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Util.swift; sourceTree = "<group>"; };
+		A31497BB2416F2A0005399C8 /* NetworkExtension.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = NetworkExtension.framework; path = System/Library/Frameworks/NetworkExtension.framework; sourceTree = SDKROOT; };
 		A3E135CF2409A61700D4B680 /* AoT-Scratch.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "AoT-Scratch.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		A3E135D22409A61700D4B680 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		A3E135D42409A61700D4B680 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -45,17 +47,27 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A31497BC2416F2A0005399C8 /* NetworkExtension.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		A31497BA2416F2A0005399C8 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				A31497BB2416F2A0005399C8 /* NetworkExtension.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		A3E135C62409A61700D4B680 = {
 			isa = PBXGroup;
 			children = (
 				A3E135D12409A61700D4B680 /* AoT-Scratch */,
 				A3E135D02409A61700D4B680 /* Products */,
+				A31497BA2416F2A0005399C8 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -332,6 +344,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = "AoT-Scratch/AoT-ScratchRelease.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 38HK43T9W4;
 				INFOPLIST_FILE = "AoT-Scratch/Info.plist";

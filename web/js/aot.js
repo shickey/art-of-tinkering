@@ -2,7 +2,7 @@
   
   var Scratch = {};
   
-  Scratch.init = function(assetFolderUrl) {
+  Scratch.init = function(defaultAssetFolderUrl, localAssetFolderUrl, imageHash) {
     
     // Instantiate the VM and create an empty project
     var vm = new VirtualMachine();
@@ -15,21 +15,34 @@
     vm.attachV2SVGAdapter(new ScratchSVGRenderer.SVGRenderer());
     vm.attachV2BitmapAdapter(new ScratchSVGRenderer.BitmapAdapter());
     
-    var getAssetUrl = function (asset) {
-      var assetUrlParts = [
-        assetFolderUrl,
-        asset.assetId,
-        '.',
-        asset.dataFormat
-      ];
-      return assetUrlParts.join('');
-    };
-    
     var storage = new ScratchStorage();
     var AssetType = storage.AssetType;
+    
     storage.addWebStore(
       [AssetType.ImageVector, AssetType.ImageBitmap, AssetType.Sound],
-      getAssetUrl);
+      function(asset) {
+        var assetUrlParts = [
+          defaultAssetFolderUrl,
+          asset.assetId,
+          '.',
+          asset.dataFormat
+        ];
+        return assetUrlParts.join('');
+      }
+    );
+    
+    storage.addWebStore(
+      [AssetType.ImageVector, AssetType.ImageBitmap, AssetType.Sound],
+      function(asset) {
+        var assetUrlParts = [
+          localAssetFolderUrl,
+          asset.assetId,
+          '.',
+          asset.dataFormat
+        ];
+        return assetUrlParts.join('');
+      }
+    );
     
     vm.attachStorage(storage);
     Scratch.storage = storage;
@@ -60,7 +73,7 @@
         },
         {
           isStage: false,
-          name: 'cat',
+          name: 'myAsset',
           variables: {},
           lists: {},
           broadcasts: {},
@@ -68,11 +81,11 @@
           currentCostume: 0,
           costumes: [
             {
-              assetId: 'b7853f557e4426412e64bb3da6531a99',
+              assetId: imageHash,
               name: 'cat',
               bitmapResolution: 1,
-              md5ext: 'b7853f557e4426412e64bb3da6531a99.svg',
-              dataFormat: 'svg',
+              md5ext: imageHash + '.png',
+              dataFormat: 'png',
               rotationCenterX: 48,
               rotationCenterY: 50
             }

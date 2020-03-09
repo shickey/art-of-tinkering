@@ -13,6 +13,8 @@ class ScratchViewController: UIViewController, WKUIDelegate, WKNavigationDelegat
 
     var webView: WKWebView!
     
+    var imageHash : String! = nil
+    
     override func loadView() {
         let webConfiguration = WKWebViewConfiguration()
         webConfiguration.preferences.setValue(true, forKey: "allowFileAccessFromFileURLs")
@@ -23,16 +25,21 @@ class ScratchViewController: UIViewController, WKUIDelegate, WKNavigationDelegat
     }
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        let url = Bundle.main.url(forResource: "web/index", withExtension: "html")!
-        let webFolderUrl = Bundle.main.url(forResource: "web", withExtension: nil)!
-        webView.loadFileURL(url, allowingReadAccessTo: webFolderUrl)
+
+        let documents = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).last!
+        let localWebFolderUrl = documents.appendingPathComponent("web", isDirectory: true)        
+        let indexUrl = localWebFolderUrl.appendingPathComponent("index.html")
+        webView.loadFileURL(indexUrl, allowingReadAccessTo: documents)
     }
     
     func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
         // Pass the URL to the assets folder within the bundle so scratch-storage can load from it
-        let assetsFolderUrl = Bundle.main.url(forResource: "web/assets", withExtension: nil)!
-        webView.evaluateJavaScript("Scratch.init('\(assetsFolderUrl)');", completionHandler: nil);
+        let documents = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).last!
+        let localWebFolderUrl = documents.appendingPathComponent("web", isDirectory: true)
+        let defaultAssetsUrl = localWebFolderUrl.appendingPathComponent("assets", isDirectory: true)
+        let spriteImagesUrl = documents.appendingPathComponent("sprite-images", isDirectory: true)
+        
+        webView.evaluateJavaScript("Scratch.init('\(defaultAssetsUrl)', '\(spriteImagesUrl)', '\(imageHash!)');", completionHandler: nil)
     }
 
 }

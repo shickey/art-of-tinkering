@@ -129,6 +129,14 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMinY="YES"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                             </view>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="R4H-Ga-6us">
+                                <rect key="frame" x="616" y="925" width="115" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMinY="YES"/>
+                                <state key="normal" title="Send to Scratch!"/>
+                                <connections>
+                                    <action selector="confirmTapped:" destination="2Wt-2H-f9e" eventType="touchUpInside" id="gJC-ai-IJo"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <viewLayoutGuide key="safeArea" id="dBR-ja-D0O"/>
@@ -151,17 +159,18 @@
         <!--Scratch View Controller-->
         <scene sceneID="U7f-kR-1ir">
             <objects>
-                <viewController id="y6f-FA-ZtA" customClass="ScratchViewController" customModule="AoT_Scratch" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="Scratch" modalPresentationStyle="fullScreen" id="y6f-FA-ZtA" customClass="ScratchViewController" customModule="AoT_Scratch" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Kjf-GK-I5w">
                         <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <viewLayoutGuide key="safeArea" id="Del-U1-cD5"/>
                     </view>
+                    <navigationItem key="navigationItem" id="5ys-Su-jJu"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Y6h-8d-DR6" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1309" y="-598"/>
+            <point key="canvasLocation" x="2590" y="131"/>
         </scene>
     </scenes>
 </document>
