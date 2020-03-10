@@ -13,3 +13,15 @@
 [submodule "svg-renderer"]
 	path = lib/svg-renderer
 	url = https://github.com/LLK/scratch-svg-renderer
+[submodule "Server-Scratch/scratch-gui"]
+	path = Server-Scratch/scratch-gui
+	url = git@github.com:khanning/scratch-gui
+	branch = art-of-tinkering
+[submodule "Server-Scratch/scratch-vm"]
+	path = Server-Scratch/scratch-vm
+	url = git@github.com:khanning/scratch-vm
+	branch = art-of-tinkering
+[submodule "Server-Scratch/scratch-render"]
+	path = Server-Scratch/scratch-render
+	url = git@github.com:khanning/scratch-render
+	branch = art-of-tinkering
