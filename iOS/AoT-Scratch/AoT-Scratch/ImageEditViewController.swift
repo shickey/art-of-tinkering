@@ -176,6 +176,8 @@ class ImageEditViewController: UIViewController {
     @IBAction func confirmTapped(_ sender: Any) {
         let bigImg = UIImage(ciImage: filter.outputImage!)
         
+        // Resize the image to something resonable
+        // @TODO: Do something better here. Maybe constrain the image to a prespecified max set of dimensions
         let size = CGSize(width: bigImg.size.width / 10.0, height: bigImg.size.height / 10.0)
         UIGraphicsBeginImageContext(size)
         bigImg.draw(in: CGRect(x: 0, y: 0, width: size.width, height: size.height))
@@ -185,10 +187,7 @@ class ImageEditViewController: UIViewController {
         let png = img.pngData()!
         let hash = md5(png)
         
-        let documents = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).last!
-        let assetsFolder = documents.appendingPathComponent("sprite-images", isDirectory: true)
-        
-        let fileUrl = assetsFolder.appendingPathComponent("\(hash).png")
+        let fileUrl = SPRITE_IMAGES_FOLDER_URL.appendingPathComponent("\(hash).png")
         try! png.write(to: fileUrl)
         
         let storyboard = UIStoryboard(name: "Main", bundle: nil)

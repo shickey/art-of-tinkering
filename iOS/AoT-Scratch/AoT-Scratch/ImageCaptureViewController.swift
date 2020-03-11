@@ -144,6 +144,10 @@ class ImageCaptureViewController: UIViewController, AVCapturePhotoCaptureDelegat
     }
     
     func photoOutput(_ output: AVCapturePhotoOutput, didFinishProcessingPhoto photo: AVCapturePhoto, error: Error?) {
+        // @TODO: Once we add front-facing camera, we may need to handle flipped image
+        //        orientations as well as the standard ones
+        
+        
         // Normalize the photo orientation so we NEVER HAVE TO WORRY ABOUT IT AGAIN FOR THE LOVE OF...
         var orientation = CGImagePropertyOrientation.up
         if let orientationValue = photo.metadata["Orientation"] as? NSNumber {

@@ -14,28 +14,18 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        // Override point for customization after application launch.
         
+        // Create the folder where we'll save images created with the app
         let fm = FileManager.default
-        let documents = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).last!
-        let localWebFolderUrl = documents.appendingPathComponent("web", isDirectory: true)
-        let spriteImagesUrl = documents.appendingPathComponent("sprite-images", isDirectory: true)
-        if !fm.fileExists(atPath: spriteImagesUrl.path) {
-            try! FileManager.default.createDirectory(at: spriteImagesUrl, withIntermediateDirectories: true, attributes: nil)
+        if !fm.fileExists(atPath: SPRITE_IMAGES_FOLDER_URL.path) {
+            try! FileManager.default.createDirectory(at: SPRITE_IMAGES_FOLDER_URL, withIntermediateDirectories: true, attributes: nil)
         }
         
-        let symLinkedAssetsUrl = localWebFolderUrl.appendingPathComponent("sprite-images")
-        
-        let bundleWebFolderUrl = Bundle.main.url(forResource: "web", withExtension: nil)!
-        
-        if fm.fileExists(atPath: localWebFolderUrl.path) {
-            try! fm.removeItem(at: localWebFolderUrl)
+        // Copy the Scratch GUI web resources to a local folder (so that both it, and the sprite images folder can be accessed by WKWebView)
+        if fm.fileExists(atPath: LOCAL_WEB_FOLDER_URL.path) {
+            try! fm.removeItem(at: LOCAL_WEB_FOLDER_URL)
         }
-        try! FileManager.default.copyItem(at: bundleWebFolderUrl, to: localWebFolderUrl)
-        
-        if !fm.fileExists(atPath: symLinkedAssetsUrl.path) {
-            try! FileManager.default.createSymbolicLink(at: symLinkedAssetsUrl, withDestinationURL: spriteImagesUrl)
-        }
+        try! FileManager.default.copyItem(at: BUNDLE_WEB_FOLDER_URL, to: LOCAL_WEB_FOLDER_URL)
         
         return true
     }
