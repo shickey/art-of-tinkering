@@ -59,10 +59,10 @@
           "currentCostume": 0,
           "costumes": [
           {
-            "assetId": "105e0d26858aba223d0e8f759e36db38",
+            "assetId": "739b5e2a2435f6e1ec2993791b423146",
             "name": "backdrop1",
             "bitmapResolution": 1,
-            "md5ext": "105e0d26858aba223d0e8f759e36db38.png",
+            "md5ext": "739b5e2a2435f6e1ec2993791b423146.png",
             "dataFormat": "png",
             "rotationCenterX": 240,
             "rotationCenterY": 180
@@ -166,9 +166,28 @@
 
     });
     
+    // External API
+    Scratch.sendToProjector = function() {
+      Scratch.vm.exportSprite(Scratch.vm.editingTarget.id).then((zipBlob) => {
+        var fileReader = new FileReader();
+        fileReader.onload = function() {
+          var payload = fileReader.result;
+          if (window.scratchOut) {
+            window.scratchOut.postMessage(payload);
+          }
+        }
+        fileReader.readAsBinaryString(zipBlob);
+      })
+    }
+    
     vm.start();
   }
   
+  if (typeof webkit !== 'undefined'
+      && typeof webkit.messageHandlers !== 'undefined'
+      && typeof webkit.messageHandlers.scratchOut !== 'undefined') {
+    window.scratchOut = webkit.messageHandlers.scratchOut;
+  }
   window.Scratch = Scratch;
   
 })();

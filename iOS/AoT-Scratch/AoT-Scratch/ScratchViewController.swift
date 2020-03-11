@@ -9,22 +9,28 @@
 import UIKit
 import WebKit
 
-class ScratchViewController: UIViewController, WKUIDelegate, WKNavigationDelegate {
-
+class ScratchViewController: UIViewController, WKUIDelegate, WKNavigationDelegate, WKScriptMessageHandler {
+    
     var webView: WKWebView!
     
-    var imageHash : String! = nil
+    var project : Project! = nil
+    var urlSession = URLSession(configuration: .default)
     
-    override func loadView() {
-        let webConfiguration = WKWebViewConfiguration()
-        webConfiguration.preferences.setValue(true, forKey: "allowFileAccessFromFileURLs")
-        webView = WKWebView(frame: .zero, configuration: webConfiguration)
-        webView.uiDelegate = self
-        webView.navigationDelegate = self
-        view = webView
-    }
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        let webConfiguration = WKWebViewConfiguration()
+        webConfiguration.preferences.setValue(true, forKey: "allowFileAccessFromFileURLs")
+        let webContentController = WKUserContentController()
+        webContentController.add(self, name: "scratchOut")
+        webConfiguration.userContentController = webContentController
+        
+        webView = WKWebView(frame: view.bounds, configuration: webConfiguration)
+        webView.uiDelegate = self
+        webView.navigationDelegate = self
+        webView.autoresizingMask = [.flexibleHeight, .flexibleWidth]
+        view.addSubview(webView)
+        view.sendSubviewToBack(webView)
 
         let documents = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).last!
         let localWebFolderUrl = documents.appendingPathComponent("web", isDirectory: true)        
@@ -39,7 +45,34 @@ class ScratchViewController: UIViewController, WKUIDelegate, WKNavigationDelegat
         let defaultAssetsUrl = localWebFolderUrl.appendingPathComponent("assets", isDirectory: true)
         let spriteImagesUrl = documents.appendingPathComponent("sprite-images", isDirectory: true)
         
-        webView.evaluateJavaScript("Scratch.init('\(defaultAssetsUrl)', '\(spriteImagesUrl)', '\(imageHash!)');", completionHandler: nil)
+        webView.evaluateJavaScript("Scratch.init('\(defaultAssetsUrl)', '\(spriteImagesUrl)', '\(project.id)');", completionHandler: nil)
+    }
+    
+    func userContentController(_ userContentController: WKUserContentController, didReceive message: WKScriptMessage) {
+        if let sprite3Payload = message.body as? String {
+            var request = URLRequest(url: RELAY_SERVER_URL)
+            request.httpMethod = "POST"
+            request.httpBody = sprite3Payload.data(using: .utf8)
+            let task = urlSession.dataTask(with: request) { (data, response, error) in
+                print(response)
+            }
+            task.resume()
+        }
     }
 
+    @IBAction func backButtonTapped(_ sender: Any) {
+        navigationController!.popViewController(animated: true)
+    }
+    
+    @IBAction func greenFlagTapped(_ sender: Any) {
+        webView.evaluateJavaScript("Scratch.vm.greenFlag();", completionHandler: nil)
+    }
+    
+    @IBAction func stopTapped(_ sender: Any) {
+        webView.evaluateJavaScript("Scratch.vm.stopAll();", completionHandler: nil)
+    }
+    
+    @IBAction func sendToProjectorTapped(_ sender: Any) {
+        webView.evaluateJavaScript("Scratch.sendToProjector();", completionHandler: nil)
+    }
 }

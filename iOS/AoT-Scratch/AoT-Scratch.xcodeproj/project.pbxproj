@@ -13,6 +13,7 @@
 		A31497B824140041005399C8 /* Util.swift in Sources */ = {isa = PBXBuildFile; fileRef = A31497B724140041005399C8 /* Util.swift */; };
 		A31497BC2416F2A0005399C8 /* NetworkExtension.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A31497BB2416F2A0005399C8 /* NetworkExtension.framework */; };
 		A31497BE24193AFB005399C8 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = A31497BD24193AFB005399C8 /* Constants.swift */; };
+		A31497C024193F0B005399C8 /* DataStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = A31497BF24193F0B005399C8 /* DataStore.swift */; };
 		A3E135D32409A61700D4B680 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3E135D22409A61700D4B680 /* AppDelegate.swift */; };
 		A3E135DA2409A61700D4B680 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A3E135D82409A61700D4B680 /* Main.storyboard */; };
 		A3E135DC2409A61900D4B680 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A3E135DB2409A61900D4B680 /* Assets.xcassets */; };
@@ -20,7 +21,6 @@
 		A3E135E72409A68E00D4B680 /* ProjectsCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3E135E62409A68E00D4B680 /* ProjectsCollectionViewController.swift */; };
 		A3E135E92409ABFD00D4B680 /* ImageCaptureViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3E135E82409ABFD00D4B680 /* ImageCaptureViewController.swift */; };
 		A3E135EB2409B04700D4B680 /* ScratchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3E135EA2409B04700D4B680 /* ScratchViewController.swift */; };
-		A3E135EE240D77D000D4B680 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3E135D42409A61700D4B680 /* SceneDelegate.swift */; };
 		A3E135F0240D794100D4B680 /* web in Resources */ = {isa = PBXBuildFile; fileRef = A3E135EF240D794100D4B680 /* web */; };
 /* End PBXBuildFile section */
 
@@ -31,9 +31,9 @@
 		A31497B724140041005399C8 /* Util.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Util.swift; sourceTree = "<group>"; };
 		A31497BB2416F2A0005399C8 /* NetworkExtension.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = NetworkExtension.framework; path = System/Library/Frameworks/NetworkExtension.framework; sourceTree = SDKROOT; };
 		A31497BD24193AFB005399C8 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		A31497BF24193F0B005399C8 /* DataStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataStore.swift; sourceTree = "<group>"; };
 		A3E135CF2409A61700D4B680 /* AoT-Scratch.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "AoT-Scratch.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		A3E135D22409A61700D4B680 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		A3E135D42409A61700D4B680 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		A3E135D92409A61700D4B680 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		A3E135DB2409A61900D4B680 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		A3E135DE2409A61900D4B680 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -85,9 +85,9 @@
 			isa = PBXGroup;
 			children = (
 				A3E135D22409A61700D4B680 /* AppDelegate.swift */,
-				A3E135D42409A61700D4B680 /* SceneDelegate.swift */,
 				A3E135E62409A68E00D4B680 /* ProjectsCollectionViewController.swift */,
 				A3E135D82409A61700D4B680 /* Main.storyboard */,
+				A31497BF24193F0B005399C8 /* DataStore.swift */,
 				A31497BD24193AFB005399C8 /* Constants.swift */,
 				A3E135EA2409B04700D4B680 /* ScratchViewController.swift */,
 				A3E135E82409ABFD00D4B680 /* ImageCaptureViewController.swift */,
@@ -179,7 +179,7 @@
 				A31497B824140041005399C8 /* Util.swift in Sources */,
 				A30DC6012412EF3C008DD0E0 /* ImageEditViewController.swift in Sources */,
 				A30DC6032412F46F008DD0E0 /* ChromaKeyFilter.swift in Sources */,
-				A3E135EE240D77D000D4B680 /* SceneDelegate.swift in Sources */,
+				A31497C024193F0B005399C8 /* DataStore.swift in Sources */,
 				A31497BE24193AFB005399C8 /* Constants.swift in Sources */,
 				A3E135D32409A61700D4B680 /* AppDelegate.swift in Sources */,
 				A3E135EB2409B04700D4B680 /* ScratchViewController.swift in Sources */,
@@ -331,6 +331,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 38HK43T9W4;
 				INFOPLIST_FILE = "AoT-Scratch/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -352,6 +353,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 38HK43T9W4;
 				INFOPLIST_FILE = "AoT-Scratch/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

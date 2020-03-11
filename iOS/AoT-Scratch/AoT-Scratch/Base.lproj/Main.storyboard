@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="fXD-WC-zOG">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="UgI-gY-gi2">
     <device id="ipad9_7" orientation="portrait" layout="fullscreen" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
@@ -10,12 +10,12 @@
         <!--Projects Collection View Controller-->
         <scene sceneID="WFW-Sl-VIq">
             <objects>
-                <collectionViewController id="9LE-Q9-W5T" customClass="ProjectsCollectionViewController" customModule="AoT_Scratch" customModuleProvider="target" sceneMemberID="viewController">
+                <collectionViewController modalPresentationStyle="fullScreen" id="9LE-Q9-W5T" customClass="ProjectsCollectionViewController" customModule="AoT_Scratch" customModuleProvider="target" sceneMemberID="viewController">
                     <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" id="JSy-7F-i34">
                         <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" red="0.20000000000000001" green="0.27843137254901962" blue="0.44313725490196076" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                        <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="zX9-qQ-AN0" customClass="EqualSpacingFlowLayout" customModule="AoT_Scratch" customModuleProvider="target">
+                        <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="0.0" minimumInteritemSpacing="0.0" id="zX9-qQ-AN0" customClass="EqualSpacingFlowLayout" customModule="AoT_Scratch" customModuleProvider="target">
                             <size key="itemSize" width="320" height="240"/>
                             <size key="headerReferenceSize" width="0.0" height="0.0"/>
                             <size key="footerReferenceSize" width="0.0" height="0.0"/>
@@ -40,6 +40,9 @@
                                 </view>
                                 <color key="backgroundColor" red="0.15686274510000001" green="0.21960784310000001" blue="0.33725490200000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <size key="customSize" width="320" height="240"/>
+                                <connections>
+                                    <segue destination="fXD-WC-zOG" kind="show" id="Zoe-ll-PbP"/>
+                                </connections>
                             </collectionViewCell>
                             <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="ProjectCell" id="0N9-2P-Mcl" customClass="ProjectCell" customModule="AoT_Scratch" customModuleProvider="target">
                                 <rect key="frame" x="448" y="0.0" width="320" height="240"/>
@@ -67,15 +70,31 @@
                             <outlet property="delegate" destination="9LE-Q9-W5T" id="2yY-di-Mur"/>
                         </connections>
                     </collectionView>
+                    <navigationItem key="navigationItem" id="VN9-qf-h5E"/>
                 </collectionViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="GKX-qX-lPu" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="138" y="131"/>
         </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="rXG-zx-gn0">
+            <objects>
+                <navigationController navigationBarHidden="YES" id="UgI-gY-gi2" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="VoI-wG-txF">
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="9LE-Q9-W5T" kind="relationship" relationship="rootViewController" id="iTW-cm-bJo"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="vff-dQ-H5I" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-620" y="131"/>
+        </scene>
         <!--Image Capture View Controller-->
         <scene sceneID="fYl-aa-mob">
             <objects>
-                <viewController id="fXD-WC-zOG" customClass="ImageCaptureViewController" customModule="AoT_Scratch" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController modalPresentationStyle="fullScreen" id="fXD-WC-zOG" customClass="ImageCaptureViewController" customModule="AoT_Scratch" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="QXe-eq-Df8">
                         <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -99,6 +118,7 @@
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <viewLayoutGuide key="safeArea" id="U0q-y4-7AQ"/>
                     </view>
+                    <navigationItem key="navigationItem" id="aUS-Yw-1tQ"/>
                     <connections>
                         <outlet property="previewView" destination="0dS-Cx-UxF" id="7rc-Gj-l3U"/>
                         <segue destination="2Wt-2H-f9e" kind="show" identifier="ToEdit" id="bTP-4y-1fM"/>
@@ -163,6 +183,40 @@
                     <view key="view" contentMode="scaleToFill" id="Kjf-GK-I5w">
                         <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NGX-UC-se0">
+                                <rect key="frame" x="26" y="20" width="34" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Back"/>
+                                <connections>
+                                    <action selector="backButtonTapped:" destination="y6f-FA-ZtA" eventType="touchUpInside" id="R9u-DC-KeC"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="w8V-9Q-8uh">
+                                <rect key="frame" x="673" y="20" width="75" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Green Flag"/>
+                                <connections>
+                                    <action selector="greenFlagTapped:" destination="y6f-FA-ZtA" eventType="touchUpInside" id="s36-Sk-TY6"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zaO-SR-3Xn">
+                                <rect key="frame" x="716" y="58" width="32" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Stop"/>
+                                <connections>
+                                    <action selector="stopTapped:" destination="y6f-FA-ZtA" eventType="touchUpInside" id="2ax-0x-KDq"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BgG-Sn-omZ">
+                                <rect key="frame" x="677" y="145" width="71" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Project!"/>
+                                <connections>
+                                    <action selector="sendToProjectorTapped:" destination="y6f-FA-ZtA" eventType="touchUpInside" id="0fZ-Hm-EgL"/>
+                                </connections>
+                            </button>
+                        </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <viewLayoutGuide key="safeArea" id="Del-U1-cD5"/>
                     </view>
@@ -170,7 +224,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Y6h-8d-DR6" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2590" y="131"/>
+            <point key="canvasLocation" x="2589.84375" y="130.6640625"/>
         </scene>
     </scenes>
 </document>

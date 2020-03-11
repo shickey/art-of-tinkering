@@ -11,8 +11,8 @@ import UIKit
 private let projectReuseIdentifier = "ProjectCell"
 private let addReuseIdentifier = "AddProjectCell"
 
-struct Project {
-    var name : String
+protocol ProjectManager {
+    func projectWasCreated(project: Project)
 }
 
 class ProjectCell : UICollectionViewCell {
@@ -38,16 +38,12 @@ class EqualSpacingFlowLayout : UICollectionViewFlowLayout {
     
 }
 
-class ProjectsCollectionViewController: UICollectionViewController {
+class ProjectsCollectionViewController: UICollectionViewController, ProjectManager {
     
-    var projects : [Project] = []
+    var projects : [Project]! = nil
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        for i in 0..<5 {
-            projects.append(Project(name: "Project \(i)"))
-        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -56,8 +52,9 @@ class ProjectsCollectionViewController: UICollectionViewController {
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using [segue destinationViewController].
-        // Pass the selected object to the new view controller.
+        if let imageCaptureVC = segue.destination as? ImageCaptureViewController {
+            imageCaptureVC.projectManager = self
+        }
     }
 
     // MARK: UICollectionViewDataSource
@@ -79,9 +76,18 @@ class ProjectsCollectionViewController: UICollectionViewController {
         
         let project = projects[indexPath.item - 1]
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: projectReuseIdentifier, for: indexPath) as! ProjectCell
-//        cell.projectThumbnail.image = project.thumbnail
+        cell.projectThumbnail.image = project.image
     
         return cell
+    }
+    
+    // MARK: ProjectManager
+    func projectWasCreated(project: Project) {
+        projects.append(project)
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let scratchVC = storyboard.instantiateViewController(withIdentifier: "Scratch") as! ScratchViewController
+        scratchVC.project = project
+        navigationController!.setViewControllers([navigationController!.viewControllers[0], scratchVC], animated: true)
     }
 
 }

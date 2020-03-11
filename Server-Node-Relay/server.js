@@ -40,7 +40,7 @@ function log(msg) {
     serverStatus.log.unshift(msg);
 }
 
-app.use(bodyParser.text({ type: '*/*' }));
+app.use(bodyParser.text({ limit: '50mb', type: '*/*' }));
 app.use(express.static(path.join(__dirname, 'build')));
 
 app.get('/server-status', function(req, res) {

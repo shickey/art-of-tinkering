@@ -110,7 +110,8 @@ class ThresholdGestureRecognizer : UIGestureRecognizer {
 }
 
 class ImageEditViewController: UIViewController {
-
+    
+    var projectManager : ProjectManager! = nil
     var image : UIImage! = nil
     var filter = ChromaKeyFilter()
     var sampler : ImageSampler! = nil
@@ -190,11 +191,9 @@ class ImageEditViewController: UIViewController {
         let fileUrl = SPRITE_IMAGES_FOLDER_URL.appendingPathComponent("\(hash).png")
         try! png.write(to: fileUrl)
         
-        let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        let scratchVC = storyboard.instantiateViewController(withIdentifier: "Scratch") as! ScratchViewController
-        scratchVC.imageHash = hash
-        self.present(scratchVC, animated: true, completion: nil)
+        let project = Project(id: hash, image: img)
         
+        projectManager.projectWasCreated(project: project)
     }
     
 }

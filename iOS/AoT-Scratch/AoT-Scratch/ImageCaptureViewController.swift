@@ -46,6 +46,7 @@ extension AVCaptureVideoOrientation {
 
 class ImageCaptureViewController: UIViewController, AVCapturePhotoCaptureDelegate {
     
+    var projectManager : ProjectManager! = nil
     
     var session : AVCaptureSession! = nil
     var capturePhotoOutput: AVCapturePhotoOutput! = nil
@@ -192,6 +193,7 @@ class ImageCaptureViewController: UIViewController, AVCapturePhotoCaptureDelegat
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let imageEditVC = segue.destination as? ImageEditViewController, let photo = capturedPhoto {
+            imageEditVC.projectManager = projectManager
             imageEditVC.image = photo
         }
     }
