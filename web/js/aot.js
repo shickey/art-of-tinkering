@@ -9,7 +9,7 @@
     Scratch.vm = vm;
     
     var canvas = document.getElementById('stage');
-    var renderer = new ScratchRender(canvas, -800, 800, -450, 450);
+    var renderer = new ScratchRender(canvas);
     Scratch.renderer = renderer;
     vm.attachRenderer(renderer);
     vm.attachV2SVGAdapter(new ScratchSVGRenderer.SVGRenderer());
@@ -61,7 +61,7 @@
           {
             "assetId": "739b5e2a2435f6e1ec2993791b423146",
             "name": "backdrop1",
-            "bitmapResolution": 1,
+            "bitmapResolution": 2,
             "md5ext": "739b5e2a2435f6e1ec2993791b423146.png",
             "dataFormat": "png",
             "rotationCenterX": 240,
@@ -73,7 +73,7 @@
         },
         {
           isStage: false,
-          name: 'myAsset',
+          name: 'mySprite',
           variables: {},
           lists: {},
           broadcasts: {},
@@ -82,8 +82,8 @@
           costumes: [
             {
               assetId: imageHash,
-              name: 'cat',
-              bitmapResolution: 1,
+              name: 'mySprite',
+              bitmapResolution: 2,
               md5ext: imageHash + '.png',
               dataFormat: 'png',
               rotationCenterX: 48,

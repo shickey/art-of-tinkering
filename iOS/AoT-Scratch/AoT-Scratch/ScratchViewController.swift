@@ -54,7 +54,7 @@ class ScratchViewController: UIViewController, WKUIDelegate, WKNavigationDelegat
             request.httpMethod = "POST"
             request.httpBody = sprite3Payload.data(using: .utf8)
             let task = urlSession.dataTask(with: request) { (data, response, error) in
-                print(response)
+                // @TODO: Error handling, etc. here
             }
             task.resume()
         }
