@@ -14,6 +14,10 @@ struct Project {
     var image: UIImage
 }
 
+protocol ProjectManager {
+    func projectWasCreated(project: Project)
+}
+
 func loadProjectsManifest(_ url: URL) -> [Project] {
     var manifest : String = ""
     do {

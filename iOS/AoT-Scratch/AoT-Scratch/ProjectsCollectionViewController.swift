@@ -11,10 +11,6 @@ import UIKit
 private let projectReuseIdentifier = "ProjectCell"
 private let addReuseIdentifier = "AddProjectCell"
 
-protocol ProjectManager {
-    func projectWasCreated(project: Project)
-}
-
 class ProjectCell : UICollectionViewCell {
     @IBOutlet weak var projectThumbnail: UIImageView!
 }

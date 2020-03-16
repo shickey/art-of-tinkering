@@ -177,9 +177,22 @@ class ImageEditViewController: UIViewController {
     @IBAction func confirmTapped(_ sender: Any) {
         let bigImg = UIImage(ciImage: filter.outputImage!)
         
-        // Resize the image to something resonable
-        // @TODO: Do something better here. Maybe constrain the image to a prespecified max set of dimensions
-        let size = CGSize(width: bigImg.size.width / 10.0, height: bigImg.size.height / 10.0)
+        // Resize the image to max 800px in the larger dimension
+        var size = CGSize.zero
+        if bigImg.size.width > bigImg.size.height {
+            // Landscape
+            // It should already be in 4:3 but just in case...
+            let ratio = 800.0 / bigImg.size.width
+            let newHeight = bigImg.size.height * ratio
+            size = CGSize(width: 800.0, height: newHeight)
+        }
+        else {
+            // Portrait
+            let ratio = 800.0 / bigImg.size.height
+            let newWidth = bigImg.size.width * ratio
+            size = CGSize(width: newWidth, height: 800.0)
+        }
+        
         UIGraphicsBeginImageContext(size)
         bigImg.draw(in: CGRect(x: 0, y: 0, width: size.width, height: size.height))
         let img = UIGraphicsGetImageFromCurrentImageContext()!
