@@ -27,11 +27,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
         try! FileManager.default.copyItem(at: BUNDLE_WEB_FOLDER_URL, to: LOCAL_WEB_FOLDER_URL)
         
-        // Load projects from manifest
-        let projects = loadProjectsManifest(PROJECTS_MANIFEST_URL)
-        let nav = window!.rootViewController as! UINavigationController
-        let projectsVC = nav.viewControllers[0] as! ProjectsCollectionViewController
-        projectsVC.projects = projects
+        // Initialize data store
+        loadProjectsFromManifest(manifestUrl: PROJECTS_MANIFEST_URL, into: AotStore)
         
         return true
     }

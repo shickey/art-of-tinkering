@@ -1,5 +1,5 @@
 //
-//  ImageEditViewController.swift
+//  ImageEditorViewController.swift
 //  AoT-Scratch
 //
 //  Created by Sean Hickey on 3/6/20.
@@ -109,13 +109,8 @@ class ThresholdGestureRecognizer : UIGestureRecognizer {
     
 }
 
-protocol ImageEditorDelegate {
-    func imageEditorCreatedProject(_ editor: ImageEditorViewController, project: Project)
-}
-
 class ImageEditorViewController: UIViewController {
     
-    var delegate : ImageEditDelegate? = nil
     var image : UIImage! = nil
     var filter = ChromaKeyFilter()
     var sampler : ImageSampler! = nil
@@ -181,7 +176,11 @@ class ImageEditorViewController: UIViewController {
     @IBAction func confirmTapped(_ sender: Any) {
         let img = UIImage(ciImage: filter.outputImage!)
         let project = createProjectWithImage(img, in: AotStore)
-        projectManager.projectWasCreated(project: project)
+        
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let scratchVC = storyboard.instantiateViewController(withIdentifier: "Scratch") as! ScratchViewController
+        scratchVC.project = project
+        navigationController!.setViewControllers([navigationController!.viewControllers[0], scratchVC], animated: true)
     }
     
 }

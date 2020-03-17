@@ -34,7 +34,7 @@ class EqualSpacingFlowLayout : UICollectionViewFlowLayout {
     
 }
 
-class ProjectsCollectionViewController: UICollectionViewController, ProjectManager {
+class ProjectsCollectionViewController: UICollectionViewController {
     
     var projects : [Project]! = nil
 
@@ -44,13 +44,8 @@ class ProjectsCollectionViewController: UICollectionViewController, ProjectManag
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        projects = AotStore.projects
         collectionView?.reloadData()
-    }
-    
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if let imageCaptureVC = segue.destination as? ImageCaptureViewController {
-            imageCaptureVC.projectManager = self
-        }
     }
 
     // MARK: UICollectionViewDataSource
@@ -65,7 +60,6 @@ class ProjectsCollectionViewController: UICollectionViewController, ProjectManag
     }
 
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        print("Adding cell at index path \(indexPath)")
         if indexPath.item == 0 {
             return collectionView.dequeueReusableCell(withReuseIdentifier: addReuseIdentifier, for: indexPath) as! AddProjectCell
         }
@@ -75,15 +69,6 @@ class ProjectsCollectionViewController: UICollectionViewController, ProjectManag
         cell.projectThumbnail.image = project.image
     
         return cell
-    }
-    
-    // MARK: ProjectManager
-    func projectWasCreated(project: Project) {
-        projects.append(project)
-        let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        let scratchVC = storyboard.instantiateViewController(withIdentifier: "Scratch") as! ScratchViewController
-        scratchVC.project = project
-        navigationController!.setViewControllers([navigationController!.viewControllers[0], scratchVC], animated: true)
     }
 
 }
