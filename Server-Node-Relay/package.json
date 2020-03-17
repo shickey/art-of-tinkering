@@ -1,8 +1,26 @@
 {
-  "name": "server-node-relay",
-  "version": "0.1.0",
-  "private": true,
-  "proxy": "http://localhost:8080",
+  "name": "aot-relay-server",
+  "version": "0.0.1",
+  "build": {
+    "appId": "com.aot.scratchrelayserver",
+    "extends": null,
+    "files": [
+      "**/*",
+      "assets/**/*",
+      "build/**/*"
+    ]
+  },
+  "description": "",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron .",
+    "pack": "electron-building --dir",
+    "build": "react-scripts build",
+    "dist": "electron-builder",
+    "test": "node tests/test.js"
+  },
+  "author": "",
+  "license": "ISC",
   "dependencies": {
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.5.0",
@@ -14,13 +32,9 @@
     "react-dom": "^16.13.0",
     "react-scripts": "3.4.0"
   },
-  "scripts": {
-    "start": "node server.js",
-    "build": "react-scripts build",
-    "test": "node tests/test.js"
-  },
-  "eslintConfig": {
-    "extends": "react-app"
+  "devDependencies": {
+    "electron": "^8.1.1",
+    "electron-builder": "^22.4.1"
   },
   "browserslist": {
     "production": [
