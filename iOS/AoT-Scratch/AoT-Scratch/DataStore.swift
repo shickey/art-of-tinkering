@@ -10,21 +10,22 @@ import Foundation
 import UIKit
 
 struct Project {
-    var id: String // md5 hash of the asset
-    var image: UIImage
+    var id: UUID
+    var thumbnail: UIImage
+    var sprite3Data: Data
 }
 
 class Store {
-    let assetsUrl : URL
+    let projectsFolderUrl : URL
     var projects : [Project]
     
-    init(assetsUrl url: URL) {
-        assetsUrl = url
+    init(projectsFolderUrl url: URL) {
+        projectsFolderUrl = url
         projects = []
     }
 }
 
-let AotStore = Store(assetsUrl: SPRITE_IMAGES_FOLDER_URL)
+let AotStore = Store(projectsFolderUrl: PROJECTS_FOLDER_URL)
 
 func loadProjectsFromManifest(manifestUrl: URL, into store: Store, overwriteProjects : Bool = true) {
     var manifest : String = ""
@@ -42,12 +43,18 @@ func loadProjectsFromManifest(manifestUrl: URL, into store: Store, overwriteProj
     
     let lines = manifest.split(separator: "\n").map { String($0) };
     for projectId in lines {
-        let projectImage = loadPngImageAsset(projectId, assetFolderUrl: SPRITE_IMAGES_FOLDER_URL)
-        if projectImage == nil {
-            print("WARNING: Failed to load image for project \(projectId). Skipping project.")
-            continue
-        }
-        let project = Project(id: String(projectId), image: projectImage!)    
+        // @TODO: We're loading absolutely everything (thumbnails, sprite3 data) into
+        //        memory just for simplicity. We could (should?) lazy load some of this
+        //        in the future if it makes sense to do so
+        
+        let uuid = UUID(uuidString: projectId)!
+        
+        let projectFolderUrl = PROJECTS_FOLDER_URL.appendingPathComponent(projectId, isDirectory: true)
+        let thumb = UIImage(contentsOfFile: projectFolderUrl.appendingPathComponent("thumb.png").path)!
+        
+        let sprite3 = try! Data(contentsOf: PROJECTS_FOLDER_URL.appendingPathComponent("project.sprite3"))
+        
+        let project = Project(id: uuid, thumbnail: thumb, sprite3Data: sprite3)  
         store.projects.append(project)
     }
 }
@@ -55,7 +62,7 @@ func loadProjectsFromManifest(manifestUrl: URL, into store: Store, overwriteProj
 func saveProjectsManifest(store: Store, to url: URL) -> Bool {
     var manifest = ""
     for project in store.projects {
-        manifest += "\(project.id)\n"
+        manifest += "\(project.id.uuidString)\n"
     }
     
     do {
@@ -67,40 +74,24 @@ func saveProjectsManifest(store: Store, to url: URL) -> Bool {
     }
 }
 
-func loadPngImageAsset(_ md5Hash: String, assetFolderUrl: URL) -> UIImage? {
-    let assetUrl = assetFolderUrl.appendingPathComponent("\(md5Hash).png")
-    return UIImage(contentsOfFile: assetUrl.path)
-}
-
 func createProjectWithImage(_ img: UIImage, in store: Store) -> Project {
-    // Resize the image to max 800px in the larger dimension
-    var size = CGSize.zero
-    if img.size.width > img.size.height {
-        // Landscape
-        // It should already be in 4:3 but just in case...
-        let ratio = 800.0 / img.size.width
-        let newHeight = img.size.height * ratio
-        size = CGSize(width: 800.0, height: newHeight)
-    }
-    else {
-        // Portrait
-        let ratio = 800.0 / img.size.height
-        let newWidth = img.size.width * ratio
-        size = CGSize(width: newWidth, height: 800.0)
+    var image = img
+    if image.size.width > 800 || image.size.height > 800 {
+        image = resizeImageConstrained(to: 800, image: img)
     }
     
-    UIGraphicsBeginImageContext(size)
-    img.draw(in: CGRect(x: 0, y: 0, width: size.width, height: size.height))
-    let storeImg = UIGraphicsGetImageFromCurrentImageContext()!
-    UIGraphicsEndImageContext()
+    let sprite3 = createSprite3Archive(from: image)
+    let thumbnail = resizeImageConstrained(to: 320, image: image)
+    let thumbnailData = thumbnail.pngData()!
     
-    let png = storeImg.pngData()!
-    let hash = md5(png)
+    let projectId = UUID()
+    let projectFolderUrl = PROJECTS_FOLDER_URL.appendingPathComponent("\(projectId.uuidString)")
+    try! FileManager.default.createDirectory(at: projectFolderUrl, withIntermediateDirectories: true, attributes: nil)
     
-    let fileUrl = SPRITE_IMAGES_FOLDER_URL.appendingPathComponent("\(hash).png")
-    try! png.write(to: fileUrl)
+    try! thumbnailData.write(to: projectFolderUrl.appendingPathComponent("thumb.png"))
+    try! sprite3.write(to: projectFolderUrl.appendingPathComponent("project.sprite3"))
     
-    let project = Project(id: hash, image: storeImg)
+    let project = Project(id: projectId, thumbnail: thumbnail, sprite3Data: sprite3)
     store.projects.append(project)
     return project
 }

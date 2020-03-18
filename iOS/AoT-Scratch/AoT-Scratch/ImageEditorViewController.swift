@@ -175,6 +175,7 @@ class ImageEditorViewController: UIViewController {
     
     @IBAction func confirmTapped(_ sender: Any) {
         let img = UIImage(ciImage: filter.outputImage!)
+        
         let project = createProjectWithImage(img, in: AotStore)
         
         let storyboard = UIStoryboard(name: "Main", bundle: nil)

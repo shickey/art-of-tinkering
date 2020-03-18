@@ -17,8 +17,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         // Create the folder where we'll save images created with the app
         let fm = FileManager.default
-        if !fm.fileExists(atPath: SPRITE_IMAGES_FOLDER_URL.path) {
-            try! FileManager.default.createDirectory(at: SPRITE_IMAGES_FOLDER_URL, withIntermediateDirectories: true, attributes: nil)
+        if !fm.fileExists(atPath: PROJECTS_FOLDER_URL.path) {
+            try! FileManager.default.createDirectory(at: PROJECTS_FOLDER_URL, withIntermediateDirectories: true, attributes: nil)
         }
         
         // Copy the Scratch GUI web resources to a local folder (so that both it, and the sprite images folder can be accessed by WKWebView)

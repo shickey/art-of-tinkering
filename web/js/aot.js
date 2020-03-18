@@ -2,7 +2,7 @@
   
   var Scratch = {};
   
-  Scratch.init = function(defaultAssetFolderUrl, localAssetFolderUrl, imageHash) {
+  Scratch.init = function(defaultAssetFolderUrl) {
     
     // Instantiate the VM and create an empty project
     var vm = new VirtualMachine();
@@ -23,19 +23,6 @@
       function(asset) {
         var assetUrlParts = [
           defaultAssetFolderUrl,
-          asset.assetId,
-          '.',
-          asset.dataFormat
-        ];
-        return assetUrlParts.join('');
-      }
-    );
-    
-    storage.addWebStore(
-      [AssetType.ImageVector, AssetType.ImageBitmap, AssetType.Sound],
-      function(asset) {
-        var assetUrlParts = [
-          localAssetFolderUrl,
           asset.assetId,
           '.',
           asset.dataFormat
@@ -70,35 +57,6 @@
           ],
           "sounds": [],
           "volume": 100,
-        },
-        {
-          isStage: false,
-          name: 'mySprite',
-          variables: {},
-          lists: {},
-          broadcasts: {},
-          blocks: {},
-          currentCostume: 0,
-          costumes: [
-            {
-              assetId: imageHash,
-              name: 'mySprite',
-              bitmapResolution: 2,
-              md5ext: imageHash + '.png',
-              dataFormat: 'png',
-              rotationCenterX: 48,
-              rotationCenterY: 50
-            }
-          ],
-          sounds: [],
-          volume: 100,
-          visible: true,
-          x: 0,
-          y: 0,
-          size: 100,
-          direction: 90,
-          draggable: false,
-          rotationStyle: 'all around'
         }
       ],
       "meta": {

@@ -66,7 +66,7 @@ class ProjectsCollectionViewController: UICollectionViewController {
         
         let project = projects[indexPath.item - 1]
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: projectReuseIdentifier, for: indexPath) as! ProjectCell
-        cell.projectThumbnail.image = project.image
+        cell.projectThumbnail.image = project.thumbnail
     
         return cell
     }

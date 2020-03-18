@@ -6,7 +6,7 @@
 //  Copyright © 2020 Lifelong Kindergarten. All rights reserved.
 //
 
-import Foundation
+import UIKit
 import CommonCrypto
 
 func md5(_ data: Data) -> String {
@@ -24,4 +24,27 @@ func clamp<T>(_ val: T, _ min: T, _ max: T) -> T where T:Numeric, T:Comparable {
     if val < min { return min }
     if val > max { return max }
     return val
+}
+
+func resizeImageConstrained(to largestDimension: CGFloat, image: UIImage) -> UIImage {
+    var size = CGSize.zero
+    if image.size.width > image.size.height {
+        // Landscape
+        let ratio = largestDimension / image.size.width
+        let newHeight = image.size.height * ratio
+        size = CGSize(width: largestDimension, height: newHeight)
+    }
+    else {
+        // Portrait
+        let ratio = largestDimension / image.size.height
+        let newWidth = image.size.width * ratio
+        size = CGSize(width: newWidth, height: largestDimension)
+    }
+    
+    UIGraphicsBeginImageContext(size)
+    image.draw(in: CGRect(x: 0, y: 0, width: size.width, height: size.height))
+    let resizedImg = UIGraphicsGetImageFromCurrentImageContext()!
+    UIGraphicsEndImageContext()
+    
+    return resizedImg
 } 

@@ -40,12 +40,21 @@ class ScratchViewController: UIViewController, WKUIDelegate, WKNavigationDelegat
     
     func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
         // Pass the URL to the assets folder within the bundle so scratch-storage can load from it
-        let documents = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).last!
-        let localWebFolderUrl = documents.appendingPathComponent("web", isDirectory: true)
-        let defaultAssetsUrl = localWebFolderUrl.appendingPathComponent("assets", isDirectory: true)
-        let spriteImagesUrl = documents.appendingPathComponent("sprite-images", isDirectory: true)
+        let defaultAssetsUrl = LOCAL_WEB_FOLDER_URL.appendingPathComponent("assets", isDirectory: true)
         
-        webView.evaluateJavaScript("Scratch.init('\(defaultAssetsUrl)', '\(spriteImagesUrl)', '\(project.id)');", completionHandler: nil)
+        let spriteBase64String = project.sprite3Data.base64EncodedString()
+        webView.evaluateJavaScript("""
+            // Initialize Scratch
+            Scratch.init('\(defaultAssetsUrl)');
+            
+            // Inject the sprite zip
+            var zipBinaryData = window.atob('\(spriteBase64String)');
+            var bytes = new Uint8Array(zipBinaryData.length);
+            for (var i = 0; i < zipBinaryData.length; i++) {
+                bytes[i] = zipBinaryData.charCodeAt(i);
+            }
+            Scratch.vm.addSprite(bytes.buffer);
+        """, completionHandler: nil)
     }
     
     func userContentController(_ userContentController: WKUserContentController, didReceive message: WKScriptMessage) {
