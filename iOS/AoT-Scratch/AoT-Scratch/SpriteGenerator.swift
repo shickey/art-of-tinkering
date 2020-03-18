@@ -28,35 +28,35 @@ func createSprite3Archive(from image: UIImage) -> Data {
 
 func generateSprite3Json(imageHash: String, imageSize: CGSize) -> String {
     return """
-{
-  "isStage": false,
-  "name": "my-sprite",
-  "variables": {},
-  "lists": {},
-  "broadcasts": {},
-  "blocks": {},
-  "comments": {},
-  "currentCostume": 0,
-  "costumes": [
-    {
-      "assetId": "\(imageHash)",
-      "name": "my-sprite",
-      "bitmapResolution": 2,
-      "md5ext": "\(imageHash).png",
-      "dataFormat": "png",
-      "rotationCenterX": \(Int(imageSize.width) / 2),
-      "rotationCenterY": \(Int(imageSize.height) / 2)
-    }
-  ],
-  "sounds": [],
-  "volume": 100,
-  "visible": true,
-  "x": 0,
-  "y": 0,
-  "size": 100,
-  "direction": 90,
-  "draggable": false,
-  "rotationStyle": "all around"
-}
-"""
+        {
+          "isStage": false,
+          "name": "my-sprite",
+          "variables": {},
+          "lists": {},
+          "broadcasts": {},
+          "blocks": {},
+          "comments": {},
+          "currentCostume": 0,
+          "costumes": [
+            {
+              "assetId": "\(imageHash)",
+              "name": "my-sprite",
+              "bitmapResolution": 2,
+              "md5ext": "\(imageHash).png",
+              "dataFormat": "png",
+              "rotationCenterX": \(Int(imageSize.width) / 2),
+              "rotationCenterY": \(Int(imageSize.height) / 2)
+            }
+          ],
+          "sounds": [],
+          "volume": 100,
+          "visible": true,
+          "x": 0,
+          "y": 0,
+          "size": 100,
+          "direction": 90,
+          "draggable": false,
+          "rotationStyle": "all around"
+        }
+    """
 }

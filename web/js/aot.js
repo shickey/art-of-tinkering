@@ -138,6 +138,15 @@
       })
     }
     
+    Scratch.injectBase64Sprite3Data = function(base64Sprite3Data) {
+      var binaryData = window.atob(base64Sprite3Data);
+      var bytes = new Uint8Array(binaryData.length);
+      for (var i = 0; i < binaryData.length; i++) {
+          bytes[i] = binaryData.charCodeAt(i);
+      }
+      Scratch.vm.addSprite(bytes.buffer);
+    }
+    
     vm.start();
   }
   

@@ -44,16 +44,8 @@ class ScratchViewController: UIViewController, WKUIDelegate, WKNavigationDelegat
         
         let spriteBase64String = project.sprite3Data.base64EncodedString()
         webView.evaluateJavaScript("""
-            // Initialize Scratch
             Scratch.init('\(defaultAssetsUrl)');
-            
-            // Inject the sprite zip
-            var zipBinaryData = window.atob('\(spriteBase64String)');
-            var bytes = new Uint8Array(zipBinaryData.length);
-            for (var i = 0; i < zipBinaryData.length; i++) {
-                bytes[i] = zipBinaryData.charCodeAt(i);
-            }
-            Scratch.vm.addSprite(bytes.buffer);
+            Scratch.injectBase64Sprite3Data('\(spriteBase64String)');
         """, completionHandler: nil)
     }
     

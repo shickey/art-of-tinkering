@@ -17,6 +17,7 @@
 		A354602E24216D5F00037DF4 /* SpriteGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = A354602D24216D5F00037DF4 /* SpriteGenerator.swift */; };
 		A3546035242178DA00037DF4 /* ZIPFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A3546033242174D200037DF4 /* ZIPFoundation.framework */; };
 		A3546036242178DA00037DF4 /* ZIPFoundation.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = A3546033242174D200037DF4 /* ZIPFoundation.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		A35460392422B59E00037DF4 /* Logging.swift in Sources */ = {isa = PBXBuildFile; fileRef = A35460382422B59E00037DF4 /* Logging.swift */; };
 		A3E135D32409A61700D4B680 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3E135D22409A61700D4B680 /* AppDelegate.swift */; };
 		A3E135DA2409A61700D4B680 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A3E135D82409A61700D4B680 /* Main.storyboard */; };
 		A3E135DC2409A61900D4B680 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A3E135DB2409A61900D4B680 /* Assets.xcassets */; };
@@ -51,6 +52,7 @@
 		A31497BF24193F0B005399C8 /* DataStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataStore.swift; sourceTree = "<group>"; };
 		A354602D24216D5F00037DF4 /* SpriteGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpriteGenerator.swift; sourceTree = "<group>"; };
 		A3546033242174D200037DF4 /* ZIPFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = ZIPFoundation.framework; sourceTree = "<group>"; };
+		A35460382422B59E00037DF4 /* Logging.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Logging.swift; sourceTree = "<group>"; };
 		A3E135CF2409A61700D4B680 /* AoT-Scratch.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "AoT-Scratch.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		A3E135D22409A61700D4B680 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		A3E135D92409A61700D4B680 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -111,6 +113,7 @@
 				A31497BD24193AFB005399C8 /* Constants.swift */,
 				A3E135EA2409B04700D4B680 /* ScratchViewController.swift */,
 				A354602D24216D5F00037DF4 /* SpriteGenerator.swift */,
+				A35460382422B59E00037DF4 /* Logging.swift */,
 				A3E135E82409ABFD00D4B680 /* ImageCaptureViewController.swift */,
 				A30DC6002412EF3C008DD0E0 /* ImageEditorViewController.swift */,
 				A31497B724140041005399C8 /* Util.swift */,
@@ -205,6 +208,7 @@
 				A30DC6032412F46F008DD0E0 /* ChromaKeyFilter.swift in Sources */,
 				A31497C024193F0B005399C8 /* DataStore.swift in Sources */,
 				A31497BE24193AFB005399C8 /* Constants.swift in Sources */,
+				A35460392422B59E00037DF4 /* Logging.swift in Sources */,
 				A3E135D32409A61700D4B680 /* AppDelegate.swift in Sources */,
 				A3E135EB2409B04700D4B680 /* ScratchViewController.swift in Sources */,
 				A3E135E72409A68E00D4B680 /* ProjectsCollectionViewController.swift in Sources */,
@@ -366,6 +370,7 @@
 				);
 				MTLLINKER_FLAGS = "-cikernel";
 				MTL_COMPILER_FLAGS = "-fcikernel";
+				OTHER_SWIFT_FLAGS = "-DDEBUG";
 				PRODUCT_BUNDLE_IDENTIFIER = "edu.mit.media.llk.AoT-Scratch";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
@@ -377,7 +382,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_ENTITLEMENTS = "AoT-Scratch/AoT-ScratchRelease.entitlements";
+				CODE_SIGN_ENTITLEMENTS = "";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 38HK43T9W4;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -392,6 +397,7 @@
 				);
 				MTLLINKER_FLAGS = "-cikernel";
 				MTL_COMPILER_FLAGS = "-fcikernel";
+				OTHER_SWIFT_FLAGS = "";
 				PRODUCT_BUNDLE_IDENTIFIER = "edu.mit.media.llk.AoT-Scratch";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
