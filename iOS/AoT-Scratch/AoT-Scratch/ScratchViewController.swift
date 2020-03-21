@@ -42,7 +42,8 @@ class ScratchViewController: UIViewController, WKUIDelegate, WKNavigationDelegat
         // Pass the URL to the assets folder within the bundle so scratch-storage can load from it
         let defaultAssetsUrl = LOCAL_WEB_FOLDER_URL.appendingPathComponent("assets", isDirectory: true)
         
-        let spriteBase64String = project.sprite3Data.base64EncodedString()
+        let sprite3Data = createSprite3Archive(from: project)
+        let spriteBase64String = sprite3Data.base64EncodedString()
         webView.evaluateJavaScript("""
             Scratch.init('\(defaultAssetsUrl)');
             Scratch.injectBase64Sprite3Data('\(spriteBase64String)');

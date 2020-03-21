@@ -47,6 +47,13 @@ class ProjectsCollectionViewController: UICollectionViewController {
         projects = AotStore.projects
         collectionView?.reloadData()
     }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let scratchVC = segue.destination as? ScratchViewController, let cell = sender as? ProjectCell {
+            let indexPath = collectionView!.indexPath(for: cell)!
+            scratchVC.project = projects[indexPath.item - 1]
+        }
+    }
 
     // MARK: UICollectionViewDataSource
 

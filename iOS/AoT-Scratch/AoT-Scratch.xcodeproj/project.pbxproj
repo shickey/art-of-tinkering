@@ -14,7 +14,6 @@
 		A31497BC2416F2A0005399C8 /* NetworkExtension.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A31497BB2416F2A0005399C8 /* NetworkExtension.framework */; };
 		A31497BE24193AFB005399C8 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = A31497BD24193AFB005399C8 /* Constants.swift */; };
 		A31497C024193F0B005399C8 /* DataStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = A31497BF24193F0B005399C8 /* DataStore.swift */; };
-		A354602E24216D5F00037DF4 /* SpriteGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = A354602D24216D5F00037DF4 /* SpriteGenerator.swift */; };
 		A3546035242178DA00037DF4 /* ZIPFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A3546033242174D200037DF4 /* ZIPFoundation.framework */; };
 		A3546036242178DA00037DF4 /* ZIPFoundation.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = A3546033242174D200037DF4 /* ZIPFoundation.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		A35460392422B59E00037DF4 /* Logging.swift in Sources */ = {isa = PBXBuildFile; fileRef = A35460382422B59E00037DF4 /* Logging.swift */; };
@@ -50,7 +49,6 @@
 		A31497BB2416F2A0005399C8 /* NetworkExtension.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = NetworkExtension.framework; path = System/Library/Frameworks/NetworkExtension.framework; sourceTree = SDKROOT; };
 		A31497BD24193AFB005399C8 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		A31497BF24193F0B005399C8 /* DataStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataStore.swift; sourceTree = "<group>"; };
-		A354602D24216D5F00037DF4 /* SpriteGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpriteGenerator.swift; sourceTree = "<group>"; };
 		A3546033242174D200037DF4 /* ZIPFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = ZIPFoundation.framework; sourceTree = "<group>"; };
 		A35460382422B59E00037DF4 /* Logging.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Logging.swift; sourceTree = "<group>"; };
 		A3E135CF2409A61700D4B680 /* AoT-Scratch.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "AoT-Scratch.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -112,7 +110,6 @@
 				A31497BF24193F0B005399C8 /* DataStore.swift */,
 				A31497BD24193AFB005399C8 /* Constants.swift */,
 				A3E135EA2409B04700D4B680 /* ScratchViewController.swift */,
-				A354602D24216D5F00037DF4 /* SpriteGenerator.swift */,
 				A35460382422B59E00037DF4 /* Logging.swift */,
 				A3E135E82409ABFD00D4B680 /* ImageCaptureViewController.swift */,
 				A30DC6002412EF3C008DD0E0 /* ImageEditorViewController.swift */,
@@ -223,7 +220,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				A30DC6052412F663008DD0E0 /* Shaders.metal in Sources */,
-				A354602E24216D5F00037DF4 /* SpriteGenerator.swift in Sources */,
 				A31497B824140041005399C8 /* Util.swift in Sources */,
 				A30DC6012412EF3C008DD0E0 /* ImageEditorViewController.swift in Sources */,
 				A30DC6032412F46F008DD0E0 /* ChromaKeyFilter.swift in Sources */,
