@@ -63,7 +63,14 @@ class ScratchViewController: UIViewController, WKUIDelegate, WKNavigationDelegat
     }
 
     @IBAction func backButtonTapped(_ sender: Any) {
-        navigationController!.popViewController(animated: true)
+        // @TODO: Block UI on saving
+        webView.evaluateJavaScript("Scratch.vm.exportSpriteJson(Scratch.vm.editingTarget.id)") { (res, err) in
+            if let json = res as? String {
+                self.project.json = json
+                writeProjectToDisk(self.project)
+                self.navigationController!.popViewController(animated: true)
+            }
+        }
     }
     
     @IBAction func greenFlagTapped(_ sender: Any) {

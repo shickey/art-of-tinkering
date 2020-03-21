@@ -10,17 +10,30 @@ import Foundation
 import UIKit
 import ZIPFoundation
 
-struct Costume {
+class Costume {
     let hash: String
     let image: UIImage
+    
+    init(hash newHash: String, image newImage: UIImage) {
+        hash = newHash
+        image = newImage
+    }
 }
 
-struct Project {
+class Project {
     weak var store: Store?
     var id: UUID
     var thumbnail: UIImage
     var json: String
     var costumes: [Costume]
+    
+    init(store newStore: Store?, id newId: UUID, thumbnail newThumbnail: UIImage, json newJson: String, costumes newCostumes: [Costume]) {
+        store = newStore
+        id = newId
+        thumbnail = newThumbnail
+        json = newJson
+        costumes = newCostumes
+    }
 }
 
 class Store {
