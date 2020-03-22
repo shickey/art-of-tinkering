@@ -15,9 +15,12 @@ class ScratchViewController: UIViewController, WKUIDelegate, WKNavigationDelegat
     
     var project : Project! = nil
     var urlSession = URLSession(configuration: .default)
+    var relayServerUrl : URL! = nil
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        relayServerUrl = UserDefaults.standard.url(forKey: USER_DEFAULTS_RELAY_SERVER_URL_KEY)
         
         let webConfiguration = WKWebViewConfiguration()
         webConfiguration.preferences.setValue(true, forKey: "allowFileAccessFromFileURLs")
@@ -52,7 +55,7 @@ class ScratchViewController: UIViewController, WKUIDelegate, WKNavigationDelegat
     
     func userContentController(_ userContentController: WKUserContentController, didReceive message: WKScriptMessage) {
         if let sprite3Payload = message.body as? String {
-            var request = URLRequest(url: RELAY_SERVER_URL)
+            var request = URLRequest(url: relayServerUrl)
             request.httpMethod = "POST"
             request.httpBody = sprite3Payload.data(using: .utf8)
             let task = urlSession.dataTask(with: request) { (data, response, error) in

@@ -27,6 +27,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
         try! FileManager.default.copyItem(at: BUNDLE_WEB_FOLDER_URL, to: LOCAL_WEB_FOLDER_URL)
         
+        // Initialize user defaults (if necessary)
+        let userDefaults = UserDefaults.standard
+        if userDefaults.url(forKey: USER_DEFAULTS_RELAY_SERVER_URL_KEY) == nil {
+            userDefaults.set(RELAY_SERVER_URL, forKey: USER_DEFAULTS_RELAY_SERVER_URL_KEY)
+        }
+        
         // Initialize data store
         loadProjectsFromManifest(manifestUrl: PROJECTS_MANIFEST_URL, into: AotStore)
         

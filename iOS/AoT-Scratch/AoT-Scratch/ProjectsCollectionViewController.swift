@@ -44,6 +44,8 @@ class ProjectsCollectionViewController: UICollectionViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        navigationController!.setNavigationBarHidden(false, animated: false)
+        navigationController!.navigationBar.barTintColor = UIColor(hex: 0x121A26)
         projects = AotStore.projects
         collectionView?.reloadData()
     }

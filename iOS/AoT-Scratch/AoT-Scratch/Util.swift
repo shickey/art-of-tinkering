@@ -47,4 +47,23 @@ func resizeImageConstrained(to largestDimension: CGFloat, image: UIImage) -> UII
     UIGraphicsEndImageContext()
     
     return resizedImg
-} 
+}
+
+extension UIColor {
+    convenience init(hex: UInt) {
+        let r = CGFloat((hex & 0x00FF0000) >> 16) / 255.0
+        let g = CGFloat((hex & 0x0000FF00) >> 8) / 255.0
+        let b = CGFloat((hex & 0x000000FF)) / 255.0
+        self.init(red: r, green: g, blue: b, alpha: 1.0)
+    }
+}
+
+extension URL {
+    func withoutScheme() -> String {
+        if let scheme = self.scheme {
+            let schemeWithSlashes = "\(scheme)://"
+            return self.absoluteString.replacingOccurrences(of: schemeWithSlashes, with: "")
+        }
+        return self.absoluteString
+    }
+}
