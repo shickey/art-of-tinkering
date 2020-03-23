@@ -41,6 +41,11 @@ class ScratchViewController: UIViewController, WKUIDelegate, WKNavigationDelegat
         webView.loadFileURL(indexUrl, allowingReadAccessTo: documents)
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        navigationController?.setNavigationBarHidden(true, animated: true)
+    }
+    
     func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
         let defaultAssetsUrl = LOCAL_WEB_FOLDER_URL.appendingPathComponent("assets", isDirectory: true)
         let backgroundFilename = UserDefaults.standard.string(forKey: USER_DEFAULTS_BACKGROUND_KEY)!

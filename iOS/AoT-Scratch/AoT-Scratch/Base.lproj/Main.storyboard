@@ -284,15 +284,15 @@
             <objects>
                 <viewController modalPresentationStyle="fullScreen" id="fXD-WC-zOG" customClass="ImageCaptureViewController" customModule="AoT_Scratch" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="QXe-eq-Df8">
-                        <rect key="frame" x="0.0" y="0.0" width="768" height="974"/>
+                        <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="0dS-Cx-UxF" customClass="CameraPreviewView" customModule="AoT_Scratch" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="0.0" width="768" height="974"/>
+                                <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZRU-Yn-UFy">
-                                        <rect key="frame" x="682" y="472" width="55" height="30"/>
+                                        <rect key="frame" x="682" y="497" width="55" height="30"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                                         <state key="normal" title="Capture"/>
                                         <connections>
@@ -307,6 +307,7 @@
                         <viewLayoutGuide key="safeArea" id="U0q-y4-7AQ"/>
                     </view>
                     <navigationItem key="navigationItem" id="aUS-Yw-1tQ"/>
+                    <nil key="simulatedTopBarMetrics"/>
                     <connections>
                         <outlet property="previewView" destination="0dS-Cx-UxF" id="7rc-Gj-l3U"/>
                         <segue destination="2Wt-2H-f9e" kind="show" identifier="ToEdit" id="bTP-4y-1fM"/>
@@ -321,11 +322,11 @@
             <objects>
                 <viewController modalPresentationStyle="fullScreen" id="2Wt-2H-f9e" customClass="ImageEditorViewController" customModule="AoT_Scratch" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="mvS-kX-uke">
-                        <rect key="frame" x="0.0" y="0.0" width="768" height="974"/>
+                        <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView clipsSubviews="YES" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="gee-in-Ypg">
-                                <rect key="frame" x="0.0" y="0.0" width="768" height="812"/>
+                                <rect key="frame" x="0.0" y="0.0" width="768" height="862"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <gestureRecognizers/>
                                 <connections>
@@ -333,12 +334,12 @@
                                 </connections>
                             </imageView>
                             <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="gmS-Nc-uQ1" customClass="ColorView" customModule="AoT_Scratch" customModuleProvider="target">
-                                <rect key="frame" x="59" y="826" width="240" height="128"/>
+                                <rect key="frame" x="59" y="876" width="240" height="128"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMinY="YES"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="R4H-Ga-6us">
-                                <rect key="frame" x="616" y="875" width="115" height="30"/>
+                                <rect key="frame" x="616" y="925" width="115" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMinY="YES"/>
                                 <state key="normal" title="Send to Scratch!"/>
                                 <connections>
@@ -369,7 +370,7 @@
             <objects>
                 <viewController storyboardIdentifier="Scratch" modalPresentationStyle="fullScreen" id="y6f-FA-ZtA" customClass="ScratchViewController" customModule="AoT_Scratch" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Kjf-GK-I5w">
-                        <rect key="frame" x="0.0" y="0.0" width="768" height="974"/>
+                        <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NGX-UC-se0">
@@ -409,6 +410,7 @@
                         <viewLayoutGuide key="safeArea" id="Del-U1-cD5"/>
                     </view>
                     <navigationItem key="navigationItem" id="5ys-Su-jJu"/>
+                    <nil key="simulatedTopBarMetrics"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Y6h-8d-DR6" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>

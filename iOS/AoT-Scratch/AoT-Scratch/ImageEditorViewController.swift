@@ -128,6 +128,11 @@ class ImageEditorViewController: UIViewController {
             filter.chromaColor = SIMD3<Float>(0, 1.0, 0)
         }
     }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        navigationController?.setNavigationBarHidden(true, animated: true)
+    }
 
     @IBAction func thresholdGestureRecognized(_ sender: ThresholdGestureRecognizer) {
         switch sender.state {
