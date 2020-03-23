@@ -32,6 +32,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         if userDefaults.url(forKey: USER_DEFAULTS_RELAY_SERVER_URL_KEY) == nil {
             userDefaults.set(RELAY_SERVER_URL, forKey: USER_DEFAULTS_RELAY_SERVER_URL_KEY)
         }
+        if userDefaults.string(forKey: USER_DEFAULTS_BACKGROUND_KEY) == nil {
+            userDefaults.set(DEFAULT_BACKGROUND_FILENAME, forKey: USER_DEFAULTS_BACKGROUND_KEY)
+        }
         
         // Initialize data store
         loadProjectsFromManifest(manifestUrl: PROJECTS_MANIFEST_URL, into: AotStore)

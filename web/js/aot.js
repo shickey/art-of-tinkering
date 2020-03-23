@@ -2,7 +2,7 @@
   
   var Scratch = {};
   
-  Scratch.init = function(defaultAssetFolderUrl) {
+  Scratch.init = function(defaultAssetFolderUrl, backgroundFilename) {
     
     // Instantiate the VM and create an empty project
     var vm = new VirtualMachine();
@@ -33,6 +33,8 @@
     
     vm.attachStorage(storage);
     Scratch.storage = storage;
+    
+    var backgroundHash = backgroundFilename.split('.')[0]
 
     var defaultProject = {
       "targets": [
@@ -46,10 +48,10 @@
           "currentCostume": 0,
           "costumes": [
           {
-            "assetId": "739b5e2a2435f6e1ec2993791b423146",
+            "assetId": backgroundHash,
             "name": "backdrop1",
-            "bitmapResolution": 2,
-            "md5ext": "739b5e2a2435f6e1ec2993791b423146.png",
+            "bitmapResolution": 1,
+            "md5ext": backgroundFilename,
             "dataFormat": "png",
             "rotationCenterX": 240,
             "rotationCenterY": 180

@@ -42,13 +42,13 @@ class ScratchViewController: UIViewController, WKUIDelegate, WKNavigationDelegat
     }
     
     func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
-        // Pass the URL to the assets folder within the bundle so scratch-storage can load from it
         let defaultAssetsUrl = LOCAL_WEB_FOLDER_URL.appendingPathComponent("assets", isDirectory: true)
+        let backgroundFilename = UserDefaults.standard.string(forKey: USER_DEFAULTS_BACKGROUND_KEY)!
         
         let sprite3Data = createSprite3Archive(from: project)
         let spriteBase64String = sprite3Data.base64EncodedString()
         webView.evaluateJavaScript("""
-            Scratch.init('\(defaultAssetsUrl)');
+            Scratch.init('\(defaultAssetsUrl)', '\(backgroundFilename)');
             Scratch.injectBase64Sprite3Data('\(spriteBase64String)');
         """, completionHandler: nil)
     }

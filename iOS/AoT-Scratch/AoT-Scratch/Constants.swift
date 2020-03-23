@@ -16,5 +16,7 @@ let BUNDLE_WEB_FOLDER_URL = Bundle.main.url(forResource: "web", withExtension: n
 let PROJECTS_MANIFEST_URL = DOCUMENTS_FOLDER_URL.appendingPathComponent("aot.manifest")
 let RELAY_SERVER_URL      = URL(string: "http://10.0.1.83:8080/")!
 
-// UserDefaults Keys
+// UserDefaults
 let USER_DEFAULTS_RELAY_SERVER_URL_KEY = "edu.mit.media.llk.ArtOfTinkering.relayServerUrl"
+let USER_DEFAULTS_BACKGROUND_KEY = "edu.mit.media.llk.ArtOfTinkering.defaultBackground"
+let DEFAULT_BACKGROUND_FILENAME = "739b5e2a2435f6e1ec2993791b423146.png" // White background
