@@ -53,7 +53,7 @@
 		A3546033242174D200037DF4 /* ZIPFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = ZIPFoundation.framework; sourceTree = "<group>"; };
 		A35460382422B59E00037DF4 /* Logging.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Logging.swift; sourceTree = "<group>"; };
 		A354603C2426CCBB00037DF4 /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
-		A3E135CF2409A61700D4B680 /* AoT-Scratch.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "AoT-Scratch.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		A3E135CF2409A61700D4B680 /* Octopus.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Octopus.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A3E135D22409A61700D4B680 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		A3E135D92409A61700D4B680 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		A3E135DB2409A61900D4B680 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -98,7 +98,7 @@
 		A3E135D02409A61700D4B680 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				A3E135CF2409A61700D4B680 /* AoT-Scratch.app */,
+				A3E135CF2409A61700D4B680 /* Octopus.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -147,7 +147,7 @@
 			);
 			name = "AoT-Scratch";
 			productName = "AoT-Scratch";
-			productReference = A3E135CF2409A61700D4B680 /* AoT-Scratch.app */;
+			productReference = A3E135CF2409A61700D4B680 /* Octopus.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -386,7 +386,7 @@
 					"$(PROJECT_DIR)/AoT-Scratch",
 				);
 				INFOPLIST_FILE = "AoT-Scratch/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -395,7 +395,7 @@
 				MTL_COMPILER_FLAGS = "-fcikernel";
 				OTHER_SWIFT_FLAGS = "-DDEBUG";
 				PRODUCT_BUNDLE_IDENTIFIER = edu.mit.media.llk.ArtOfTinkering;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = Octopus;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 2;
 			};
@@ -415,7 +415,7 @@
 					"$(PROJECT_DIR)/AoT-Scratch",
 				);
 				INFOPLIST_FILE = "AoT-Scratch/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -424,7 +424,7 @@
 				MTL_COMPILER_FLAGS = "-fcikernel";
 				OTHER_SWIFT_FLAGS = "";
 				PRODUCT_BUNDLE_IDENTIFIER = edu.mit.media.llk.ArtOfTinkering;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = Octopus;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 2;
 			};

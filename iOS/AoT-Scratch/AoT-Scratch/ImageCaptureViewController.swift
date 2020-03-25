@@ -54,7 +54,11 @@ class ImageCaptureViewController: UIViewController, AVCapturePhotoCaptureDelegat
     @IBOutlet weak var previewView: CameraPreviewView!
     
     var windowOrientation: UIInterfaceOrientation {
-        return view.window?.windowScene?.interfaceOrientation ?? .unknown
+        if #available(iOS 13.0, *) {
+            return view.window?.windowScene?.interfaceOrientation ?? .unknown
+        } else {
+            return UIApplication.shared.statusBarOrientation
+        }
     }
     
     override func viewDidLoad() {
