@@ -79,6 +79,9 @@ class SettingsViewController: UIViewController, UITextFieldDelegate, UICollectio
     }
     
     @IBAction func closeButtonTapped(_ sender: Any) {
+        if relayServerUrlField.isEditing {
+            relayServerUrlField.endEditing(false)
+        }
         if updatedRelayServerUrl == nil {
             let alert = UIAlertController(title: "Invalid Server URL", message: "The relay server url is invalid. Would you like to discard your changes or fix the URL?", preferredStyle: .alert)
             alert.addAction(UIAlertAction(title: "Discard", style: .default, handler: { _ in
