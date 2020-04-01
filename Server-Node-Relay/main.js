@@ -23,7 +23,7 @@ let serverStatus = {
     ws: {
         port: WS_PORT,
         status: false,
-        clients: []
+        clientCount: 0
     },
     http: {
         port: HTTP_PORT,
@@ -103,6 +103,7 @@ app.on('activate', () => {
   }
 })
 
+function noop() {}
 function startWSServer() {
     wsServer = new WebSocket.Server({ port: WS_PORT });
     log('Started WebSocket server on port ' + WS_PORT);
@@ -110,7 +111,28 @@ function startWSServer() {
     wsServer.on('connection', (client, req) => {
         const ip = req.connection.remoteAddress;
         log('Connected to WebSocket client at IP: ' + ip);
-        serverStatus.ws.clients.push(ip);
+        client.isAlive = true;
+        client.on('pong', function() {
+            this.isAlive = true;
+        });
+        client.on('close', function() {
+            serverStatus.ws.clientCount--;
+            log('Disconnected from WebSocket client at IP: ' +
+                this._socket._peername.address);
+        });
+        serverStatus.ws.clientCount++;
+    });
+    wsServerInterval = setInterval(() => {
+        wsServer.clients.forEach(ws => {
+            if (ws.isAlive == false) {
+                return ws.terminate();
+            }
+            ws.isAlive = false;
+            ws.ping(noop);
+        });
+    }, 5000);
+    wsServer.on('close', () => {
+        clearInterval(wsServerInterval);
     });
 }
 

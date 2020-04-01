@@ -31,7 +31,7 @@ class App extends React.Component {
                 this.setState({
                     'wsStatus': json.ws.status,
                     'wsPort': json.ws.port,
-                    'wsClients': json.ws.clients,
+                    'wsClientCount': json.ws.clientCount,
                     'httpStatus': json.http.status,
                     'httpPort': json.http.port,
                     'log': json.log
@@ -65,7 +65,7 @@ class App extends React.Component {
                     </tr>
                     <tr>
                       <td>WebSocket Client(s) connected:</td>
-                      <td>{this.state.wsClients.length}</td>
+                      <td>{this.state.wsClientCount}</td>
                     </tr>
                 </table>
                 <div className='console-container'>
