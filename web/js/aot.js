@@ -305,8 +305,8 @@
     });
     
     // External API
-    Scratch.sendToProjector = function() {
-      Scratch.vm.exportSprite(Scratch.vm.editingTarget.id).then((zipBlob) => {
+    Scratch.sendToProjector = function(projectId) {
+      Scratch.vm.exportSprite(Scratch.vm.editingTarget.id, {iosId: projectId}).then((zipBlob) => {
         var fileReader = new FileReader();
         fileReader.onload = function() {
           var payload = fileReader.result;

@@ -2,6 +2,7 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="UgI-gY-gi2">
     <device id="ipad9_7" orientation="portrait" layout="fullscreen" appearance="light"/>
     <dependencies>
+        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="collection view cell content view" minToolsVersion="11.0"/>
@@ -11,12 +12,12 @@
         <!--Projects Collection View Controller-->
         <scene sceneID="xbh-Cv-x5A">
             <objects>
-                <collectionViewController id="78Z-e3-sdQ" customClass="ProjectsCollectionViewController" customModule="AoT_Scratch" customModuleProvider="target" sceneMemberID="viewController">
+                <collectionViewController id="78Z-e3-sdQ" customClass="ProjectsCollectionViewController" customModule="Octopus" customModuleProvider="target" sceneMemberID="viewController">
                     <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" id="MPW-4L-cUf">
                         <rect key="frame" x="0.0" y="0.0" width="768" height="974"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" red="0.20000000000000001" green="0.2784313725" blue="0.4431372549" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                        <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="OK3-a2-KAf" customClass="EqualSpacingFlowLayout" customModule="AoT_Scratch" customModuleProvider="target">
+                        <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="OK3-a2-KAf" customClass="EqualSpacingFlowLayout" customModule="Octopus" customModuleProvider="target">
                             <size key="itemSize" width="320" height="240"/>
                             <size key="estimatedItemSize" width="320" height="240"/>
                             <size key="headerReferenceSize" width="0.0" height="0.0"/>
@@ -24,7 +25,7 @@
                             <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                         </collectionViewFlowLayout>
                         <cells>
-                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="AddProjectCell" id="Vm5-nU-gKO" customClass="AddProjectCell" customModule="AoT_Scratch" customModuleProvider="target">
+                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="AddProjectCell" id="Vm5-nU-gKO" customClass="AddProjectCell" customModule="Octopus" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="240"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
@@ -46,7 +47,7 @@
                                     <segue destination="fXD-WC-zOG" kind="show" id="Zoe-ll-PbP"/>
                                 </connections>
                             </collectionViewCell>
-                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="ProjectCell" id="0N9-2P-Mcl" customClass="ProjectCell" customModule="AoT_Scratch" customModuleProvider="target">
+                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="ProjectCell" id="0N9-2P-Mcl" customClass="ProjectCell" customModule="Octopus" customModuleProvider="target">
                                 <rect key="frame" x="448" y="0.0" width="320" height="240"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
@@ -90,7 +91,7 @@
         <!--Settings View Controller-->
         <scene sceneID="vIa-sN-cks">
             <objects>
-                <viewController id="2JA-nQ-jVE" customClass="SettingsViewController" customModule="AoT_Scratch" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="2JA-nQ-jVE" customClass="SettingsViewController" customModule="Octopus" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="Emd-EJ-caG">
                         <rect key="frame" x="0.0" y="0.0" width="712" height="984"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -169,7 +170,7 @@
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="500" id="ndL-hm-ydR"/>
                                                 </constraints>
-                                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="yVh-0c-OtG" customClass="EqualSpacingFlowLayout" customModule="AoT_Scratch" customModuleProvider="target">
+                                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="yVh-0c-OtG" customClass="EqualSpacingFlowLayout" customModule="Octopus" customModuleProvider="target">
                                                     <size key="itemSize" width="240" height="180"/>
                                                     <size key="estimatedItemSize" width="240" height="180"/>
                                                     <size key="headerReferenceSize" width="0.0" height="0.0"/>
@@ -177,7 +178,7 @@
                                                     <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                                 </collectionViewFlowLayout>
                                                 <cells>
-                                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="BackgroundCell" id="sJG-Tx-J28" customClass="BackgroundCell" customModule="AoT_Scratch" customModuleProvider="target">
+                                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="BackgroundCell" id="sJG-Tx-J28" customClass="BackgroundCell" customModule="Octopus" customModuleProvider="target">
                                                         <rect key="frame" x="0.0" y="0.0" width="240" height="180"/>
                                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                         <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="gJr-Qt-RSn">
@@ -253,6 +254,7 @@
                             <constraint firstItem="7ep-Xt-291" firstAttribute="centerX" secondItem="Emd-EJ-caG" secondAttribute="centerX" id="EDo-c2-ol4"/>
                             <constraint firstItem="7ep-Xt-291" firstAttribute="top" secondItem="Emd-EJ-caG" secondAttribute="topMargin" constant="68" id="fJa-WX-kMN"/>
                         </constraints>
+                        <viewLayoutGuide key="safeArea" id="6F1-6d-Qxc"/>
                     </view>
                     <connections>
                         <outlet property="collectionView" destination="00P-6w-eii" id="deE-aJ-glb"/>
@@ -282,12 +284,12 @@
         <!--Image Capture View Controller-->
         <scene sceneID="fYl-aa-mob">
             <objects>
-                <viewController modalPresentationStyle="fullScreen" id="fXD-WC-zOG" customClass="ImageCaptureViewController" customModule="AoT_Scratch" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController modalPresentationStyle="fullScreen" id="fXD-WC-zOG" customClass="ImageCaptureViewController" customModule="Octopus" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="QXe-eq-Df8">
                         <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="0dS-Cx-UxF" customClass="CameraPreviewView" customModule="AoT_Scratch" customModuleProvider="target">
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="0dS-Cx-UxF" customClass="CameraPreviewView" customModule="Octopus" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <subviews>
@@ -320,7 +322,7 @@
         <!--Image Editor View Controller-->
         <scene sceneID="rWO-mq-LIT">
             <objects>
-                <viewController modalPresentationStyle="fullScreen" id="2Wt-2H-f9e" customClass="ImageEditorViewController" customModule="AoT_Scratch" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController modalPresentationStyle="fullScreen" id="2Wt-2H-f9e" customClass="ImageEditorViewController" customModule="Octopus" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="mvS-kX-uke">
                         <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -333,7 +335,7 @@
                                     <outletCollection property="gestureRecognizers" destination="NUb-8Z-lht" appends="YES" id="DQh-V0-ZlY"/>
                                 </connections>
                             </imageView>
-                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="gmS-Nc-uQ1" customClass="ColorView" customModule="AoT_Scratch" customModuleProvider="target">
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="gmS-Nc-uQ1" customClass="ColorView" customModule="Octopus" customModuleProvider="target">
                                 <rect key="frame" x="59" y="876" width="240" height="128"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMinY="YES"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
@@ -357,7 +359,7 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="IT0-eS-NNJ" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-                <gestureRecognizer id="NUb-8Z-lht" customClass="ThresholdGestureRecognizer" customModule="AoT_Scratch" customModuleProvider="target">
+                <gestureRecognizer id="NUb-8Z-lht" customClass="ThresholdGestureRecognizer" customModule="Octopus" customModuleProvider="target">
                     <connections>
                         <action selector="thresholdGestureRecognized:" destination="2Wt-2H-f9e" id="pbR-Iz-omZ"/>
                     </connections>
@@ -368,7 +370,7 @@
         <!--Scratch View Controller-->
         <scene sceneID="U7f-kR-1ir">
             <objects>
-                <viewController storyboardIdentifier="Scratch" modalPresentationStyle="fullScreen" id="y6f-FA-ZtA" customClass="ScratchViewController" customModule="AoT_Scratch" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="Scratch" modalPresentationStyle="fullScreen" id="y6f-FA-ZtA" customClass="ScratchViewController" customModule="Octopus" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Kjf-GK-I5w">
                         <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -439,10 +441,11 @@
                                         <rect key="frame" x="0.0" y="0.0" width="52" height="52"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     </imageView>
-                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BgG-Sn-omZ">
-                                        <rect key="frame" x="-10" y="11" width="71" height="30"/>
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BgG-Sn-omZ">
+                                        <rect key="frame" x="0.0" y="0.0" width="52" height="52"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
-                                        <state key="normal" title="Project!"/>
+                                        <inset key="imageEdgeInsets" minX="8" minY="8" maxX="8" maxY="8"/>
+                                        <state key="normal" image="send"/>
                                         <connections>
                                             <action selector="sendToProjectorTapped:" destination="y6f-FA-ZtA" eventType="touchUpInside" id="0fZ-Hm-EgL"/>
                                         </connections>
@@ -469,6 +472,7 @@
         <image name="close" width="25" height="25"/>
         <image name="greenflag" width="33" height="36"/>
         <image name="record" width="50" height="50"/>
+        <image name="send" width="50" height="50"/>
         <image name="settings" width="25" height="25.5"/>
         <image name="stop" width="35.5" height="36"/>
     </resources>

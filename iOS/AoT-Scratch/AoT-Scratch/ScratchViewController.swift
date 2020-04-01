@@ -97,6 +97,6 @@ class ScratchViewController: UIViewController, WKUIDelegate, WKNavigationDelegat
     }
     
     @IBAction func sendToProjectorTapped(_ sender: Any) {
-        webView.evaluateJavaScript("Scratch.sendToProjector();", completionHandler: nil)
+        webView.evaluateJavaScript("Scratch.sendToProjector(\"\(project.id.uuidString)\");", completionHandler: nil)
     }
 }
