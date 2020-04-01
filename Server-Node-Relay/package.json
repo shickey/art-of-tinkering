@@ -1,6 +1,6 @@
 {
   "name": "aot-relay-server",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "build": {
     "appId": "com.aot.scratchrelayserver",
     "extends": null,
