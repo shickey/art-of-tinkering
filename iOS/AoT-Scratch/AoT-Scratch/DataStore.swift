@@ -114,7 +114,7 @@ func createProjectWithImage(_ img: UIImage, in store: Store) -> Project {
     let projectId = UUID()
     let costume = createCostume(from: image)
     let costumes : [Costume] = [costume]
-    let json = createSprite3Json(from: costumes)
+    let json = createSprite3Json(from: costumes, with: projectId.uuidString)
     
     let project = Project(store: store, id: projectId, thumbnail: thumbnail, json: json, costumes: costumes)
     store.projects.append(project)
@@ -144,7 +144,7 @@ func createCostume(from image: UIImage) -> Costume {
     return Costume(hash: hash, image: image)
 }
 
-func createSprite3Json(from costumes: [Costume]) -> String {
+func createSprite3Json(from costumes: [Costume], with uuidString: String) -> String {
     var costumesJson : [String] = []
     for costume in costumes {
         let costumeJson = """
@@ -162,6 +162,7 @@ func createSprite3Json(from costumes: [Costume]) -> String {
     }
     return """
         {
+          "id": "\(uuidString)",
           "isStage": false,
           "name": "my-sprite",
           "variables": {},

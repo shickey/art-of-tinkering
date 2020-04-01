@@ -15,7 +15,7 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "A3E135CE2409A61700D4B680"
-               BuildableName = "AoT-Scratch.app"
+               BuildableName = "Octopus.app"
                BlueprintName = "AoT-Scratch"
                ReferencedContainer = "container:AoT-Scratch.xcodeproj">
             </BuildableReference>
@@ -45,7 +45,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "A3E135CE2409A61700D4B680"
-            BuildableName = "AoT-Scratch.app"
+            BuildableName = "Octopus.app"
             BlueprintName = "AoT-Scratch"
             ReferencedContainer = "container:AoT-Scratch.xcodeproj">
          </BuildableReference>
@@ -62,7 +62,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "A3E135CE2409A61700D4B680"
-            BuildableName = "AoT-Scratch.app"
+            BuildableName = "Octopus.app"
             BlueprintName = "AoT-Scratch"
             ReferencedContainer = "container:AoT-Scratch.xcodeproj">
          </BuildableReference>
