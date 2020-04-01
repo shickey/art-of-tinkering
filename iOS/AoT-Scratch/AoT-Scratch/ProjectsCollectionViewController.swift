@@ -53,6 +53,7 @@ class ProjectsCollectionViewController: UICollectionViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let scratchVC = segue.destination as? ScratchViewController, let cell = sender as? ProjectCell {
             let indexPath = collectionView!.indexPath(for: cell)!
+            print(projects[indexPath.item - 1].json)
             scratchVC.project = projects[indexPath.item - 1]
         }
     }

@@ -74,7 +74,14 @@ class ScratchViewController: UIViewController, WKUIDelegate, WKNavigationDelegat
         // @TODO: Block UI on saving
         webView.evaluateJavaScript("Scratch.vm.exportSpriteJson(Scratch.vm.editingTarget.id)") { (res, err) in
             if let json = res as? String {
-                self.project.json = json
+                
+                // Hack the project id back into the json
+                var mutableJson = json
+                let idJson = "\"id\":\"\(self.project.id.uuidString)\","
+                let insertionIndex = mutableJson.index(after: mutableJson.startIndex)
+                mutableJson.insert(contentsOf: idJson, at: insertionIndex)
+                
+                self.project.json = mutableJson
                 writeProjectToDisk(self.project)
                 self.navigationController!.popViewController(animated: true)
             }
