@@ -34,6 +34,184 @@
     vm.attachStorage(storage);
     Scratch.storage = storage;
     
+    
+    // Set up touch/mouse event handling
+    Scratch.mouseState = {
+      mouseDown: false,
+      mouseDownPosition: null,
+      mouseTimeoutId: null
+    };
+      
+    var dragThreshold = 3;
+    Scratch.dragState = {
+      isDragging: false,
+      dragId: null,
+      dragOffset: null
+    };
+      
+      
+    function getEventXY(e) {
+      if (e.touches && e.touches[0]) {
+          return {x: e.touches[0].clientX, y: e.touches[0].clientY};
+      } else if (e.changedTouches && e.changedTouches[0]) {
+          return {x: e.changedTouches[0].clientX, y: e.changedTouches[0].clientY};
+      }
+      return {x: e.clientX, y: e.clientY};
+    };
+    
+    function onMouseDown (e) {
+      var rect = canvas.getBoundingClientRect();
+      var XY = getEventXY(e);
+      var x = XY.x;
+      var y = XY.y;
+      var mousePosition = [x - rect.left, y - rect.top];
+      if (e.button === 0 || (window.TouchEvent && e instanceof TouchEvent)) {
+        Scratch.mouseState = {
+          mouseDown: true,
+          mouseDownPosition: mousePosition,
+          mouseDownTimeoutId: setTimeout(
+            onStartDrag(mousePosition[0], mousePosition[1]),
+            400
+            )
+        };
+      }
+      var data = {
+        isDown: true,
+        x: mousePosition[0],
+        y: mousePosition[1],
+        canvasWidth: rect.width,
+        canvasHeight: rect.height
+      };
+      vm.postIOData('mouse', data);
+      if (e.preventDefault) {
+        // Prevent default to prevent touch from dragging page
+        e.preventDefault();
+        // But we do want any active input to be blurred
+        if (document.activeElement && document.activeElement.blur) {
+          document.activeElement.blur();
+        }
+      }
+    }
+    
+    function getScratchCoords (x, y) {
+      var rect = canvas.getBoundingClientRect();
+      var nativeSize = renderer.getNativeSize();
+      return [
+        (nativeSize[0] / rect.width) * (x - (rect.width / 2)),
+        (nativeSize[1] / rect.height) * (y - (rect.height / 2))
+      ];
+    }
+    
+    function cancelMouseDownTimeout () {
+      if (Scratch.mouseState.mouseDownTimeoutId !== null) {
+        clearTimeout(Scratch.mouseState.mouseDownTimeoutId);
+      }
+      Scratch.mouseState.mouseDownTimeoutId = null;
+    }
+    
+    function onMouseMove (e) {
+      var rect = canvas.getBoundingClientRect();
+      var XY = getEventXY(e);
+      var x = XY.x;
+      var y = XY.y;
+      var mousePosition = [x - rect.left, y - rect.top];
+
+      if (Scratch.mouseState.mouseDown && !Scratch.dragState.isDragging) {
+        var distanceFromMouseDown = Math.sqrt(
+          Math.pow(mousePosition[0] - Scratch.mouseState.mouseDownPosition[0], 2) +
+          Math.pow(mousePosition[1] - Scratch.mouseState.mouseDownPosition[1], 2)
+          );
+        if (distanceFromMouseDown > dragThreshold) {
+          cancelMouseDownTimeout();
+          var mouseDownPosition = Scratch.mouseState.mouseDownPosition;
+          onStartDrag(mouseDownPosition[0], mouseDownPosition[1]);
+        }
+      }
+      if (Scratch.mouseState.mouseDown && Scratch.dragState.isDragging) {
+        var spritePosition = getScratchCoords(mousePosition[0], mousePosition[1]);
+        vm.postSpriteInfo({
+          x: spritePosition[0] + Scratch.dragState.dragOffset[0],
+          y: -(spritePosition[1] + Scratch.dragState.dragOffset[1]),
+          force: true
+        });
+      }
+      var coordinates = {
+        x: mousePosition[0],
+        y: mousePosition[1],
+        canvasWidth: rect.width,
+        canvasHeight: rect.height
+      };
+      vm.postIOData('mouse', coordinates);
+    }
+    
+    function onMouseUp (e) {
+      var rect = canvas.getBoundingClientRect();
+      var XY = getEventXY(e);
+      var x = XY.x;
+      var y = XY.y;
+      var mousePosition = [x - rect.left, y - rect.top];
+      cancelMouseDownTimeout();
+      Scratch.mouseState = {
+        mouseDown: false,
+        mouseDownPosition: null
+      };
+      var data = {
+        isDown: false,
+        x: x - rect.left,
+        y: y - rect.top,
+        canvasWidth: rect.width,
+        canvasHeight: rect.height,
+        wasDragged: Scratch.dragState.isDragging
+      };
+      if (Scratch.dragState.isDragging) {
+        onStopDrag(mousePosition[0], mousePosition[1]);
+      }
+      vm.postIOData('mouse', data);
+    }
+    
+    function onStartDrag(x, y) {
+      if (Scratch.dragState.dragId) return;
+      var drawableId = renderer.pick(x, y);
+      if (drawableId === null) return;
+      var targetId = vm.getTargetIdForDrawableId(drawableId);
+      if (targetId === null) return;
+
+      var target = vm.runtime.getTargetById(targetId);
+
+      // Do not start drag unless target is draggable
+      if (!target.draggable) return;
+
+      // Dragging always brings the target to the front
+      target.goToFront();
+
+      // Extract the drawable art
+      var drawableData = renderer.extractDrawable(drawableId, x, y);
+
+      vm.startDrag(targetId);
+      Scratch.dragState = {
+        isDragging: true,
+        dragId: targetId,
+        dragOffset: drawableData.scratchOffset
+      };
+    }
+    
+    function onStopDrag (mouseX, mouseY) {
+      var dragId = Scratch.dragState.dragId;
+      vm.stopDrag(dragId);
+      Scratch.dragState = {
+        isDragging: false,
+        dragOffset: null,
+        dragId: null
+      };
+    }
+    
+    canvas.addEventListener('mousedown', onMouseDown);
+    canvas.addEventListener('touchstart', onMouseDown);
+    document.addEventListener('mousemove', onMouseMove);
+    document.addEventListener('mouseup', onMouseUp);
+    document.addEventListener('touchmove', onMouseMove);
+    document.addEventListener('touchend', onMouseUp);
+    
     var backgroundHash = backgroundFilename.split('.')[0]
 
     var defaultProject = {

@@ -180,7 +180,7 @@ func createSprite3Json(from costumes: [Costume]) -> String {
           "y": 0,
           "size": 100,
           "direction": 90,
-          "draggable": false,
+          "draggable": true,
           "rotationStyle": "all around"
         }
     """
