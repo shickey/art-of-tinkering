@@ -8,7 +8,6 @@
 
 import Foundation
 import UIKit
-import ZIPFoundation
 
 class Costume {
     let hash: String

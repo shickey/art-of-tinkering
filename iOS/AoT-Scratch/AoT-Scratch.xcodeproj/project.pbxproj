@@ -14,8 +14,14 @@
 		A31497BC2416F2A0005399C8 /* NetworkExtension.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A31497BB2416F2A0005399C8 /* NetworkExtension.framework */; };
 		A31497BE24193AFB005399C8 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = A31497BD24193AFB005399C8 /* Constants.swift */; };
 		A31497C024193F0B005399C8 /* DataStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = A31497BF24193F0B005399C8 /* DataStore.swift */; };
-		A3546035242178DA00037DF4 /* ZIPFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A3546033242174D200037DF4 /* ZIPFoundation.framework */; };
-		A3546036242178DA00037DF4 /* ZIPFoundation.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = A3546033242174D200037DF4 /* ZIPFoundation.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		A34AB7C22435529800EC94AE /* Archive+MemoryFile.swift in Sources */ = {isa = PBXBuildFile; fileRef = A34AB7BA2435529700EC94AE /* Archive+MemoryFile.swift */; };
+		A34AB7C32435529800EC94AE /* Archive+Reading.swift in Sources */ = {isa = PBXBuildFile; fileRef = A34AB7BB2435529700EC94AE /* Archive+Reading.swift */; };
+		A34AB7C42435529800EC94AE /* Archive+Writing.swift in Sources */ = {isa = PBXBuildFile; fileRef = A34AB7BC2435529700EC94AE /* Archive+Writing.swift */; };
+		A34AB7C52435529800EC94AE /* Data+Compression.swift in Sources */ = {isa = PBXBuildFile; fileRef = A34AB7BD2435529700EC94AE /* Data+Compression.swift */; };
+		A34AB7C62435529800EC94AE /* Archive.swift in Sources */ = {isa = PBXBuildFile; fileRef = A34AB7BE2435529700EC94AE /* Archive.swift */; };
+		A34AB7C72435529800EC94AE /* Data+Serialization.swift in Sources */ = {isa = PBXBuildFile; fileRef = A34AB7BF2435529800EC94AE /* Data+Serialization.swift */; };
+		A34AB7C82435529800EC94AE /* FileManager+ZIP.swift in Sources */ = {isa = PBXBuildFile; fileRef = A34AB7C02435529800EC94AE /* FileManager+ZIP.swift */; };
+		A34AB7C92435529800EC94AE /* Entry.swift in Sources */ = {isa = PBXBuildFile; fileRef = A34AB7C12435529800EC94AE /* Entry.swift */; };
 		A35460392422B59E00037DF4 /* Logging.swift in Sources */ = {isa = PBXBuildFile; fileRef = A35460382422B59E00037DF4 /* Logging.swift */; };
 		A354603D2426CCBB00037DF4 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A354603C2426CCBB00037DF4 /* SettingsViewController.swift */; };
 		A3E135D32409A61700D4B680 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3E135D22409A61700D4B680 /* AppDelegate.swift */; };
@@ -35,7 +41,6 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				A3546036242178DA00037DF4 /* ZIPFoundation.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -50,7 +55,14 @@
 		A31497BB2416F2A0005399C8 /* NetworkExtension.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = NetworkExtension.framework; path = System/Library/Frameworks/NetworkExtension.framework; sourceTree = SDKROOT; };
 		A31497BD24193AFB005399C8 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		A31497BF24193F0B005399C8 /* DataStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataStore.swift; sourceTree = "<group>"; };
-		A3546033242174D200037DF4 /* ZIPFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = ZIPFoundation.framework; sourceTree = "<group>"; };
+		A34AB7BA2435529700EC94AE /* Archive+MemoryFile.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Archive+MemoryFile.swift"; sourceTree = "<group>"; };
+		A34AB7BB2435529700EC94AE /* Archive+Reading.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Archive+Reading.swift"; sourceTree = "<group>"; };
+		A34AB7BC2435529700EC94AE /* Archive+Writing.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Archive+Writing.swift"; sourceTree = "<group>"; };
+		A34AB7BD2435529700EC94AE /* Data+Compression.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Data+Compression.swift"; sourceTree = "<group>"; };
+		A34AB7BE2435529700EC94AE /* Archive.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Archive.swift; sourceTree = "<group>"; };
+		A34AB7BF2435529800EC94AE /* Data+Serialization.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Data+Serialization.swift"; sourceTree = "<group>"; };
+		A34AB7C02435529800EC94AE /* FileManager+ZIP.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "FileManager+ZIP.swift"; sourceTree = "<group>"; };
+		A34AB7C12435529800EC94AE /* Entry.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Entry.swift; sourceTree = "<group>"; };
 		A35460382422B59E00037DF4 /* Logging.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Logging.swift; sourceTree = "<group>"; };
 		A354603C2426CCBB00037DF4 /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		A3E135CF2409A61700D4B680 /* Octopus.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Octopus.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -71,7 +83,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				A31497BC2416F2A0005399C8 /* NetworkExtension.framework in Frameworks */,
-				A3546035242178DA00037DF4 /* ZIPFoundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -84,6 +95,29 @@
 				A31497BB2416F2A0005399C8 /* NetworkExtension.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		A34AB7B82435527C00EC94AE /* lib */ = {
+			isa = PBXGroup;
+			children = (
+				A34AB7B92435528100EC94AE /* ZIPFoundation */,
+			);
+			path = lib;
+			sourceTree = "<group>";
+		};
+		A34AB7B92435528100EC94AE /* ZIPFoundation */ = {
+			isa = PBXGroup;
+			children = (
+				A34AB7BE2435529700EC94AE /* Archive.swift */,
+				A34AB7BB2435529700EC94AE /* Archive+Reading.swift */,
+				A34AB7BC2435529700EC94AE /* Archive+Writing.swift */,
+				A34AB7BA2435529700EC94AE /* Archive+MemoryFile.swift */,
+				A34AB7C12435529800EC94AE /* Entry.swift */,
+				A34AB7BD2435529700EC94AE /* Data+Compression.swift */,
+				A34AB7BF2435529800EC94AE /* Data+Serialization.swift */,
+				A34AB7C02435529800EC94AE /* FileManager+ZIP.swift */,
+			);
+			path = ZIPFoundation;
 			sourceTree = "<group>";
 		};
 		A3E135C62409A61700D4B680 = {
@@ -106,6 +140,7 @@
 		A3E135D12409A61700D4B680 /* AoT-Scratch */ = {
 			isa = PBXGroup;
 			children = (
+				A34AB7B82435527C00EC94AE /* lib */,
 				A3E135D22409A61700D4B680 /* AppDelegate.swift */,
 				A3E135E62409A68E00D4B680 /* ProjectsCollectionViewController.swift */,
 				A3E135D82409A61700D4B680 /* Main.storyboard */,
@@ -122,7 +157,6 @@
 				A3E135DB2409A61900D4B680 /* Assets.xcassets */,
 				A3E135DD2409A61900D4B680 /* LaunchScreen.storyboard */,
 				A3E135E02409A61900D4B680 /* Info.plist */,
-				A3546033242174D200037DF4 /* ZIPFoundation.framework */,
 				A3E135EF240D794100D4B680 /* web */,
 			);
 			path = "AoT-Scratch";
@@ -222,18 +256,26 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A34AB7C92435529800EC94AE /* Entry.swift in Sources */,
 				A30DC6052412F663008DD0E0 /* Shaders.metal in Sources */,
+				A34AB7C62435529800EC94AE /* Archive.swift in Sources */,
 				A31497B824140041005399C8 /* Util.swift in Sources */,
 				A30DC6012412EF3C008DD0E0 /* ImageEditorViewController.swift in Sources */,
+				A34AB7C72435529800EC94AE /* Data+Serialization.swift in Sources */,
 				A30DC6032412F46F008DD0E0 /* ChromaKeyFilter.swift in Sources */,
 				A31497C024193F0B005399C8 /* DataStore.swift in Sources */,
 				A31497BE24193AFB005399C8 /* Constants.swift in Sources */,
 				A35460392422B59E00037DF4 /* Logging.swift in Sources */,
 				A3E135D32409A61700D4B680 /* AppDelegate.swift in Sources */,
+				A34AB7C52435529800EC94AE /* Data+Compression.swift in Sources */,
 				A3E135EB2409B04700D4B680 /* ScratchViewController.swift in Sources */,
+				A34AB7C22435529800EC94AE /* Archive+MemoryFile.swift in Sources */,
 				A3E135E72409A68E00D4B680 /* ProjectsCollectionViewController.swift in Sources */,
 				A3E135E92409ABFD00D4B680 /* ImageCaptureViewController.swift in Sources */,
 				A354603D2426CCBB00037DF4 /* SettingsViewController.swift in Sources */,
+				A34AB7C32435529800EC94AE /* Archive+Reading.swift in Sources */,
+				A34AB7C42435529800EC94AE /* Archive+Writing.swift in Sources */,
+				A34AB7C82435529800EC94AE /* FileManager+ZIP.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
