@@ -312,7 +312,7 @@
         var fileReader = new FileReader();
         fileReader.onload = function() {
           var payload = fileReader.result;
-          var url = 'http://' + document.getElementById('ip-field').value + ':8080';
+          var url = 'http://' + document.getElementById('ip-field').value;
 		  fetch(url, {
 			method: 'POST',
 			body: payload
