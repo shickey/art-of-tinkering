@@ -553,15 +553,24 @@
   </div>
 
   <div id="new-project-modal">
-    <canvas id="canvas" width=400 height=300></canvas>
-    <video id="video" width=400 height=300 autoplay></video>
-    <br />
-    <button id="capture-button">Capture</button>
-    <button id="send-button">Let's Code!</button>
+    <div id="new-project-modal-container">
+      <div id="canvas-tools">
+        <button id="magicwand-tool" disabled>Magic</button><br />
+        <button id="lasso-tool" disabled>Lasso</button>
+      </div>
+      <canvas id="canvas" width=400 height=300></canvas>
+      <video id="video" width=400 height=300 autoplay></video>
+      <br />
+      <button id="capture-button">Capture</button>
+      <button id="send-button" disabled>Let's Code!</button>
+    </div>
   </div>
 
   <div id="presentation-controls">
-    <button id="upload-button">Send</button>
+    <button id="gf-button">GF</button><br />
+    <button id="stop-button">Stop</button><br />
+    <button id="upload-button">Send</button><br />
+    <input id="ip-field" style="float: right; width: 120px;" type='text' value="65.96.160.1" />
   </div>
   
   <!-- Scratch VM -->

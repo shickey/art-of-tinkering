@@ -308,11 +308,12 @@
     
     // External API
     Scratch.sendToProjector = function(projectId) {
-      Scratch.vm.exportSprite(Scratch.vm.editingTarget.id).then((zipBlob) => {
+      Scratch.vm.exportSprite(Scratch.vm.editingTarget.id, {iosId: projectId}).then((zipBlob) => {
         var fileReader = new FileReader();
         fileReader.onload = function() {
           var payload = fileReader.result;
-		  fetch('http://localhost:8080', {
+          var url = 'http://' + document.getElementById('ip-field').value + ':8080';
+		  fetch(url, {
 			method: 'POST',
 			body: payload
 		  });
@@ -368,12 +369,20 @@ window.onload = () => {
     const projectGalleryDiv = document.getElementById('project-gallery');
     const newProjectModal = document.getElementById('new-project-modal');
 
+    const sendButton = document.getElementById('send-button');
+    const magicWandButton = document.getElementById('magicwand-tool');
+    const lassoButton = document.getElementById('lasso-tool');
+
     const canvas = document.getElementById('canvas');
     const ctx = canvas.getContext('2d');
 
     let removalThreshold = 10;
 	let dragging = false;
 	let dragStartCoords = [0, 0];
+
+    let projectId;
+
+    let selectedTool = 'magic';
 
     let imageCaptureData;
 
@@ -438,6 +447,54 @@ window.onload = () => {
         px.set(imageCaptureData);
         removeHSL(px, rgbToHSL(selectedColor));
         ctx.putImageData(ctxData, 0, 0);
+
+    }
+
+    function resetImage() {
+        let ctxData = ctx.getImageData(0, 0, canvas.width, canvas.height);
+        ctxData.data.set(imageCaptureData);
+        ctx.putImageData(ctxData, 0, 0);
+    }
+
+    function midPoint(p1, p2) {
+        return [
+            p1[0] + (p2[0] - p1[0]) / 2,
+            p1[1] + (p2[1] - p1[1]) / 2
+        ];
+    }
+
+    function drawPath(path, closed) {
+        resetImage();
+        lastX = path[0][0];
+        lastY = path[0][1];
+        if (closed) {
+            ctx.globalCompositeOperation = 'destination-in';
+            ctx.beginPath();
+            ctx.moveTo(path[0][0], path[0][1]);
+            for (p in path) {
+                let mid = midPoint([lastX, lastY], path[p]);
+                ctx.quadraticCurveTo(lastX, lastY, mid[0], mid[1]);
+                // ctx.lineTo(path[p][0], path[p][1]);
+                lastX = path[p][0];
+                lastY = path[p][1];
+            }
+            ctx.closePath();
+            ctx.fill();
+            ctx.globalCompositeOperation = 'source-over';
+        } else {
+            ctx.beginPath();
+            ctx.lineWidth = 5;
+            ctx.strokeStyle = '#f5e042';
+            ctx.moveTo(path[0][0], path[0][1]);
+            for (p in path) {
+                // ctx.lineTo(path[p][0], path[p][1]);
+                let mid = midPoint([lastX, lastY], path[p]);
+                ctx.quadraticCurveTo(lastX, lastY, mid[0], mid[1]);
+                lastX = path[p][0];
+                lastY = path[p][1];
+            }
+            ctx.stroke();
+        }
     }
 
 	function removeHSL(px, hsl) {
@@ -463,26 +520,50 @@ window.onload = () => {
 
     canvas.onmousedown = (event) => {
 	  dragging = true;
+      curPath = [];
+      let rect = canvas.getBoundingClientRect();
 	  dragStartCoords = [
-		event.pageX - canvas.offsetLeft,
-		event.pageY - canvas.offsetTop
+		event.clientX - rect.left,
+		event.clientY - rect.top
 	  ];
       if (event.button !== 0 || !imageCaptureData) return;
-      let pixel = ((event.offsetY * canvas.width) + event.offsetX) * 4;
-      selectedColor = [imageCaptureData[pixel], imageCaptureData[pixel+1], imageCaptureData[pixel+2]];
-      removeColor();
+      resetImage();
+      if (selectedTool === 'magic') {
+          let pixel = ((event.offsetY * canvas.width) + event.offsetX) * 4;
+          selectedColor = [imageCaptureData[pixel], imageCaptureData[pixel+1], imageCaptureData[pixel+2]];
+          removeColor();
+      }
     };
+
+    let curPath = [];
+    let curX, curY;
+    let lastX, lastY;
 
 	canvas.onmousemove = (event) => {
 		if (!dragging) return;
-		const x = event.pageX - canvas.offsetLeft;
-		const y = event.pageY - canvas.offsetTop;
-	    const distance = Math.sqrt(Math.pow(dragStartCoords[0]-x, 2) + Math.pow(dragStartCoords[1]-y, 2));
-		removalThreshold = Math.round(distance/2);
-		if (removalThreshold < 10) removalThreshold = 10;
-		removeColor();
+        lastX = curX;
+        lastY = curY;
+        let rect = canvas.getBoundingClientRect();
+        curX = event.clientX - rect.left;
+        curY = event.clientY - rect.top;
+        if (selectedTool === 'magic') {
+            const distance = Math.sqrt(Math.pow(dragStartCoords[0]-curX, 2) + Math.pow(dragStartCoords[1]-curY, 2));
+            removalThreshold = Math.round(distance/2);
+            if (removalThreshold < 10) removalThreshold = 10;
+            removeColor();
+        } else if (selectedTool === 'lasso') {
+            if ((lastX !== curX) || (lastY !== curY))
+                curPath.push([curX, curY]);
+            drawPath(curPath, false);
+        }
 	};
-	canvas.onmouseup = (event) => { dragging = false };
+
+    canvas.onmouseup = (event) => {
+        dragging = false;
+        if (selectedTool === 'lasso') {
+            drawPath(curPath, true);
+        }
+    };
 
     document.getElementById('new-project-button').onclick = (event) => {
         projectGalleryDiv.style.display = 'none';
@@ -490,11 +571,28 @@ window.onload = () => {
         startCam();
     };
 
-    document.getElementById('capture-button').onclick = (event) => capture();
+    document.getElementById('capture-button').onclick = (event) => {
+        if (imageCaptureData) {
+            imageCaptureData = null;
+            magicWandButton.disabled = true;
+            lassoButton.disabled = true;
+            sendButton.disabled = true;
+            event.target.innerHTML = 'Capture';
+            canvas.style.display = 'none';
+            video.style.display = 'inline';
+            startCam();
+        } else {
+            lassoButton.disabled = false;
+            sendButton.disabled = false;
+            event.target.innerHTML = 'Retake';
+            capture();
+        }
+    }
 
-    document.getElementById('send-button').onclick = (event) => {
+    sendButton.onclick = (event) => {
         projectGalleryDiv.style.display = 'none';
         newProjectModal.style.display = 'none';
+        projectId = (Math.floor(Math.random() * (1000000 - 100000)) + 100000).toString();
         Scratch.init();
         const dataURL = canvas.toDataURL('image/png');
         const binary = convertDataURIToBinary(dataURL);
@@ -523,7 +621,29 @@ window.onload = () => {
 
     };
 
+    magicWandButton.onclick = (event) => {
+        resetImage();
+        selectedTool = 'magic';
+        magicWandButton.disabled = true;
+        lassoButton.disabled = false;
+    };
+
+    lassoButton.onclick = (event) => {
+        resetImage();
+        selectedTool = 'lasso';
+        magicWandButton.disabled = false;
+        lassoButton.disabled = true;
+    };
+
 	document.getElementById('upload-button').onclick = (event) => {
-		Scratch.sendToProjector();
+		Scratch.sendToProjector(projectId);
 	};
+
+    document.getElementById('gf-button').onclick = (event) => {
+        Scratch.vm.greenFlag();
+    };
+
+    document.getElementById('stop-button').onclick = (event) => {
+        Scratch.vm.stopAll();
+    };
 };
