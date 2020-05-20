@@ -369,7 +369,7 @@ window.onload = () => {
     const projectGalleryDiv = document.getElementById('project-gallery');
     const newProjectModal = document.getElementById('new-project-modal');
 
-    const sendButton = document.getElementById('send-button');
+    const sendButton = document.getElementById('scratch-button');
     const magicWandButton = document.getElementById('magicwand-tool');
     const lassoButton = document.getElementById('lasso-tool');
 
@@ -572,6 +572,7 @@ window.onload = () => {
     };
 
     document.getElementById('capture-button').onclick = (event) => {
+        document.body.style.cursor = 'url("../assets/mouse-wand.png"), auto';
         if (imageCaptureData) {
             imageCaptureData = null;
             magicWandButton.disabled = true;
@@ -590,6 +591,8 @@ window.onload = () => {
     }
 
     sendButton.onclick = (event) => {
+        if (!imageCaptureData) return;
+        document.body.style.cursor = 'auto';
         projectGalleryDiv.style.display = 'none';
         newProjectModal.style.display = 'none';
         projectId = (Math.floor(Math.random() * (1000000 - 100000)) + 100000).toString();
@@ -616,12 +619,14 @@ window.onload = () => {
         };
         setTimeout(() => {
             Scratch.vm.addSprite(JSON.stringify(newSprite));
+            document.getElementById('app-controls').style.display = 'block';
 			document.getElementById('presentation-controls').style.display = 'block';
         }, 50);
 
     };
 
     magicWandButton.onclick = (event) => {
+        document.body.style.cursor = 'url("../assets/mouse-wand.png"), auto';
         resetImage();
         selectedTool = 'magic';
         magicWandButton.disabled = true;
@@ -629,6 +634,7 @@ window.onload = () => {
     };
 
     lassoButton.onclick = (event) => {
+        document.body.style.cursor = 'url("../assets/mouse-lasso.png"), auto';
         resetImage();
         selectedTool = 'lasso';
         magicWandButton.disabled = false;
@@ -646,4 +652,15 @@ window.onload = () => {
     document.getElementById('stop-button').onclick = (event) => {
         Scratch.vm.stopAll();
     };
+
+    // document.getElementById('back-button').onclick = (event) => {
+        // Scratch.vm.stopAll();
+        // document.getElementById('app-controls').style.display = 'none';
+        // document.getElementById('presentation-controls').style.display = 'none';
+        // document.getElementById('presentation-controls').style.display = 'none';
+        // document.getElementById('blocks-container').style.display = 'none';
+        // projectGalleryDiv.style.display = "block";
+    // };
+
+    startCam();
 };

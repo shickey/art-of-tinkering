@@ -11,6 +11,7 @@ body {
 }
 
 #project-gallery {
+  display: none;
   height: 100%;
   width: 100%;
   position: absolute;
@@ -20,7 +21,7 @@ body {
 }
 
 #new-project-modal {
-  display: none;
+  /* display: none; */
   height: 100%;
   width: 100%;
   position: absolute;
@@ -49,6 +50,16 @@ body {
   margin: auto;
 }
 
+#app-controls {
+  position: absolute;
+  display: none;
+  top: 0;
+  left: 0;
+  width: 60px;
+  height 60px;
+  padding: 10px 0 10px 10px;
+}
+
 #presentation-controls {
   position: absolute;
   display: none;
@@ -60,9 +71,22 @@ body {
   padding: 10px 10px 10px 0;
 }
 
-#presentation-controls button {
-  width: 60px;
-  margin: 5px 0;
+.control-button {
+  float: left;
+  width: 50px;
+  height: 50px;
+  background-color: #4d6ba8;
+  border-radius: 5px;
+  text-align: center;
+  margin: 5px;
+}
+
+.control-button:active {
+  background-color: #334771;
+}
+
+.control-button img {
+  padding: 7px 0;
 }
 
 #new-project-modal-container {
@@ -80,6 +104,17 @@ body {
 #canvas-tools button {
   margin: 5px 0;
   width: 60px;
+}
+
+#canvas-controls {
+  display: inline-block;
+  width: 400px;
+  text-align: center;
+}
+
+#canvas-controls-content {
+  display: inline-block;
+  margin: 0 auto;
 }
 
 #upload-button {
