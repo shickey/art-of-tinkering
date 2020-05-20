@@ -19,6 +19,8 @@
   border: 1px solid black;
   height: 200px;
   margin-top: 50px;
+  overflow-x: hidden;
+  overflow-y: scroll;
 }
 
 .log-console {

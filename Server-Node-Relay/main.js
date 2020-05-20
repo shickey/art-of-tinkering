@@ -5,6 +5,7 @@ const App = express();
 const WebSocket = require('ws');
 const { app, BrowserWindow, Tray, Menu, nativeImage } = require('electron');
 const test = require('./tests/test');
+const cors = require('cors');
 
 const APP_VER = app.getVersion();
 
@@ -146,11 +147,31 @@ function log(msg) {
 App.use(bodyParser.text({ limit: '50mb', type: '*/*' }));
 App.use(express.static(path.join(__dirname, 'build')));
 
+// App.use(function(req, res, next) {
+    // res.header("Access-Control-Allow-Origin", "http://localhost:8000");
+    // res.header("Access-Control-Allow-Origin", "https://shickey.github.io");
+    // res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+    // next();
+// });
+
+App.use(cors());
+
 App.get('/server-status', function(req, res) {
     return res.send(JSON.stringify(serverStatus));
 });
 
-App.post('/', function(req, res) {
+var whitelist = ['http://localhost:8000', 'https://shickey.github.io', 'http://aot.local/'];
+var corsOptions = {
+  origin: function (origin, callback) {
+    if (whitelist.indexOf(origin) !== -1) {
+      callback(null, true)
+    } else {
+      callback(new Error('Not allowed by CORS'))
+    }
+  }
+}
+
+App.post('/', cors(corsOptions), function(req, res) {
     const body = req.body;
     res.writeHead(200, {'Content-Type': 'text/plain'});
     res.write('SUCCESS');
