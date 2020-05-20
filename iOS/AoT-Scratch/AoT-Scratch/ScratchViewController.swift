@@ -63,8 +63,10 @@ class ScratchViewController: UIViewController, WKUIDelegate, WKNavigationDelegat
             var request = URLRequest(url: relayServerUrl)
             request.httpMethod = "POST"
             request.httpBody = sprite3Payload.data(using: .utf8)
+            request.allHTTPHeaderFields = ["Origin": "http://aot.local/"]
             let task = urlSession.dataTask(with: request) { (data, response, error) in
                 // @TODO: Error handling, etc. here
+                print(response)
             }
             task.resume()
         }
