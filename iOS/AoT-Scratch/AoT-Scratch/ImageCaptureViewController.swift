@@ -108,6 +108,10 @@ class ImageCaptureViewController: UIViewController, AVCapturePhotoCaptureDelegat
         }
     }
     
+    @IBAction func backButtonTapped(_ sender: Any) {
+        navigationController!.popViewController(animated: true)
+    }
+    
     func setupCaptureSession() {
         let discovery = AVCaptureDevice.DiscoverySession(deviceTypes: [.builtInWideAngleCamera], mediaType: nil, position: .back)
         let backCamera = discovery.devices[0]
@@ -200,7 +204,8 @@ class ImageCaptureViewController: UIViewController, AVCapturePhotoCaptureDelegat
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let imageEditVC = segue.destination as? ImageEditorViewController, let photo = capturedPhoto {
-            imageEditVC.image = photo
+            let resampledPhoto = resizeImageConstrained(to: 800, image: photo)
+            imageEditVC.image = resampledPhoto
         }
     }
     

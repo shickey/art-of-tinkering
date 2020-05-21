@@ -65,8 +65,28 @@ class ScratchViewController: UIViewController, WKUIDelegate, WKNavigationDelegat
             request.httpBody = sprite3Payload.data(using: .utf8)
             request.allHTTPHeaderFields = ["Origin": "http://aot.local/"]
             let task = urlSession.dataTask(with: request) { (data, response, error) in
-                // @TODO: Error handling, etc. here
-                print(response)
+                DispatchQueue.main.async {
+                    // @TODO: Better error handling, etc. here
+                    var alertTitle = "Success!"
+                    var alertText = "Look for your sprite on the projector!"
+                    var success = true
+                    if let e = error {
+                        success = false
+                        alertText = "Got an error: \(e.localizedDescription) Make sure you're connected to the internet and then try sending your sprite again!"
+                    }
+                    if let httpResponse = response as? HTTPURLResponse {
+                        if httpResponse.statusCode != 200 {
+                            success = false
+                            alertText = "Received status code \(httpResponse.statusCode). Make sure you're connected to the internet and then try sending your sprite again!"
+                        }
+                    }
+                    if !success {
+                        alertTitle = "Uh oh!" 
+                    }
+                    let alert = UIAlertController(title: alertTitle, message: alertText, preferredStyle: .alert)
+                    alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+                    self.present(alert, animated: true, completion: nil)
+                }
             }
             task.resume()
         }

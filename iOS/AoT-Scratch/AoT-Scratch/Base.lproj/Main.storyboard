@@ -301,6 +301,15 @@
                                             <action selector="captureButtonPressed:" destination="fXD-WC-zOG" eventType="touchUpInside" id="UCn-v8-CN7"/>
                                         </connections>
                                     </button>
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Im5-Ea-C5t" userLabel="Back Button">
+                                        <rect key="frame" x="25" y="26" width="52" height="52"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <inset key="imageEdgeInsets" minX="10" minY="10" maxX="10" maxY="10"/>
+                                        <state key="normal" image="back"/>
+                                        <connections>
+                                            <action selector="backButtonTapped:" destination="fXD-WC-zOG" eventType="touchUpInside" id="6E4-z1-Yhh"/>
+                                        </connections>
+                                    </button>
                                 </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </view>
@@ -335,17 +344,37 @@
                                     <outletCollection property="gestureRecognizers" destination="NUb-8Z-lht" appends="YES" id="DQh-V0-ZlY"/>
                                 </connections>
                             </imageView>
-                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="gmS-Nc-uQ1" customClass="ColorView" customModule="Octopus" customModuleProvider="target">
-                                <rect key="frame" x="59" y="876" width="240" height="128"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMinY="YES"/>
-                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="NNu-0L-BYv" customClass="DrawMaskView" customModule="Octopus" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="0.0" width="768" height="862"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="R4H-Ga-6us">
-                                <rect key="frame" x="616" y="925" width="115" height="30"/>
+                                <rect key="frame" x="647" y="925" width="54" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMinY="YES"/>
-                                <state key="normal" title="Send to Scratch!"/>
+                                <state key="normal" title="Code it!"/>
                                 <connections>
                                     <action selector="confirmTapped:" destination="2Wt-2H-f9e" eventType="touchUpInside" id="gJC-ai-IJo"/>
+                                </connections>
+                            </button>
+                            <segmentedControl opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="t3N-gB-K7G">
+                                <rect key="frame" x="20" y="925" width="243" height="32"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                <segments>
+                                    <segment title="Magic Wand"/>
+                                    <segment title="Lasso"/>
+                                </segments>
+                                <connections>
+                                    <action selector="toolControlTapped:" destination="2Wt-2H-f9e" eventType="valueChanged" id="vsU-FS-4ey"/>
+                                </connections>
+                            </segmentedControl>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qyG-UD-cJr" userLabel="Back Button">
+                                <rect key="frame" x="25" y="26" width="52" height="52"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <inset key="imageEdgeInsets" minX="10" minY="10" maxX="10" maxY="10"/>
+                                <state key="normal" image="back"/>
+                                <connections>
+                                    <action selector="backButtonTapped:" destination="2Wt-2H-f9e" eventType="touchUpInside" id="tQ1-NH-bS3"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -354,7 +383,7 @@
                     </view>
                     <navigationItem key="navigationItem" id="HhV-PO-Hc8"/>
                     <connections>
-                        <outlet property="colorView" destination="gmS-Nc-uQ1" id="ih6-Ei-BzD"/>
+                        <outlet property="drawMaskView" destination="NNu-0L-BYv" id="xM3-zg-4gm"/>
                         <outlet property="imageView" destination="gee-in-Ypg" id="zFU-K8-nSy"/>
                     </connections>
                 </viewController>
