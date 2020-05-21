@@ -555,22 +555,33 @@
   <div id="new-project-modal">
     <div id="new-project-modal-container">
       <div id="canvas-tools">
-        <button id="magicwand-tool" disabled>Magic</button><br />
-        <button id="lasso-tool" disabled>Lasso</button>
+        <div class="control-button" id="magicwand-tool"><img src="assets/wand.png" /></div>
+        <div class="control-button" id="lasso-tool"><img src="assets/lasso.png" /></div>
       </div>
       <canvas id="canvas" width=400 height=300></canvas>
       <video id="video" width=400 height=300 autoplay></video>
       <br />
-      <button id="capture-button">Capture</button>
-      <button id="send-button" disabled>Let's Code!</button>
+      <div id="canvas-controls">
+        <div id="canvas-controls-content">
+          <div class="control-button" id="capture-button"><img src="assets/record.png" /></div>
+          <div class="control-button" id="scratch-button"><img src="assets/send.png" /></div>
+        </div>
+        <!-- <div id="camera-dropdown"> -->
+          <!-- <select id="device-dropdown"></select> -->
+        <!-- </div> -->
+      </div>
     </div>
   </div>
 
   <div id="presentation-controls">
-    <button id="gf-button">GF</button><br />
-    <button id="stop-button">Stop</button><br />
-    <button id="upload-button">Send</button><br />
-    <input id="ip-field" style="float: right; width: 120px;" type='text' value="65.96.160.1:62626" />
+    <div class="control-button" id="gf-button"><img src="assets/greenflag.png" /></div>
+    <div class="control-button" id="stop-button"><img src="assets/stop.png" /></div>
+    <div class="control-button" id="upload-button"><img src="assets/send.png" /></div>
+    <input id="ip-field" type='text' value="65.96.164.164:62626" />
+  </div>
+
+  <div id="app-controls">
+    <!-- <div class="control-button" id="back-button"><img src="assets/arrow-back.png" /></div> -->
   </div>
   
   <!-- Scratch VM -->
