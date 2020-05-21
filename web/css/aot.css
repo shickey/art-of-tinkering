@@ -125,6 +125,22 @@ body {
   height: 65vh;
 }
 
+#ip-field {
+  width: 100px;
+  float: right;
+  font-size: 0.6em;
+  background-color: #334771;
+  border: 1px dashed black;
+  border-radius: 5px;
+  margin: 10px 0;
+}
+
+#ip-field:focus {
+  width: 200px;
+  background-color: white;
+  font-size: 1.2em;
+}
+
 .blocklyMainBackground {
   stroke: none;
 }

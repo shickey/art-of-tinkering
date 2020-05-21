@@ -373,12 +373,16 @@ window.onload = () => {
     const magicWandButton = document.getElementById('magicwand-tool');
     const lassoButton = document.getElementById('lasso-tool');
 
+    // const cameraDropdown = document.getElementById('device-dropdown');
+
     const canvas = document.getElementById('canvas');
     const ctx = canvas.getContext('2d');
 
     let removalThreshold = 10;
 	let dragging = false;
 	let dragStartCoords = [0, 0];
+
+    let capturing = true;
 
     let projectId;
 
@@ -389,6 +393,7 @@ window.onload = () => {
     function startCam(id) {
       navigator.mediaDevices.getUserMedia({video: true})
       .then((stream) => {
+              console.log(stream);
               let settings = stream.getVideoTracks()[0].getSettings();
               camWidth = settings.width;
               camHeight = settings.height;
@@ -518,6 +523,26 @@ window.onload = () => {
         return array;
     }
 
+
+    // cameraDropdown.onchange = (event) => {
+      // if (capturing) startCam(videoDevices[event.target.value]);
+    // };
+
+    // navigator.mediaDevices.enumerateDevices({video: true})
+    // .then(devices => {
+      // cameraDropdown.innerHTML = '';
+      // videoDevices = [];
+      // let devs = devices.filter(d => d.kind === 'videoinput');
+      // console.log(devs);
+      // devs.forEach(d => {
+          // let index = videoDevices.push(d.deviceId);
+          // let opt = document.createElement('option');
+          // opt.value = index;
+          // opt.innerHTML = 'Camera ' + index;
+          // cameraDropdown.appendChild(opt);
+        // });
+    // });
+
     canvas.onmousedown = (event) => {
 	  dragging = true;
       curPath = [];
@@ -538,6 +563,19 @@ window.onload = () => {
     let curPath = [];
     let curX, curY;
     let lastX, lastY;
+
+    canvas.onmouseenter = (event) => {
+        if (selectedTool === 'magic')
+            document.body.style.cursor = 'url("../assets/mouse-wand.png"), auto';
+        else if (selectedTool === 'lasso')
+            document.body.style.cursor = 'url("../assets/mouse-lasso.png"), auto';
+        else
+            document.body.style.cursor = 'auto';
+    };
+
+    canvas.onmouseleave = (event) => {
+        document.body.style.cursor = 'auto';
+    };
 
 	canvas.onmousemove = (event) => {
 		if (!dragging) return;
@@ -572,8 +610,8 @@ window.onload = () => {
     };
 
     document.getElementById('capture-button').onclick = (event) => {
-        document.body.style.cursor = 'url("../assets/mouse-wand.png"), auto';
         if (imageCaptureData) {
+            capturing = false;
             imageCaptureData = null;
             magicWandButton.disabled = true;
             lassoButton.disabled = true;
@@ -583,16 +621,15 @@ window.onload = () => {
             video.style.display = 'inline';
             startCam();
         } else {
+            capturing = true;
             lassoButton.disabled = false;
             sendButton.disabled = false;
-            event.target.innerHTML = 'Retake';
             capture();
         }
     }
 
     sendButton.onclick = (event) => {
         if (!imageCaptureData) return;
-        document.body.style.cursor = 'auto';
         projectGalleryDiv.style.display = 'none';
         newProjectModal.style.display = 'none';
         projectId = (Math.floor(Math.random() * (1000000 - 100000)) + 100000).toString();
@@ -626,7 +663,6 @@ window.onload = () => {
     };
 
     magicWandButton.onclick = (event) => {
-        document.body.style.cursor = 'url("../assets/mouse-wand.png"), auto';
         resetImage();
         selectedTool = 'magic';
         magicWandButton.disabled = true;
@@ -634,7 +670,6 @@ window.onload = () => {
     };
 
     lassoButton.onclick = (event) => {
-        document.body.style.cursor = 'url("../assets/mouse-lasso.png"), auto';
         resetImage();
         selectedTool = 'lasso';
         magicWandButton.disabled = false;
