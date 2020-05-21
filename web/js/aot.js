@@ -566,9 +566,9 @@ window.onload = () => {
 
     canvas.onmouseenter = (event) => {
         if (selectedTool === 'magic')
-            document.body.style.cursor = 'url("../assets/mouse-wand.png"), auto';
+            document.body.style.cursor = 'url("./assets/mouse-wand.png"), auto';
         else if (selectedTool === 'lasso')
-            document.body.style.cursor = 'url("../assets/mouse-lasso.png"), auto';
+            document.body.style.cursor = 'url("./assets/mouse-lasso.png"), auto';
         else
             document.body.style.cursor = 'auto';
     };
