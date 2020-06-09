@@ -171,23 +171,6 @@
       </block>
       <block id="looks_show" type="looks_show"></block>
       <block id="looks_hide" type="looks_hide"></block>
-      <block id="looks_switchcostumeto" type="looks_switchcostumeto">
-        <value name="COSTUME">
-          <shadow type="looks_costume"/>
-        </value>
-      </block>
-      <block id="looks_nextcostume" type="looks_nextcostume"></block>
-      <block id="looks_nextbackdrop" type="looks_nextbackdrop"></block>
-      <block id="looks_switchbackdropto" type="looks_switchbackdropto">
-        <value name="BACKDROP">
-          <shadow type="looks_backdrops"/>
-        </value>
-      </block>
-      <block id="looks_switchbackdroptoandwait" type="looks_switchbackdroptoandwait">
-        <value name="BACKDROP">
-          <shadow type="looks_backdrops"/>
-        </value>
-      </block>
       <block id="looks_changeeffectby" type="looks_changeeffectby">
         <value name="CHANGE">
           <shadow type="math_number">
@@ -225,65 +208,10 @@
           </shadow>
         </value>
       </block>
-      <block id="looks_costumenumbername" type="looks_costumenumbername"></block>
-      <block id="looks_backdropnumbername" type="looks_backdropnumbername"></block>
       <block id="looks_size" type="looks_size"></block>
-    </category>
-    <category colour="#D65CD6" id="sound" name="%{BKY_CATEGORY_SOUND}" secondaryColour="#BD42BD">
-      <block id="sound_play" type="sound_play">
-        <value name="SOUND_MENU">
-          <shadow type="sound_sounds_menu"/>
-        </value>
-      </block>
-      <block id="sound_playuntildone" type="sound_playuntildone">
-        <value name="SOUND_MENU">
-          <shadow type="sound_sounds_menu"/>
-        </value>
-      </block>
-      <block id="sound_stopallsounds" type="sound_stopallsounds"></block>
-      <block id="sound_changeeffectby" type="sound_changeeffectby">
-        <value name="VALUE">
-          <shadow type="math_number">
-            <field name="NUM">10</field>
-          </shadow>
-        </value>
-      </block>
-      <block id="sound_seteffectto" type="sound_seteffectto">
-        <value name="VALUE">
-          <shadow type="math_number">
-            <field name="NUM">100</field>
-          </shadow>
-        </value>
-      </block>
-      <block id="sound_cleareffects" type="sound_cleareffects"></block>
-      <block id="sound_changevolumeby" type="sound_changevolumeby">
-        <value name="VOLUME">
-          <shadow type="math_number">
-            <field name="NUM">-10</field>
-          </shadow>
-        </value>
-      </block>
-      <block id="sound_setvolumeto" type="sound_setvolumeto">
-        <value name="VOLUME">
-          <shadow type="math_number">
-            <field name="NUM">100</field>
-          </shadow>
-        </value>
-      </block>
-      <block id="sound_volume" type="sound_volume"></block>
     </category>
     <category colour="#FFD500" id="events" name="%{BKY_CATEGORY_EVENTS}" secondaryColour="#CC9900">
       <block id="event_whenflagclicked" type="event_whenflagclicked"></block>
-      <block id="event_whenkeypressed" type="event_whenkeypressed"></block>
-      <block id="event_whenthisspriteclicked" type="event_whenthisspriteclicked"></block>
-      <block id="event_whenbackdropswitchesto" type="event_whenbackdropswitchesto"></block>
-      <block id="event_whengreaterthan" type="event_whengreaterthan">
-        <value name="VALUE">
-          <shadow type="math_number">
-            <field name="NUM">10</field>
-          </shadow>
-        </value>
-      </block>
       <block id="event_whenbroadcastreceived" type="event_whenbroadcastreceived"></block>
       <block id="event_broadcast" type="event_broadcast">
         <value name="BROADCAST_INPUT">
@@ -344,21 +272,6 @@
           <shadow type="colour_picker"/>
         </value>
       </block>
-      <block id="sensing_distanceto" type="sensing_distanceto">
-        <value name="DISTANCETOMENU">
-          <shadow type="sensing_distancetomenu"/>
-        </value>
-      </block>
-      <block id="sensing_keypressed" type="sensing_keypressed">
-        <value name="KEY_OPTION">
-          <shadow type="sensing_keyoptions"/>
-        </value>
-      </block>
-      <block id="sensing_mousedown" type="sensing_mousedown"></block>
-      <block id="sensing_mousex" type="sensing_mousex"></block>
-      <block id="sensing_mousey" type="sensing_mousey"></block>
-      <block id="sensing_setdragmode" type="sensing_setdragmode"></block>
-      <block id="sensing_loudness" type="sensing_loudness"></block>
       <block id="sensing_timer" type="sensing_timer"></block>
       <block id="sensing_resettimer" type="sensing_resettimer"></block>
       <block id="sensing_of" type="sensing_of">
@@ -540,7 +453,6 @@
       </block>
     </category>
     <category colour="#FF8C1A" custom="VARIABLE" id="data" name="%{BKY_CATEGORY_VARIABLES}" secondaryColour="#DB6E00"></category>
-    <category colour="#FF6680" custom="PROCEDURE" id="more" name="%{BKY_CATEGORY_MYBLOCKS}" secondaryColour="#FF4D6A"></category>
   </xml>
   
   <div id="stage-container">
@@ -577,7 +489,8 @@
     <div class="control-button" id="gf-button"><img src="assets/greenflag.png" /></div>
     <div class="control-button" id="stop-button"><img src="assets/stop.png" /></div>
     <div class="control-button" id="upload-button"><img src="assets/send.png" /></div>
-    <input id="ip-field" type='text' value="65.96.164.164:62626" />
+    <input id="ip-field" type='text' value="aot.khanning.com:62626" /><br />
+    <!-- <div id="backdrop-toggle"><input type="checkbox" /> Show Backdrop?</div> -->
   </div>
 
   <div id="app-controls">

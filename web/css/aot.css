@@ -141,6 +141,11 @@ body {
   font-size: 1.2em;
 }
 
+#backdrop-toggle {
+  width: 200px;
+  float: right;
+}
+
 .blocklyMainBackground {
   stroke: none;
 }
