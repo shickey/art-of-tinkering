@@ -25,6 +25,9 @@
 		A34AB7C92435529800EC94AE /* Entry.swift in Sources */ = {isa = PBXBuildFile; fileRef = A34AB7C12435529800EC94AE /* Entry.swift */; };
 		A35460392422B59E00037DF4 /* Logging.swift in Sources */ = {isa = PBXBuildFile; fileRef = A35460382422B59E00037DF4 /* Logging.swift */; };
 		A354603D2426CCBB00037DF4 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A354603C2426CCBB00037DF4 /* SettingsViewController.swift */; };
+		A386D9B1248E9F95006504F2 /* OpenCVBridge.mm in Sources */ = {isa = PBXBuildFile; fileRef = A386D9B0248E9F95006504F2 /* OpenCVBridge.mm */; };
+		A386D9B3248EC9B6006504F2 /* opencv2.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A386D9AB248E9DAA006504F2 /* opencv2.framework */; };
+		A3BDF752248FF5FA00293990 /* GrabCutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3BDF751248FF5FA00293990 /* GrabCutViewController.swift */; };
 		A3E135D32409A61700D4B680 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3E135D22409A61700D4B680 /* AppDelegate.swift */; };
 		A3E135DA2409A61700D4B680 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A3E135D82409A61700D4B680 /* Main.storyboard */; };
 		A3E135DC2409A61900D4B680 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A3E135DB2409A61900D4B680 /* Assets.xcassets */; };
@@ -34,19 +37,6 @@
 		A3E135EB2409B04700D4B680 /* ScratchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3E135EA2409B04700D4B680 /* ScratchViewController.swift */; };
 		A3E135F0240D794100D4B680 /* web in Resources */ = {isa = PBXBuildFile; fileRef = A3E135EF240D794100D4B680 /* web */; };
 /* End PBXBuildFile section */
-
-/* Begin PBXCopyFilesBuildPhase section */
-		A3546037242178DA00037DF4 /* Embed Frameworks */ = {
-			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
-			dstPath = "";
-			dstSubfolderSpec = 10;
-			files = (
-			);
-			name = "Embed Frameworks";
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		A30DC6002412EF3C008DD0E0 /* ImageEditorViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageEditorViewController.swift; sourceTree = "<group>"; };
@@ -67,6 +57,11 @@
 		A34AB7C12435529800EC94AE /* Entry.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Entry.swift; sourceTree = "<group>"; };
 		A35460382422B59E00037DF4 /* Logging.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Logging.swift; sourceTree = "<group>"; };
 		A354603C2426CCBB00037DF4 /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
+		A386D9AB248E9DAA006504F2 /* opencv2.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = opencv2.framework; sourceTree = "<group>"; };
+		A386D9AD248E9E34006504F2 /* AoT-Scratch-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "AoT-Scratch-Bridging-Header.h"; sourceTree = "<group>"; };
+		A386D9B0248E9F95006504F2 /* OpenCVBridge.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = OpenCVBridge.mm; sourceTree = "<group>"; };
+		A386D9B2248E9FA0006504F2 /* OpenCVBridge.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OpenCVBridge.h; sourceTree = "<group>"; };
+		A3BDF751248FF5FA00293990 /* GrabCutViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GrabCutViewController.swift; sourceTree = "<group>"; };
 		A3E135CF2409A61700D4B680 /* Octopus.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Octopus.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A3E135D22409A61700D4B680 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		A3E135D92409A61700D4B680 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -84,6 +79,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A386D9B3248EC9B6006504F2 /* opencv2.framework in Frameworks */,
 				A31497BC2416F2A0005399C8 /* NetworkExtension.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -102,6 +98,7 @@
 		A34AB7B82435527C00EC94AE /* lib */ = {
 			isa = PBXGroup;
 			children = (
+				A386D9AB248E9DAA006504F2 /* opencv2.framework */,
 				A34AB7B92435528100EC94AE /* ZIPFoundation */,
 			);
 			path = lib;
@@ -142,7 +139,6 @@
 		A3E135D12409A61700D4B680 /* AoT-Scratch */ = {
 			isa = PBXGroup;
 			children = (
-				A34AB7B82435527C00EC94AE /* lib */,
 				A3E135D22409A61700D4B680 /* AppDelegate.swift */,
 				A3E135E62409A68E00D4B680 /* ProjectsCollectionViewController.swift */,
 				A3E135D82409A61700D4B680 /* Main.storyboard */,
@@ -154,13 +150,18 @@
 				A3E135E82409ABFD00D4B680 /* ImageCaptureViewController.swift */,
 				A31B376D247603BE00316317 /* DrawMaskView.swift */,
 				A30DC6002412EF3C008DD0E0 /* ImageEditorViewController.swift */,
+				A3BDF751248FF5FA00293990 /* GrabCutViewController.swift */,
 				A31497B724140041005399C8 /* Util.swift */,
 				A30DC6022412F46F008DD0E0 /* ChromaKeyFilter.swift */,
 				A30DC6042412F663008DD0E0 /* Shaders.metal */,
 				A3E135DB2409A61900D4B680 /* Assets.xcassets */,
 				A3E135DD2409A61900D4B680 /* LaunchScreen.storyboard */,
 				A3E135E02409A61900D4B680 /* Info.plist */,
+				A34AB7B82435527C00EC94AE /* lib */,
 				A3E135EF240D794100D4B680 /* web */,
+				A386D9AD248E9E34006504F2 /* AoT-Scratch-Bridging-Header.h */,
+				A386D9B2248E9FA0006504F2 /* OpenCVBridge.h */,
+				A386D9B0248E9F95006504F2 /* OpenCVBridge.mm */,
 			);
 			path = "AoT-Scratch";
 			sourceTree = "<group>";
@@ -175,7 +176,6 @@
 				A3E135CB2409A61700D4B680 /* Sources */,
 				A3E135CC2409A61700D4B680 /* Frameworks */,
 				A3E135CD2409A61700D4B680 /* Resources */,
-				A3546037242178DA00037DF4 /* Embed Frameworks */,
 				A354603B2422BD3A00037DF4 /* ShellScript */,
 			);
 			buildRules = (
@@ -199,6 +199,7 @@
 				TargetAttributes = {
 					A3E135CE2409A61700D4B680 = {
 						CreatedOnToolsVersion = 11.3.1;
+						LastSwiftMigration = 1130;
 					};
 				};
 			};
@@ -268,6 +269,8 @@
 				A34AB7C72435529800EC94AE /* Data+Serialization.swift in Sources */,
 				A30DC6032412F46F008DD0E0 /* ChromaKeyFilter.swift in Sources */,
 				A31497C024193F0B005399C8 /* DataStore.swift in Sources */,
+				A3BDF752248FF5FA00293990 /* GrabCutViewController.swift in Sources */,
+				A386D9B1248E9F95006504F2 /* OpenCVBridge.mm in Sources */,
 				A31497BE24193AFB005399C8 /* Constants.swift in Sources */,
 				A35460392422B59E00037DF4 /* Logging.swift in Sources */,
 				A3E135D32409A61700D4B680 /* AppDelegate.swift in Sources */,
@@ -423,6 +426,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 2;
 				DEBUG_INFORMATION_FORMAT = dwarf;
@@ -431,6 +435,7 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/AoT-Scratch",
+					"$(PROJECT_DIR)/AoT-Scratch/lib",
 				);
 				INFOPLIST_FILE = "AoT-Scratch/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
@@ -443,6 +448,8 @@
 				OTHER_SWIFT_FLAGS = "-DDEBUG";
 				PRODUCT_BUNDLE_IDENTIFIER = edu.mit.media.llk.ArtOfTinkering;
 				PRODUCT_NAME = Octopus;
+				SWIFT_OBJC_BRIDGING_HEADER = "AoT-Scratch/AoT-Scratch-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 2;
 			};
@@ -452,6 +459,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = "";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 2;
@@ -460,6 +468,7 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/AoT-Scratch",
+					"$(PROJECT_DIR)/AoT-Scratch/lib",
 				);
 				INFOPLIST_FILE = "AoT-Scratch/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
@@ -472,6 +481,7 @@
 				OTHER_SWIFT_FLAGS = "";
 				PRODUCT_BUNDLE_IDENTIFIER = edu.mit.media.llk.ArtOfTinkering;
 				PRODUCT_NAME = Octopus;
+				SWIFT_OBJC_BRIDGING_HEADER = "AoT-Scratch/AoT-Scratch-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 2;
 			};

@@ -207,6 +207,10 @@ class ImageCaptureViewController: UIViewController, AVCapturePhotoCaptureDelegat
             let resampledPhoto = resizeImageConstrained(to: 800, image: photo)
             imageEditVC.image = resampledPhoto
         }
+        else if let grabCutVC = segue.destination as? GrabCutViewController, let photo = capturedPhoto {
+            let resampledPhoto = resizeImageConstrained(to: 800, image: photo)
+            grabCutVC.image = resampledPhoto
+        }
     }
     
 }

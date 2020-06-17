@@ -281,10 +281,10 @@
             </objects>
             <point key="canvasLocation" x="-620" y="131"/>
         </scene>
-        <!--Image Capture View Controller-->
+        <!--ToEdit-->
         <scene sceneID="fYl-aa-mob">
             <objects>
-                <viewController modalPresentationStyle="fullScreen" id="fXD-WC-zOG" customClass="ImageCaptureViewController" customModule="Octopus" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController title="ToEdit" modalPresentationStyle="fullScreen" id="fXD-WC-zOG" customClass="ImageCaptureViewController" customModule="Octopus" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="QXe-eq-Df8">
                         <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -321,7 +321,7 @@
                     <nil key="simulatedTopBarMetrics"/>
                     <connections>
                         <outlet property="previewView" destination="0dS-Cx-UxF" id="7rc-Gj-l3U"/>
-                        <segue destination="2Wt-2H-f9e" kind="show" identifier="ToEdit" id="bTP-4y-1fM"/>
+                        <segue destination="2Wt-2H-f9e" kind="show" identifier="ToEdit" id="2KN-jI-LcV"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="6lb-3T-shi" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -492,6 +492,55 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Y6h-8d-DR6" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2589.84375" y="130.6640625"/>
+        </scene>
+        <!--Grab Cut View Controller-->
+        <scene sceneID="MdO-KR-BzD">
+            <objects>
+                <viewController modalPresentationStyle="fullScreen" id="qFw-i6-abL" customClass="GrabCutViewController" customModule="Octopus" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="teg-YR-Xiy">
+                        <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView clipsSubviews="YES" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="V2F-kX-zCV">
+                                <rect key="frame" x="0.0" y="0.0" width="768" height="862"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                <gestureRecognizers/>
+                            </imageView>
+                            <view alpha="0.10000000000000001" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="pyG-Z7-PAR" customClass="GrabCutGestureView" customModule="Octopus" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="0.0" width="768" height="862"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </view>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KS0-o7-kt8">
+                                <rect key="frame" x="647" y="925" width="54" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMinY="YES"/>
+                                <state key="normal" title="Code it!"/>
+                                <connections>
+                                    <action selector="confirmTapped:" destination="qFw-i6-abL" eventType="touchUpInside" id="OFb-kO-C0n"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8Au-oa-rXq" userLabel="Back Button">
+                                <rect key="frame" x="25" y="26" width="52" height="52"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <inset key="imageEdgeInsets" minX="10" minY="10" maxX="10" maxY="10"/>
+                                <state key="normal" image="back"/>
+                                <connections>
+                                    <action selector="backButtonTapped:" destination="qFw-i6-abL" eventType="touchUpInside" id="gCU-t1-ZcS"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <viewLayoutGuide key="safeArea" id="zHz-ks-mH4"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="qFV-Kz-kC7"/>
+                    <connections>
+                        <outlet property="gestureView" destination="pyG-Z7-PAR" id="KZh-l0-x0u"/>
+                        <outlet property="imageView" destination="V2F-kX-zCV" id="cBF-NP-h7V"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="LHZ-nw-DnT" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1748" y="809"/>
         </scene>
     </scenes>
     <resources>

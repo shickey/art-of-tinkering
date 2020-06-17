@@ -247,6 +247,11 @@ class ImageEditorViewController: UIViewController, DrawMaskViewDelegate {
         
         if nil != image {
             imageView.image = image
+            
+            
+//            imageView.image = OpenCVBridge.grabCut(image);
+            
+            
             sampler = ImageSampler(image: image)
 //            regionGrower = RegionGrower(image: image)
             filter.input = CIImage(image: image)!

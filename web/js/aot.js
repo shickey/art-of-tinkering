@@ -9,7 +9,7 @@
     Scratch.vm = vm;
     
     var canvas = document.getElementById('stage');
-    var renderer = new ScratchRender(canvas);
+    var renderer = new ScratchRender(canvas, -960, 960, -540, 540);
     Scratch.renderer = renderer;
     vm.attachRenderer(renderer);
     vm.attachV2SVGAdapter(new ScratchSVGRenderer.SVGRenderer());

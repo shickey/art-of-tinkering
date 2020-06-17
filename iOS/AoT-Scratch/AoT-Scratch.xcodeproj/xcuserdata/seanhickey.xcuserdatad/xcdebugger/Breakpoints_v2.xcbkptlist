@@ -14,8 +14,8 @@
             filePath = "AoT-Scratch/ImageEditorViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "333"
-            endingLineNumber = "333"
+            startingLineNumber = "337"
+            endingLineNumber = "337"
             landmarkName = "toolControlTapped(_:)"
             landmarkType = "7">
          </BreakpointContent>
