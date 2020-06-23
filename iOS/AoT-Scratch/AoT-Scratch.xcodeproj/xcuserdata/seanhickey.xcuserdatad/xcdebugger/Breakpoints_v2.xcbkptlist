@@ -7,16 +7,16 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "BF48B1F2-B027-4390-9961-16325C92BBFA"
+            uuid = "0C6544EB-E0AA-4668-BEFA-E302FCD8AA24"
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "AoT-Scratch/ImageEditorViewController.swift"
+            filePath = "AoT-Scratch/OpenCVBridge.mm"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "337"
-            endingLineNumber = "337"
-            landmarkName = "toolControlTapped(_:)"
+            startingLineNumber = "77"
+            endingLineNumber = "77"
+            landmarkName = "+grabCutUIImage:withBackgroundData:foregroundData:"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

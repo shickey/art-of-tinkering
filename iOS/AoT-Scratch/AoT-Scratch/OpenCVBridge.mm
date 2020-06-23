@@ -54,7 +54,7 @@ UIImage *UIImageFromCVMat(cv::Mat cvMat)
                                       8 * cvMat.elemSize(),                       //bits per pixel
                                       cvMat.step[0],                              //bytesPerRow
                                       colorSpace,                                 //colorspace
-                                      kCGImageAlphaNone|kCGBitmapByteOrderDefault,// bitmap info
+                                      kCGImageAlphaLast|kCGBitmapByteOrderDefault,// bitmap info
                                       provider,                                   //CGDataProviderRef
                                       NULL,                                       //decode
                                       false,                                      //should interpolate
@@ -73,61 +73,39 @@ UIImage *UIImageFromCVMat(cv::Mat cvMat)
 
 @implementation OpenCVBridge
 
-+ (UIImage *)grabCutUIImage:(UIImage *)uiImage withMaskData:(void *)maskData {
++ (UIImage *)grabCutUIImage:(UIImage *)uiImage withBackgroundData:(void *)bgdData foregroundData:(void *)fgdData {
     cv::Mat img = cvMatFromUIImage(uiImage);
     cv::cvtColor(img, img, cv::COLOR_RGBA2RGB);
     
     cv::Mat1b markers(img.rows, img.cols);
     markers.setTo(cv::GC_PR_FGD);
     
-    cv::Mat1b bg_seed = markers(cv::Range(0, 5),cv::Range::all());
+    cv::Mat1b bg_seed = markers(cv::Range(0, 1),cv::Range(0, 1));
     bg_seed.setTo(cv::GC_BGD);
     
-//    uint8_t *maskPixels = (uint8_t *)maskData;
-//    for (int i = 0; i < img.rows * img.cols; ++i) {
-//        if (maskPixels[i] > 0) {
-//            markers
-//        }
-//    }
+    cv::Mat bgdDataMat(img.rows, img.cols, CV_8UC1, bgdData);
+    cv::Mat flippedBgdMask(img.rows, img.cols, CV_8UC1);
+    cv::flip(bgdDataMat, flippedBgdMask, 0); // Flip vertically
+    markers.setTo(cv::GC_BGD, flippedBgdMask);
     
-    cv::Mat maskMat(img.rows, img.cols, CV_8UC1, maskData);
-    cv::Mat flippedMask(img.rows, img.cols, CV_8UC1);
-    cv::flip(maskMat, flippedMask, 0); // Flip vertically
-    markers.setTo(cv::GC_BGD, flippedMask);
-    
-//    // cut out a small area in the middle of the image
-//    int m_rows = 0.1 * img.rows;
-//    int m_cols = 0.1 * img.cols;
-//    // of course here you could also use cv::Rect() instead of cv::Range to select 
-//    // the region of interest
-//    cv::Mat1b fg_seed = markers(cv::Range(img.rows/2 - m_rows/2, img.rows/2 + m_rows/2), 
-//                                cv::Range(img.cols/2 - m_cols/2, img.cols/2 + m_cols/2));
-//    // mark it as foreground
-//    fg_seed.setTo(cv::GC_FGD);
+    cv::Mat fgdDataMat(img.rows, img.cols, CV_8UC1, fgdData);
+    cv::Mat flippedFgdMask(img.rows, img.cols, CV_8UC1);
+    cv::flip(fgdDataMat, flippedFgdMask, 0); // Flip vertically
+    markers.setTo(cv::GC_FGD, flippedFgdMask);
     
     cv::Mat fgd, bgd;
     
-//    cv::Rect rect = cv::Rect(10, 10, uiImage.size.width - 10, uiImage.size.height - 10);
-    
     cv::grabCut(img, markers, cv::Rect(), bgd, fgd, 1, cv::GC_INIT_WITH_MASK);
-    
-//    for (int i = 0; i < img.rows; i++) {
-//        for (int j = 0; j < img.cols; j++) {
-//            if (mask.ptr(i, j)[0] == 0 || mask.ptr(i, j)[0] == 2) {
-//                img.ptr(i, j)[0] = 0;
-//                img.ptr(i, j)[1] = 0;
-//                img.ptr(i, j)[2] = 0;
-//            }
-//        }
-//    }
     
     // let's get all foreground and possible foreground pixels
     cv::Mat1b mask_fgpf = ( markers == cv::GC_FGD) | ( markers == cv::GC_PR_FGD);
     // and copy all the foreground-pixels to a temporary image
-    cv::Mat3b tmp = cv::Mat3b::zeros(img.rows, img.cols);
-    img.copyTo(tmp, mask_fgpf);
+    cv::Mat4b outMat = cv::Mat4b::zeros(img.rows, img.cols);
+    cv::Mat combine[] = {img, mask_fgpf};
+    int from_to[] = {0, 0, 1, 1, 2, 2, 3, 3};
+    cv::mixChannels(combine, 2, &outMat, 1, from_to, 4);
     
-    UIImage *result = UIImageFromCVMat(tmp);
+    UIImage *result = UIImageFromCVMat(outMat);
     return result;
 }
 

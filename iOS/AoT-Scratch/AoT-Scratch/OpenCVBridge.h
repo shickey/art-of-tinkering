@@ -14,7 +14,7 @@
 @class UIImage;
 
 @interface OpenCVBridge : NSObject
-+ (UIImage *)grabCutUIImage:(UIImage *)uiImage withMaskData:(void *)maskData;
++ (UIImage *)grabCutUIImage:(UIImage *)uiImage withBackgroundData:(void *)bgdData foregroundData:(void *)fgdData;
 @end
 
 #endif /* OpenCVBridge_h */

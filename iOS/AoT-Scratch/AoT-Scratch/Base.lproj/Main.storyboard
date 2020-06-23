@@ -321,7 +321,7 @@
                     <nil key="simulatedTopBarMetrics"/>
                     <connections>
                         <outlet property="previewView" destination="0dS-Cx-UxF" id="7rc-Gj-l3U"/>
-                        <segue destination="2Wt-2H-f9e" kind="show" identifier="ToEdit" id="2KN-jI-LcV"/>
+                        <segue destination="qFw-i6-abL" kind="show" identifier="ToEdit" id="WY3-pk-EDU"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="6lb-3T-shi" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -506,7 +506,7 @@
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <gestureRecognizers/>
                             </imageView>
-                            <view alpha="0.10000000000000001" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="pyG-Z7-PAR" customClass="GrabCutGestureView" customModule="Octopus" customModuleProvider="target">
+                            <view alpha="0.75" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="pyG-Z7-PAR" customClass="GrabCutGestureView" customModule="Octopus" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="0.0" width="768" height="862"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -528,6 +528,25 @@
                                     <action selector="backButtonTapped:" destination="qFw-i6-abL" eventType="touchUpInside" id="gCU-t1-ZcS"/>
                                 </connections>
                             </button>
+                            <segmentedControl opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="bpc-IP-S56">
+                                <rect key="frame" x="25" y="925" width="289" height="32"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                <segments>
+                                    <segment title="Mark Background"/>
+                                    <segment title="Mark Foreground"/>
+                                </segments>
+                                <connections>
+                                    <action selector="toolModeControlChanged:" destination="qFw-i6-abL" eventType="valueChanged" id="dGx-07-lel"/>
+                                </connections>
+                            </segmentedControl>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pCr-Ga-Ruv">
+                                <rect key="frame" x="347" y="926" width="75" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                <state key="normal" title="Clear"/>
+                                <connections>
+                                    <action selector="clearButtonTapped:" destination="qFw-i6-abL" eventType="touchUpInside" id="as7-OG-v7w"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <viewLayoutGuide key="safeArea" id="zHz-ks-mH4"/>
@@ -540,7 +559,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="LHZ-nw-DnT" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1748" y="809"/>
+            <point key="canvasLocation" x="1747.65625" y="808.59375"/>
         </scene>
     </scenes>
     <resources>

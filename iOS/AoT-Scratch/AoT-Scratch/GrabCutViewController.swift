@@ -10,15 +10,22 @@ import UIKit
 import AVFoundation
 
 protocol GrabCutGestureViewDelegate {
-    func grabCutGestureViewUpdatedMask(_ gestureView: GrabCutGestureView, maskData: UnsafeMutableRawPointer)
+    func grabCutGestureViewUpdatedMask(_ gestureView: GrabCutGestureView, backgroundData: UnsafeMutableRawPointer, foregroundData: UnsafeMutableRawPointer)
 }
 
 class GrabCutGestureView: UIView {
     
+    enum GestureViewMode {
+        case background
+        case foreground
+    }
+    
     var delegate: GrabCutGestureViewDelegate? = nil
     
-    let strokeWidth : CGFloat = 10;
-    var ctx : CGContext! = nil
+    var mode : GestureViewMode = .background
+    let strokeWidth : CGFloat = 10
+    var bgdCtx : CGContext! = nil
+    var fgdCtx : CGContext! = nil
     
     var path = UIBezierPath()
     
@@ -31,22 +38,49 @@ class GrabCutGestureView: UIView {
         let width = 600
         let height = 800
 
-        ctx = CGContext(data: nil, width: width, height: height, bitsPerComponent: 8, bytesPerRow: width, space: colorSpace, bitmapInfo: CGImageAlphaInfo.none.rawValue)
-        ctx.setStrokeColor(gray: 1.0, alpha: 1.0)
+        bgdCtx = CGContext(data: nil, width: width, height: height, bitsPerComponent: 8, bytesPerRow: width, space: colorSpace, bitmapInfo: CGImageAlphaInfo.none.rawValue)
+        fgdCtx = CGContext(data: nil, width: width, height: height, bitsPerComponent: 8, bytesPerRow: width, space: colorSpace, bitmapInfo: CGImageAlphaInfo.none.rawValue)
+        bgdCtx.setStrokeColor(gray: 1.0, alpha: 1.0)
+        fgdCtx.setStrokeColor(gray: 1.0, alpha: 1.0)
     }
     
     override func draw(_ rect: CGRect) {
-        UIGraphicsPushContext(ctx)
+        if mode == .background {
+            UIGraphicsPushContext(bgdCtx)
+        }
+        else {
+            UIGraphicsPushContext(fgdCtx)
+        }
         path.lineWidth = strokeWidth
         path.stroke()
         UIGraphicsPopContext()
         
         let drawingCtx = UIGraphicsGetCurrentContext()!
-        drawingCtx.draw(ctx.makeImage()!, in: rect)
+        let drawingRect = AVMakeRect(aspectRatio: CGSize(width: 600, height: 800), insideRect: self.bounds)
+        let scale = drawingRect.size.width / 600
+        let scaleTransform = CGAffineTransform(scaleX: scale, y: scale)
+        let translationTransform = CGAffineTransform(translationX: -drawingRect.origin.x, y: -drawingRect.origin.y)
+        var transform = translationTransform.concatenating(scaleTransform)
+        let offsetPath = UIBezierPath(cgPath: path.cgPath.copy(using: &transform)!)
+        if mode == .background {
+            drawingCtx.setStrokeColor(UIColor.red.cgColor);
+        }
+        else {
+            drawingCtx.setStrokeColor(UIColor.green.cgColor);
+        }
+        offsetPath.lineWidth = strokeWidth
+        offsetPath.stroke()
+        
+//        let upperRect = CGRect(x: rect.origin.x, y: rect.origin.y, width: rect.width, height: rect.height / 2.0)
+//        let lowerRect = CGRect(x: rect.origin.x, y: rect.origin.y + (rect.height / 2.0), width: rect.width, height: rect.height / 2.0)
+//        drawingCtx.draw(bgdCtx.makeImage()!, in: upperRect)
+//        drawingCtx.draw(fgdCtx.makeImage()!, in: lowerRect)
         
         if shouldInform {
+            // Clear the visible context after making a stroke, etc
+            drawingCtx.clear(self.bounds)
             if let d = delegate {
-                d.grabCutGestureViewUpdatedMask(self, maskData: ctx.data!)
+                d.grabCutGestureViewUpdatedMask(self, backgroundData: bgdCtx.data!, foregroundData: fgdCtx.data!)
             }
         }
         shouldInform = false
@@ -77,6 +111,17 @@ class GrabCutGestureView: UIView {
     func clear() {
         path.removeAllPoints()
         setNeedsDisplay()
+    }
+    
+    func clearMasks() {
+        clear()
+        let rect = CGRect(x: 0, y: 0, width: 600, height: 800)
+        bgdCtx.clear(rect)
+        fgdCtx.clear(rect)
+        setNeedsDisplay()
+        if let d = delegate {
+            d.grabCutGestureViewUpdatedMask(self, backgroundData: bgdCtx.data!, foregroundData: fgdCtx.data!)
+        }
     }
 }
 
@@ -115,8 +160,27 @@ class GrabCutViewController: UIViewController, GrabCutGestureViewDelegate {
         navigationController!.setViewControllers([navigationController!.viewControllers[0], scratchVC], animated: true)
     }
     
-    func grabCutGestureViewUpdatedMask(_ gestureView: GrabCutGestureView, maskData: UnsafeMutableRawPointer) {
-        processedImage = OpenCVBridge.grabCut(image, withMaskData: maskData)
+    @IBAction func toolModeControlChanged(_ sender: UISegmentedControl) {
+        if sender.selectedSegmentIndex == 0 {
+            // Background
+            if gestureView.mode != .background {
+                gestureView.mode = .background
+            }
+        }
+        else {
+            // Foreground
+            if gestureView.mode != .foreground {
+                gestureView.mode = .foreground
+            }
+        }
+    }
+    
+    @IBAction func clearButtonTapped(_ sender: Any) {
+        gestureView.clearMasks()
+    }
+    
+    func grabCutGestureViewUpdatedMask(_ gestureView: GrabCutGestureView, backgroundData: UnsafeMutableRawPointer, foregroundData: UnsafeMutableRawPointer) {
+        processedImage = OpenCVBridge.grabCut(image, withBackgroundData: backgroundData, foregroundData: foregroundData)
         imageView.image = processedImage
     }
 
