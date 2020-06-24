@@ -231,8 +231,8 @@
             "bitmapResolution": 1,
             "md5ext": backgroundFilename,
             "dataFormat": "png",
-            "rotationCenterX": 240,
-            "rotationCenterY": 180
+            "rotationCenterX": 960,
+            "rotationCenterY": 540
           }
           ],
           "sounds": [],
