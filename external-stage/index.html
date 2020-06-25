@@ -50,8 +50,6 @@
   var addConnection = function(connection) {
     connection.onmessage = function (message) {
       var imgData = new Uint8Array(message.data);
-      
-      debugger;
     
       // Flip y
       for (var i = 0; i < height; ++i) {
