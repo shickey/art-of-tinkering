@@ -1047,8 +1047,8 @@ var BitmapAdapter = function () {
     }, {
         key: 'getResizedWidthHeight',
         value: function getResizedWidthHeight(oldWidth, oldHeight) {
-            var STAGE_WIDTH = 480;
-            var STAGE_HEIGHT = 360;
+            var STAGE_WIDTH = 1920;
+            var STAGE_HEIGHT = 1080;
             var STAGE_RATIO = STAGE_WIDTH / STAGE_HEIGHT;
 
             // If both dimensions are smaller than or equal to corresponding stage dimension,
@@ -1100,14 +1100,15 @@ var BitmapAdapter = function () {
                 var image = _this2._makeImage();
                 image.src = dataURI;
                 image.onload = function () {
-                    var newSize = _this2.getResizedWidthHeight(image.width, image.height);
-                    if (newSize.width === image.width && newSize.height === image.height) {
-                        // No change
-                        resolve(_this2.convertDataURIToBinary(dataURI));
-                    } else {
-                        var resizedDataURI = _this2.resize(image, newSize.width, newSize.height).toDataURL();
-                        resolve(_this2.convertDataURIToBinary(resizedDataURI));
-                    }
+                    resolve(_this2.convertDataURIToBinary(dataURI));
+                    // const newSize = this.getResizedWidthHeight(image.width, image.height);
+                    // if (newSize.width === image.width && newSize.height === image.height) {
+                    //     // No change
+                    //     resolve(this.convertDataURIToBinary(dataURI));
+                    // } else {
+                    //     const resizedDataURI = this.resize(image, newSize.width, newSize.height).toDataURL();
+                    //     resolve(this.convertDataURIToBinary(resizedDataURI));
+                    // }
                 };
                 image.onerror = function () {
                     reject('Image load failed');

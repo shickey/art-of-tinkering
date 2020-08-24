@@ -21,8 +21,12 @@
     
     <category colour="#FF6680" id="start" name="Start Here!" secondaryColour="#FF4D6A">
       <block id="event_whenflagclicked" type="event_whenflagclicked"></block>
-      <!-- 
-      <sep gap="36"/> -->
+      
+      <block type="sensing_whentouchingobject">
+          <value name="TOUCHINGOBJECTMENU">
+              <shadow type="sensing_touchingobjectmenu"/>
+          </value>
+      </block>
       
       <block id="motion_movesteps" type="motion_movesteps">
         <value name="STEPS">
@@ -384,6 +388,11 @@
       <block id="control_delete_this_clone" type="control_delete_this_clone"></block>
     </category>
     <category colour="#4CBFE6" id="sensing" name="%{BKY_CATEGORY_SENSING}" secondaryColour="#2E8EB8">
+      <block type="sensing_whentouchingobject">
+          <value name="TOUCHINGOBJECTMENU">
+              <shadow type="sensing_touchingobjectmenu"/>
+          </value>
+      </block>
       <block id="sensing_touchingobject" type="sensing_touchingobject">
         <value name="TOUCHINGOBJECTMENU">
           <shadow type="sensing_touchingobjectmenu"/>
