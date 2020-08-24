@@ -97,7 +97,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="50" translatesAutoresizingMaskIntoConstraints="NO" id="7ep-Xt-291">
-                                <rect key="frame" x="49" y="68" width="614" height="686.5"/>
+                                <rect key="frame" x="49" y="68" width="614" height="786.5"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="jn7-AH-CCo">
                                         <rect key="frame" x="0.0" y="0.0" width="614" height="98"/>
@@ -156,7 +156,7 @@
                                         </subviews>
                                     </stackView>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="XNY-xD-a0g">
-                                        <rect key="frame" x="0.0" y="148" width="614" height="538.5"/>
+                                        <rect key="frame" x="0.0" y="148" width="614" height="638.5"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Project Background" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nFD-6L-Dkf">
                                                 <rect key="frame" x="0.0" y="0.0" width="235" height="33.5"/>
@@ -165,10 +165,10 @@
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="00P-6w-eii">
-                                                <rect key="frame" x="0.0" y="38.5" width="614" height="500"/>
+                                                <rect key="frame" x="0.0" y="38.5" width="614" height="600"/>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <constraints>
-                                                    <constraint firstAttribute="height" constant="500" id="ndL-hm-ydR"/>
+                                                    <constraint firstAttribute="height" constant="600" id="ndL-hm-ydR"/>
                                                 </constraints>
                                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="yVh-0c-OtG" customClass="EqualSpacingFlowLayout" customModule="Octopus" customModuleProvider="target">
                                                     <size key="itemSize" width="240" height="180"/>
@@ -213,7 +213,7 @@
                                         </constraints>
                                     </stackView>
                                     <stackView hidden="YES" opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" translatesAutoresizingMaskIntoConstraints="NO" id="MgD-oB-cUe">
-                                        <rect key="frame" x="0.0" y="686.5" width="157" height="0.0"/>
+                                        <rect key="frame" x="0.0" y="786.5" width="157" height="0.0"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Danger Zone" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="de8-sV-wyB">
                                                 <rect key="frame" x="0.0" y="0.0" width="157" height="0.0"/>
