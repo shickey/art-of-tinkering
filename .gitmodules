@@ -15,13 +15,13 @@
 	url = https://github.com/LLK/scratch-svg-renderer
 [submodule "Server-Scratch/scratch-gui"]
 	path = Server-Scratch/scratch-gui
-	url = https://github.com/khanning/scratch-gui
-	branch = art-of-tinkering
+	url = https://github.com/shickey/scratch-gui
+	branch = aot-server
 [submodule "Server-Scratch/scratch-vm"]
 	path = Server-Scratch/scratch-vm
 	url = https://github.com/shickey/scratch-vm
 	branch = aot-server
 [submodule "Server-Scratch/scratch-render"]
 	path = Server-Scratch/scratch-render
-	url = https://github.com/khanning/scratch-render
-	branch = art-of-tinkering
+	url = https://github.com/shickey/scratch-render
+	branch = aot-server
