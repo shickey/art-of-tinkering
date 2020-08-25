@@ -19,8 +19,8 @@
 	branch = art-of-tinkering
 [submodule "Server-Scratch/scratch-vm"]
 	path = Server-Scratch/scratch-vm
-	url = https://github.com/khanning/scratch-vm
-	branch = art-of-tinkering
+	url = https://github.com/shickey/scratch-vm
+	branch = aot-server
 [submodule "Server-Scratch/scratch-render"]
 	path = Server-Scratch/scratch-render
 	url = https://github.com/khanning/scratch-render
