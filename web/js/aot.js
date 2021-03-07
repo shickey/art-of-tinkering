@@ -301,6 +301,21 @@
         Blockly.Xml.clearWorkspaceAndLoadFromXml(dom, workspace);
         workspace.addChangeListener(vm.blockListener);
       });
+      
+      vm.on('targetsUpdate', () => {
+        ['glide', 'move', 'set'].forEach( prefix => {
+          const blockX = workspace.getFlyout().getWorkspace().getBlockById(`${prefix}x`);
+          if (blockX) {
+            const value = Math.round(vm.editingTarget.x).toString();
+            blockX.inputList[0].fieldRow[0].setValue(value);
+          }
+          const blockY = workspace.getFlyout().getWorkspace().getBlockById(`${prefix}y`);
+          if (blockY) {
+            const value = Math.round(vm.editingTarget.y).toString();
+            blockY.inputList[0].fieldRow[0].setValue(value);
+          }
+        });
+      });
 
     });
     
