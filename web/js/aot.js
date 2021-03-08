@@ -258,7 +258,9 @@
         horizontalLayout: false,
         sounds: false,
         zoom: {
-          startScale: 0.75
+          controls: true,
+          startScale: 0.75,
+          wheel: true
         },
         colours: {
           workspace: '#334771',
@@ -270,7 +272,8 @@
           fieldShadow: 'rgba(255, 255, 255, 0.3)',
           dragShadowOpacity: 0.6
         },
-        toolbox: toolbox
+        toolbox: toolbox,
+        scrollbars: true
       });
 
       // // Disable long-press
