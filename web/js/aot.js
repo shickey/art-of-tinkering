@@ -639,7 +639,51 @@ window.onload = () => {
         if (selectedTool === 'lasso') {
             drawPath(curPath, true);
         }
+        findBoundingBox();
     };
+
+    function findBoundingBox() {
+        let ymin = 0;
+        let ymax = 0;
+        let xmin = 0;
+        let xmax = 0;
+        const imageData = hiddenCtx.getImageData(0, 0, hiddenCanvas.width, hiddenCanvas.height).data;
+        for (let i=0; i<imageData.length; i++) {
+            if (imageData[i] !== 0) {
+                ymin = Math.floor((i/4)/(1920*4));
+                break;
+            }
+        }
+        for (let i=imageData.length-1; i>0; i--) {
+            if (imageData[i] !== 0) {
+                ymax = Math.floor((i/4)/(1920*4));
+                break;
+            }
+        }
+        loop1:
+        for (let col=0; col<1920; col++) {
+            for (let row=0; row<1080; row++) {
+                for (let n=0; n<4; n++) {
+                    if (imageData[(row*1920*4)+(col*4)+n] !== 0) {
+                        xmin = col;
+                        break loop1;
+                    }
+                }
+            }
+        }
+        loop2:
+        for (let col=1920-1; col>0; col--) {
+            for (let row=0; row<1080; row++) {
+                for (let n=0; n<4; n++) {
+                    if (imageData[(row*1920*4)+(col*4)+n] !== 0) {
+                        xmax = col;
+                        break loop2;
+                    }
+                }
+            }
+        }
+        return [ymin, ymax, xmin, xmax];
+    }
 
     function disableCapturing() {
         capturing = false;
@@ -687,6 +731,11 @@ window.onload = () => {
         const binary = convertDataURIToBinary(dataURL);
         const costume = Scratch.createVMAsset(binary);
         costume.name = 'test';
+        const costumeCenter = findBoundingBox();
+        const centerX = ((costumeCenter[3] - costumeCenter[2]) / 2) + costumeCenter[2];
+        const centerY = ((costumeCenter[1] - costumeCenter[0]) / 2) + costumeCenter[0];
+        costume.rotationCenterX = centerX;
+        costume.rotationCenterY = centerY * 4;
         const newSprite = {
           name: 'test',
           isStage: false,
