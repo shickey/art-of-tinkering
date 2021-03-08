@@ -470,10 +470,15 @@ window.onload = () => {
     function removeColor() {
         if (!selectedColor) return;
         let ctxData = ctx.getImageData(0, 0, canvas.width, canvas.height);
+        let hiddenCtxData = hiddenCtx.getImageData(0, 0, hiddenCanvas.width, hiddenCanvas.height);
         let px = ctxData.data;
+        let hpx = hiddenCtxData.data;
         px.set(imageCaptureData);
+        hpx.set(hiddenCaptureData);
         removeHSL(px, rgbToHSL(selectedColor));
         ctx.putImageData(ctxData, 0, 0);
+        removeHSL(hpx, rgbToHSL(selectedColor));
+        hiddenCtx.putImageData(hiddenCtxData, 0, 0);
 
     }
 
