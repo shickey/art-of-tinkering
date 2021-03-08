@@ -8,8 +8,9 @@
     var vm = new VirtualMachine();
     Scratch.vm = vm;
     
+    var video = document.getElementById('video');
     var canvas = document.getElementById('stage');
-    var renderer = new ScratchRender(canvas);
+    var renderer = new ScratchRender(canvas, -960, 960, -540, 540);
     Scratch.renderer = renderer;
     vm.attachRenderer(renderer);
     vm.attachV2SVGAdapter(new ScratchSVGRenderer.SVGRenderer());
@@ -214,7 +215,7 @@
     document.addEventListener('touchend', onMouseUp);
     
     // var backgroundHash = backgroundFilename.split('.')[0]
-    var backgroundHash = '739b5e2a2435f6e1ec2993791b423146';
+    var backgroundHash = 'b98ec4bcf90c47bbcacd29012118a419';
 
     var defaultProject = {
       "targets": [
@@ -233,8 +234,8 @@
             "bitmapResolution": 1,
             "md5ext": backgroundFilename,
             "dataFormat": "png",
-            "rotationCenterX": 240,
-            "rotationCenterY": 180
+            "rotationCenterX": 1920/2,
+            "rotationCenterY": 1080/2
           }
           ],
           "sounds": [],
@@ -304,6 +305,21 @@
         workspace.addChangeListener(vm.blockListener);
       });
 
+      vm.on('targetsUpdate', () => {
+        ['glide', 'move', 'set'].forEach( prefix => {
+          const blockX = workspace.getFlyout().getWorkspace().getBlockById(`${prefix}x`);
+          if (blockX) {
+            const value = Math.round(vm.editingTarget.x).toString();
+            blockX.inputList[0].fieldRow[0].setValue(value);
+          }
+          const blockY = workspace.getFlyout().getWorkspace().getBlockById(`${prefix}y`);
+          if (blockY) {
+            const value = Math.round(vm.editingTarget.y).toString();
+            blockY.inputList[0].fieldRow[0].setValue(value);
+          }
+        });
+      });
+
     });
     
     // External API
@@ -312,7 +328,7 @@
         var fileReader = new FileReader();
         fileReader.onload = function() {
           var payload = fileReader.result;
-          var url = 'https://' + document.getElementById('ip-field').value;
+          var url = document.getElementById('ip-field').value;
 		  fetch(url, {
 			method: 'POST',
 			body: payload
@@ -376,6 +392,10 @@ window.onload = () => {
     // const cameraDropdown = document.getElementById('device-dropdown');
 
     const canvas = document.getElementById('canvas');
+    var hiddenCanvas = document.createElement('canvas');
+    hiddenCanvas.width = 1920;
+    hiddenCanvas.height = 1080;
+    var hiddenCtx = hiddenCanvas.getContext('2d');
     const ctx = canvas.getContext('2d');
 
     let removalThreshold = 10;
@@ -389,11 +409,11 @@ window.onload = () => {
     let selectedTool = 'magic';
 
     let imageCaptureData;
+    let hiddenCaptureData;
 
     function startCam(id) {
-      navigator.mediaDevices.getUserMedia({video: true})
+      navigator.mediaDevices.getUserMedia({video: { width: 1920, height: 1080 }})
       .then((stream) => {
-              console.log(stream);
               let settings = stream.getVideoTracks()[0].getSettings();
               camWidth = settings.width;
               camHeight = settings.height;
@@ -412,10 +432,12 @@ window.onload = () => {
 
     function capture() {
         video.pause();
-        let camWidth = 400;
-        let camHeight = 300;
+        let camWidth = 1920;
+        let camHeight = 1080;
         let widthRatio = canvas.width / camWidth;
         let heightRatio = canvas.height / camHeight;
+        hiddenCtx.drawImage(video, 0, 0, 1920, 1080);
+        hiddenCaptureData = hiddenCtx.getImageData(0, 0, hiddenCanvas.width, hiddenCanvas.height).data;
         ctx.drawImage(video, (canvas.width - (camWidth * heightRatio)) / 2, 0, camWidth * heightRatio, camHeight * heightRatio);
         imageCaptureData = ctx.getImageData(0, 0, canvas.width, canvas.height).data;
         canvas.style.display = 'inline';
@@ -459,6 +481,9 @@ window.onload = () => {
         let ctxData = ctx.getImageData(0, 0, canvas.width, canvas.height);
         ctxData.data.set(imageCaptureData);
         ctx.putImageData(ctxData, 0, 0);
+        let hCtxData = hiddenCtx.getImageData(0, 0, hiddenCanvas.width, hiddenCanvas.height);
+        hCtxData.data.set(hiddenCaptureData);
+        hiddenCtx.putImageData(hCtxData, 0, 0);
     }
 
     function midPoint(p1, p2) {
@@ -476,9 +501,13 @@ window.onload = () => {
             ctx.globalCompositeOperation = 'destination-in';
             ctx.beginPath();
             ctx.moveTo(path[0][0], path[0][1]);
+            hiddenCtx.globalCompositeOperation = 'destination-in';
+            hiddenCtx.beginPath();
+            hiddenCtx.moveTo(path[0][0]*4, path[0][1]*4);
             for (p in path) {
                 let mid = midPoint([lastX, lastY], path[p]);
                 ctx.quadraticCurveTo(lastX, lastY, mid[0], mid[1]);
+                hiddenCtx.quadraticCurveTo(lastX*4, lastY*4, mid[0]*4, mid[1]*4);
                 // ctx.lineTo(path[p][0], path[p][1]);
                 lastX = path[p][0];
                 lastY = path[p][1];
@@ -486,6 +515,9 @@ window.onload = () => {
             ctx.closePath();
             ctx.fill();
             ctx.globalCompositeOperation = 'source-over';
+            hiddenCtx.closePath();
+            hiddenCtx.fill();
+            hiddenCtx.globalCompositeOperation = 'source-over';
         } else {
             ctx.beginPath();
             ctx.lineWidth = 5;
@@ -544,6 +576,7 @@ window.onload = () => {
     // });
 
     canvas.onmousedown = (event) => {
+      if (capturing) return;
 	  dragging = true;
       curPath = [];
       let rect = canvas.getBoundingClientRect();
@@ -603,6 +636,20 @@ window.onload = () => {
         }
     };
 
+    function disableCapturing() {
+        capturing = false;
+        sendButton.classList.remove('disabled');
+        lassoButton.classList.remove('disabled');
+        magicWandButton.classList.remove('disabled');
+    }
+
+    function enableCapturing() {
+        capturing = true;
+        sendButton.classList.add('disabled');
+        lassoButton.classList.add('disabled');
+        magicWandButton.classList.add('disabled');
+    }
+
     document.getElementById('new-project-button').onclick = (event) => {
         projectGalleryDiv.style.display = 'none';
         newProjectModal.style.display = 'block';
@@ -611,30 +658,27 @@ window.onload = () => {
 
     document.getElementById('capture-button').onclick = (event) => {
         if (imageCaptureData) {
-            capturing = false;
             imageCaptureData = null;
-            magicWandButton.disabled = true;
-            lassoButton.disabled = true;
-            sendButton.disabled = true;
+            enableCapturing();
             event.target.innerHTML = 'Capture';
             canvas.style.display = 'none';
             video.style.display = 'inline';
             startCam();
         } else {
-            capturing = true;
-            lassoButton.disabled = false;
-            sendButton.disabled = false;
+            disableCapturing();
             capture();
         }
     }
 
     sendButton.onclick = (event) => {
+        if (capturing) return;
         if (!imageCaptureData) return;
         projectGalleryDiv.style.display = 'none';
         newProjectModal.style.display = 'none';
         projectId = (Math.floor(Math.random() * (1000000 - 100000)) + 100000).toString();
         Scratch.init();
-        const dataURL = canvas.toDataURL('image/png');
+        const dataURL = hiddenCanvas.toDataURL('image/png');
+        // const dataURL = canvas.toDataURL('image/png');
         const binary = convertDataURIToBinary(dataURL);
         const costume = Scratch.createVMAsset(binary);
         costume.name = 'test';
@@ -658,11 +702,12 @@ window.onload = () => {
             Scratch.vm.addSprite(JSON.stringify(newSprite));
             document.getElementById('app-controls').style.display = 'block';
 			document.getElementById('presentation-controls').style.display = 'block';
-        }, 50);
+        }, 500);
 
     };
 
     magicWandButton.onclick = (event) => {
+        if (capturing) return;
         resetImage();
         selectedTool = 'magic';
         magicWandButton.disabled = true;
@@ -670,6 +715,7 @@ window.onload = () => {
     };
 
     lassoButton.onclick = (event) => {
+        if (capturing) return;
         resetImage();
         selectedTool = 'lasso';
         magicWandButton.disabled = false;

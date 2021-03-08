@@ -1,0 +1,515 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
+  <title>Art of Tinkering</title>
+  
+  <!-- Scratch Blocks -->
+  <script type="text/javascript" src="./lib/blockly_vertical.js"></script>
+  <script type="text/javascript" src="./lib/messages.js"></script>
+  <script type="text/javascript" src="./lib/blocks.js"></script>
+  <script type="text/javascript" src="./lib/blocks_vertical.js"></script>
+  <script async src="https://docs.opencv.org/master/opencv.js" type="text/javascript"></script>
+  
+  <!-- CSS -->
+  <link rel="stylesheet" type="text/css" href="./css/normalize.css">
+  <link rel="stylesheet" type="text/css" href="./css/aot.css">
+</head>
+<body>
+  
+  <xml id="aot-toolbox" style="display: none">
+    <category colour="#4C97FF" id="motion" name="%{BKY_CATEGORY_MOTION}" secondaryColour="#3373CC">
+      <block id="motion_movesteps" type="motion_movesteps">
+        <value name="STEPS">
+          <shadow type="math_number">
+            <field name="NUM">10</field>
+          </shadow>
+        </value>
+      </block>
+      <block id="motion_turnright" type="motion_turnright">
+        <value name="DEGREES">
+          <shadow type="math_number">
+            <field name="NUM">15</field>
+          </shadow>
+        </value>
+      </block>
+      <block id="motion_turnleft" type="motion_turnleft">
+        <value name="DEGREES">
+          <shadow type="math_number">
+            <field name="NUM">15</field>
+          </shadow>
+        </value>
+      </block>
+      <block id="motion_pointindirection" type="motion_pointindirection">
+        <value name="DIRECTION">
+          <shadow type="math_angle">
+            <field name="NUM">90</field>
+          </shadow>
+        </value>
+      </block>
+      <block id="motion_pointtowards" type="motion_pointtowards">
+        <value name="TOWARDS">
+          <shadow type="motion_pointtowards_menu"/>
+        </value>
+      </block>
+      <block id="motion_gotoxy" type="motion_gotoxy">
+        <value name="X">
+          <shadow id="movex" type="math_number">
+            <field name="NUM">0</field>
+          </shadow>
+        </value>
+        <value name="Y">
+          <shadow id="movey" type="math_number">
+            <field name="NUM">0</field>
+          </shadow>
+        </value>
+      </block>
+      <block id="motion_goto" type="motion_goto">
+        <value name="TO">
+          <shadow type="motion_goto_menu"/>
+        </value>
+      </block>
+      <block id="motion_glidesecstoxy" type="motion_glidesecstoxy">
+        <value name="SECS">
+          <shadow type="math_number">
+            <field name="NUM">1</field>
+          </shadow>
+        </value>
+        <value name="X">
+          <shadow id="glidex" type="math_number">
+            <field name="NUM">0</field>
+          </shadow>
+        </value>
+        <value name="Y">
+          <shadow id="glidey" type="math_number">
+            <field name="NUM">0</field>
+          </shadow>
+        </value>
+      </block>
+      <block id="motion_glideto" type="motion_glideto">
+        <value name="SECS">
+          <shadow type="math_number">
+            <field name="NUM">1</field>
+          </shadow>
+        </value>
+        <value name="TO">
+          <shadow type="motion_glideto_menu"/>
+        </value>
+      </block>
+      <block id="motion_changexby" type="motion_changexby">
+        <value name="DX">
+          <shadow type="math_number">
+            <field name="NUM">10</field>
+          </shadow>
+        </value>
+      </block>
+      <block id="motion_setx" type="motion_setx">
+        <value name="X">
+          <shadow id="setx" type="math_number">
+            <field name="NUM">0</field>
+          </shadow>
+        </value>
+      </block>
+      <block id="motion_changeyby" type="motion_changeyby">
+        <value name="DY">
+          <shadow type="math_number">
+            <field name="NUM">10</field>
+          </shadow>
+        </value>
+      </block>
+      <block id="motion_sety" type="motion_sety">
+        <value name="Y">
+          <shadow id="sety" type="math_number">
+            <field name="NUM">0</field>
+          </shadow>
+        </value>
+      </block>
+      <block id="motion_ifonedgebounce" type="motion_ifonedgebounce"></block>
+      <block id="motion_setrotationstyle" type="motion_setrotationstyle"></block>
+      <block id="motion_xposition" type="motion_xposition"></block>
+      <block id="motion_yposition" type="motion_yposition"></block>
+      <block id="motion_direction" type="motion_direction"></block>
+    </category>
+    <category colour="#9966FF" id="looks" name="%{BKY_CATEGORY_LOOKS}" secondaryColour="#774DCB">
+      <block type="looks_sayforsecs">
+        <value name="MESSAGE">
+          <shadow type="text">
+            <field name="TEXT">Hello</field>
+          </shadow>
+        </value>
+        <value name="SECS">
+          <shadow type="math_number">
+            <field name="NUM">2</field>
+          </shadow>
+        </value>
+      </block>
+      <block type="looks_say">
+        <value name="MESSAGE">
+          <shadow type="text">
+            <field name="TEXT">Hello</field>
+          </shadow>
+        </value>
+      </block>
+      <block type="looks_thinkforsecs">
+        <value name="MESSAGE">
+          <shadow type="text">
+            <field name="TEXT">Hmmm...</field>
+          </shadow>
+        </value>
+        <value name="SECS">
+          <shadow type="math_number">
+            <field name="NUM">2</field>
+          </shadow>
+        </value>
+      </block>
+      <block type="looks_think">
+        <value name="MESSAGE">
+          <shadow type="text">
+            <field name="TEXT">Hmmm...</field>
+          </shadow>
+        </value>
+      </block>
+      <block id="looks_show" type="looks_show"></block>
+      <block id="looks_hide" type="looks_hide"></block>
+      <block id="looks_changeeffectby" type="looks_changeeffectby">
+        <value name="CHANGE">
+          <shadow type="math_number">
+            <field name="NUM">10</field>
+          </shadow>
+        </value>
+      </block>
+      <block id="looks_seteffectto" type="looks_seteffectto">
+        <value name="VALUE">
+          <shadow type="math_number">
+            <field name="NUM">10</field>
+          </shadow>
+        </value>
+      </block>
+      <block id="looks_cleargraphiceffects" type="looks_cleargraphiceffects"></block>
+      <block id="looks_changesizeby" type="looks_changesizeby">
+        <value name="CHANGE">
+          <shadow type="math_number">
+            <field name="NUM">10</field>
+          </shadow>
+        </value>
+      </block>
+      <block id="looks_setsizeto" type="looks_setsizeto">
+        <value name="SIZE">
+          <shadow type="math_number">
+            <field name="NUM">100</field>
+          </shadow>
+        </value>
+      </block>
+      <block id="looks_gotofrontback" type="looks_gotofrontback"></block>
+      <block id="looks_goforwardbackwardlayers" type="looks_goforwardbackwardlayers">
+        <value name="NUM">
+          <shadow type="math_integer">
+            <field name="NUM">1</field>
+          </shadow>
+        </value>
+      </block>
+      <block id="looks_size" type="looks_size"></block>
+    </category>
+    <category colour="#FFD500" id="events" name="%{BKY_CATEGORY_EVENTS}" secondaryColour="#CC9900">
+      <block id="event_whenflagclicked" type="event_whenflagclicked"></block>
+      <block id="event_whenbroadcastreceived" type="event_whenbroadcastreceived"></block>
+      <block id="event_broadcast" type="event_broadcast">
+        <value name="BROADCAST_INPUT">
+          <shadow type="event_broadcast_menu"/>
+        </value>
+      </block>
+      <block id="event_broadcastandwait" type="event_broadcastandwait">
+        <value name="BROADCAST_INPUT">
+          <shadow type="event_broadcast_menu"/>
+        </value>
+      </block>
+    </category>
+    <category colour="#FFAB19" id="control" name="%{BKY_CATEGORY_CONTROL}" secondaryColour="#CF8B17">
+      <block id="control_wait" type="control_wait">
+        <value name="DURATION">
+          <shadow type="math_positive_number">
+            <field name="NUM">1</field>
+          </shadow>
+        </value>
+      </block>
+      <block id="control_repeat" type="control_repeat">
+        <value name="TIMES">
+          <shadow type="math_whole_number">
+            <field name="NUM">10</field>
+          </shadow>
+        </value>
+      </block>
+      <block id="control_forever" type="control_forever"></block>
+      <block id="control_if" type="control_if"></block>
+      <block id="control_if_else" type="control_if_else"></block>
+      <block id="control_wait_until" type="control_wait_until"></block>
+      <block id="control_repeat_until" type="control_repeat_until"></block>
+      <block id="control_stop" type="control_stop"></block>
+      <block id="control_start_as_clone" type="control_start_as_clone"></block>
+      <block id="control_create_clone_of" type="control_create_clone_of">
+        <value name="CLONE_OPTION">
+          <shadow type="control_create_clone_of_menu"/>
+        </value>
+      </block>
+      <block id="control_delete_this_clone" type="control_delete_this_clone"></block>
+    </category>
+    <category colour="#4CBFE6" id="sensing" name="%{BKY_CATEGORY_SENSING}" secondaryColour="#2E8EB8">
+      <block id="sensing_touchingobject" type="sensing_touchingobject">
+        <value name="TOUCHINGOBJECTMENU">
+          <shadow type="sensing_touchingobjectmenu"/>
+        </value>
+      </block>
+      <block id="sensing_touchingcolor" type="sensing_touchingcolor">
+        <value name="COLOR">
+          <shadow type="colour_picker"/>
+        </value>
+      </block>
+      <block id="sensing_coloristouchingcolor" type="sensing_coloristouchingcolor">
+        <value name="COLOR">
+          <shadow type="colour_picker"/>
+        </value>
+        <value name="COLOR2">
+          <shadow type="colour_picker"/>
+        </value>
+      </block>
+      <block id="sensing_timer" type="sensing_timer"></block>
+      <block id="sensing_resettimer" type="sensing_resettimer"></block>
+      <block id="sensing_of" type="sensing_of">
+        <value name="OBJECT">
+          <shadow type="sensing_of_object_menu"/>
+        </value>
+      </block>
+      <block id="sensing_current" type="sensing_current"></block>
+      <block id="sensing_dayssince2000" type="sensing_dayssince2000"></block>
+    </category>
+    <category colour="#40BF4A" id="operators" name="%{BKY_CATEGORY_OPERATORS}" secondaryColour="#389438">
+      <block id="operator_add" type="operator_add">
+        <value name="NUM1">
+          <shadow type="math_number">
+            <field name="NUM"></field>
+          </shadow>
+        </value>
+        <value name="NUM2">
+          <shadow type="math_number">
+            <field name="NUM"></field>
+          </shadow>
+        </value>
+      </block>
+      <block id="operator_subtract" type="operator_subtract">
+        <value name="NUM1">
+          <shadow type="math_number">
+            <field name="NUM"></field>
+          </shadow>
+        </value>
+        <value name="NUM2">
+          <shadow type="math_number">
+            <field name="NUM"></field>
+          </shadow>
+        </value>
+      </block>
+      <block id="operator_multiply" type="operator_multiply">
+        <value name="NUM1">
+          <shadow type="math_number">
+            <field name="NUM"></field>
+          </shadow>
+        </value>
+        <value name="NUM2">
+          <shadow type="math_number">
+            <field name="NUM"></field>
+          </shadow>
+        </value>
+      </block>
+      <block id="operator_divide" type="operator_divide">
+        <value name="NUM1">
+          <shadow type="math_number">
+            <field name="NUM"></field>
+          </shadow>
+        </value>
+        <value name="NUM2">
+          <shadow type="math_number">
+            <field name="NUM"></field>
+          </shadow>
+        </value>
+      </block>
+      <block id="operator_random" type="operator_random">
+        <value name="FROM">
+          <shadow type="math_number">
+            <field name="NUM">1</field>
+          </shadow>
+        </value>
+        <value name="TO">
+          <shadow type="math_number">
+            <field name="NUM">10</field>
+          </shadow>
+        </value>
+      </block>
+      <block id="operator_lt" type="operator_lt">
+        <value name="OPERAND1">
+          <shadow type="text">
+            <field name="TEXT"></field>
+          </shadow>
+        </value>
+        <value name="OPERAND2">
+          <shadow type="text">
+            <field name="TEXT"></field>
+          </shadow>
+        </value>
+      </block>
+      <block id="operator_equals" type="operator_equals">
+        <value name="OPERAND1">
+          <shadow type="text">
+            <field name="TEXT"></field>
+          </shadow>
+        </value>
+        <value name="OPERAND2">
+          <shadow type="text">
+            <field name="TEXT"></field>
+          </shadow>
+        </value>
+      </block>
+      <block id="operator_gt" type="operator_gt">
+        <value name="OPERAND1">
+          <shadow type="text">
+            <field name="TEXT"></field>
+          </shadow>
+        </value>
+        <value name="OPERAND2">
+          <shadow type="text">
+            <field name="TEXT"></field>
+          </shadow>
+        </value>
+      </block>
+      <block id="operator_and" type="operator_and"></block>
+      <block id="operator_or" type="operator_or"></block>
+      <block id="operator_not" type="operator_not"></block>
+      <block id="operator_join" type="operator_join">
+        <value name="STRING1">
+          <shadow type="text">
+            <field name="TEXT">hello</field>
+          </shadow>
+        </value>
+        <value name="STRING2">
+          <shadow type="text">
+            <field name="TEXT">world</field>
+          </shadow>
+        </value>
+      </block>
+      <block id="operator_letter_of" type="operator_letter_of">
+        <value name="LETTER">
+          <shadow type="math_whole_number">
+            <field name="NUM">1</field>
+          </shadow>
+        </value>
+        <value name="STRING">
+          <shadow type="text">
+            <field name="TEXT">world</field>
+          </shadow>
+        </value>
+      </block>
+      <block id="operator_length" type="operator_length">
+        <value name="STRING">
+          <shadow type="text">
+            <field name="TEXT">world</field>
+          </shadow>
+        </value>
+      </block>
+      <block id="operator_contains" type="operator_contains">
+        <value name="STRING1">
+          <shadow type="text">
+            <field name="TEXT">hello</field>
+          </shadow>
+        </value>
+        <value name="STRING2">
+          <shadow type="text">
+            <field name="TEXT">world</field>
+          </shadow>
+        </value>
+      </block>
+      <block id="operator_mod" type="operator_mod">
+        <value name="NUM1">
+          <shadow type="math_number">
+            <field name="NUM"></field>
+          </shadow>
+        </value>
+        <value name="NUM2">
+          <shadow type="math_number">
+            <field name="NUM"></field>
+          </shadow>
+        </value>
+      </block>
+      <block id="operator_round" type="operator_round">
+        <value name="NUM">
+          <shadow type="math_number">
+            <field name="NUM"></field>
+          </shadow>
+        </value>
+      </block>
+      <block id="operator_mathop" type="operator_mathop">
+        <value name="NUM">
+          <shadow type="math_number">
+            <field name="NUM"></field>
+          </shadow>
+        </value>
+      </block>
+    </category>
+    <category colour="#FF8C1A" custom="VARIABLE" id="data" name="%{BKY_CATEGORY_VARIABLES}" secondaryColour="#DB6E00"></category>
+  </xml>
+  
+  <div id="stage-container">
+    <canvas id="stage"></canvas>
+  </div>
+  <div id="blocks-container"></div>
+
+  <div id="project-gallery">
+    <button id="new-project-button">New Project</button>
+  </div>
+
+  <div id="new-project-modal">
+    <div id="new-project-modal-container">
+      <div id="canvas-tools">
+        <div class="control-button" id="bg-tool"><img src="assets/background.png" /></div>
+        <div class="control-button" id="fg-tool"><img src="assets/foreground.png" /></div>
+        <!-- <div class="control-button" id="magicwand-tool"><img src="assets/wand.png" /></div> -->
+        <!-- <div class="control-button" id="lasso-tool"><img src="assets/lasso.png" /></div> -->
+      </div>
+      <canvas id="canvas" width=400 height=300></canvas>
+      <video id="video" width=400 height=300 autoplay></video>
+      <br />
+      <div id="canvas-controls">
+        <div id="canvas-controls-content">
+          <div class="control-button" id="capture-button"><img src="assets/record.png" /></div>
+          <div class="control-button" id="scratch-button"><img src="assets/send.png" /></div>
+        </div>
+        <!-- <div id="camera-dropdown"> -->
+          <!-- <select id="device-dropdown"></select> -->
+        <!-- </div> -->
+      </div>
+    </div>
+  </div>
+
+  <div id="presentation-controls">
+    <div class="control-button" id="gf-button"><img src="assets/greenflag.png" /></div>
+    <div class="control-button" id="stop-button"><img src="assets/stop.png" /></div>
+    <div class="control-button" id="upload-button"><img src="assets/send.png" /></div>
+    <input id="ip-field" type='text' value="aot.khanning.com:62626" /><br />
+    <!-- <div id="backdrop-toggle"><input type="checkbox" /> Show Backdrop?</div> -->
+  </div>
+
+  <div id="app-controls">
+    <!-- <div class="control-button" id="back-button"><img src="assets/arrow-back.png" /></div> -->
+  </div>
+  
+  <!-- Scratch VM -->
+  <script src="./lib/scratch-vm.min.js"></script>
+  
+  <!-- Scratch Render -->
+  <script src="./lib/scratch-render.min.js"></script>
+  <script src="./lib/scratch-svg-renderer.js"></script>
+  
+  <!-- Scratch Storage -->
+  <script src="./lib/scratch-storage.min.js"></script>
+  
+  <script src="./js/aot.js"></script>
+</body>
+</html>

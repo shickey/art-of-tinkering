@@ -46,7 +46,6 @@ body {
 #stage {
   background-color: #000;
   height: 100%;
-  width: calc(35vh * 4 / 3);
   margin: auto;
 }
 
@@ -79,19 +78,30 @@ body {
   border-radius: 5px;
   text-align: center;
   margin: 5px;
+  cursor: pointer;
 }
 
-.control-button:active {
+.control-button:not(.disabled):active {
   background-color: #334771;
+}
+
+.control-button.disabled {
+  cursor: default;
+  filter: brightness(0.5);
 }
 
 .control-button img {
   padding: 7px 0;
+  -webkit-user-drag: none;
+  -khtml-user-drag: none;
+  -moz-user-drag: none;
+  -o-user-drag: none;
+  user-drag: none;
 }
 
 #new-project-modal-container {
   position: relative;
-  width: 550px;
+  width: 650px;
   margin: 0 auto;
 }
 
