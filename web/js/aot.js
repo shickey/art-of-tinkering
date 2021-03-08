@@ -489,6 +489,9 @@ window.onload = () => {
         let ctxData = ctx.getImageData(0, 0, canvas.width, canvas.height);
         ctxData.data.set(imageCaptureData);
         ctx.putImageData(ctxData, 0, 0);
+    }
+
+    function resetHidden() {
         let hCtxData = hiddenCtx.getImageData(0, 0, hiddenCanvas.width, hiddenCanvas.height);
         hCtxData.data.set(hiddenCaptureData);
         hiddenCtx.putImageData(hCtxData, 0, 0);
@@ -506,6 +509,7 @@ window.onload = () => {
         lastX = path[0][0];
         lastY = path[0][1];
         if (closed) {
+            resetHidden();
             ctx.globalCompositeOperation = 'destination-in';
             ctx.beginPath();
             ctx.moveTo(path[0][0], path[0][1]);
